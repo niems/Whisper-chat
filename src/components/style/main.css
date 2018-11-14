@@ -1,0 +1,266 @@
+/*
+import each file according to the order below:
+
+1. abstracts/
+2. base/
+3. layout/
+4. components/
+5. pages/
+6. themes/
+*/
+.row {
+  display: flex;
+}
+
+.row.space-between {
+  justify-content: space-between;
+}
+
+.abs-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.abs-top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+h1, header {
+  text-align: center;
+  font-size: calc(1.75rem + 0.75 * ((100vw - 18.75rem) / 43.75) );
+}
+
+p {
+  text-align: center;
+  font-size: calc(1rem + 0.5 * ((100vw - 18.75rem) / 43.75) );
+}
+
+header {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #90caf9;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  min-height: max-content;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0;
+  color: #F1F1F1;
+  background-color: inherit;
+}
+
+.wrapper.main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1 1 100%;
+}
+
+.wrapper.center {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 100%;
+}
+
+form {
+  box-sizing: border-box;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
+  margin: 0;
+  margin-top: calc(0.25rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
+  margin-bottom: calc(0.625rem + 0.375 * ((100vw - 18.75rem) / 43.75) );
+}
+form input {
+  box-sizing: border-box;
+  margin: calc(0.25rem + 0.125 * ((100vw - 18.75rem) / 43.75) ) 0;
+  padding: 5px calc(0.5rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
+  max-width: 350px;
+  width: calc(14.6875rem + 7.1875 * ((100vw - 18.75rem) / 43.75) );
+  height: max-content;
+  font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+  border: none;
+  outline: none;
+  background: none;
+}
+form .rounded-border {
+  border: 1px inset #1D2227;
+  border-radius: 5px;
+  padding: 0.625rem calc(0.5rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
+  box-shadow: inset 1px 1px 2px black;
+}
+form input[class=underline-border] {
+  position: relative;
+  z-index: 0;
+  border-bottom: 1px inset #1D2227;
+}
+form input[class=underline-border]::after {
+  content: "asdfa";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+form input[id=username]::before {
+  content: "Username can consist of letters, numbers, and _";
+  color: red;
+  background: black;
+}
+form button[id=submit] {
+  align-self: flex-end;
+  width: 100%;
+  outline: none;
+  padding: 8px 0;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px outset black;
+  transition: background 0.4s;
+}
+
+/*
+Takes up the full page when under the specified min-width,
+otherwise only takes up a section of the screen in the center
+*/
+.section-view {
+  box-sizing: border-box;
+  max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  background-color: #242A2F;
+}
+.section-view h1 {
+  margin-bottom: 3rem;
+}
+.section-view input {
+  width: 65%;
+}
+
+@media only screen and (min-width: 28.125rem) {
+  .section-view {
+    max-height: 100vh;
+    width: 26.5625rem;
+    height: 18.75rem;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px #1D2227;
+  }
+}
+.side-panel {
+  min-width: 6.25rem;
+  height: 100vh;
+}
+
+#overview-panel {
+  background-color: #303134;
+}
+
+#listview-panel {
+  background-color: #3C3D43;
+}
+
+#login, #create-account {
+  background-color: #90caf9;
+  background: linear-gradient(45deg, #90caf9, #5d99c6);
+  color: #303134;
+}
+#login form input, #create-account form input {
+  color: #303134;
+  font-weight: bold;
+}
+#login form input::-webkit-input-placeholder, #create-account form input::-webkit-input-placeholder {
+  color: gray;
+}
+#login form button[id=submit], #create-account form button[id=submit] {
+  background-color: #00e5ff;
+}
+#login form button[id=submit]:hover, #create-account form button[id=submit]:hover {
+  background-color: #00bbcf;
+}
+
+.link-to {
+  text-decoration: none;
+  margin: 10px 15px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px outset black;
+  box-shadow: 1px 1px 2px black;
+  font-weight: bold;
+  text-align: center;
+  font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+}
+
+/*  ELECTRON-BUILD ONLY: need a container around the titlebar
+  with padding so that you're able to resize the window */
+.titlebar-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: 1.8rem;
+  padding: 2px 2px 0 2px;
+}
+
+.titlebar {
+  -webkit-app-region: drag;
+  width: 100%;
+  height: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 0 1 auto;
+  background: white;
+}
+
+#homepage {
+  flex: 1 1 100%;
+  color: #303134;
+  background: #90caf9;
+}
+#homepage .link-to {
+  background: #303134;
+  color: #90caf9;
+  transition: background 0.4s;
+}
+#homepage .link-to:hover {
+  background: #5d99c6;
+  color: #303134;
+}
+
+/*# sourceMappingURL=main.css.map */

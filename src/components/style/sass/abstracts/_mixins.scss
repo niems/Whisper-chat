@@ -1,0 +1,32 @@
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin fullSize($width, $height, $minWidth: none, $minHeight: none, $maxWidth: none, $maxHeight: none) {
+    max-width: $maxWidth;
+    max-height: $maxHeight;
+    min-width: $minWidth;
+    min-height: $minHeight;
+    width: $width;
+    height: $height;
+}
+
+@mixin flexbox($flex-flow: (column nowrap), $justify-content: center, $align-items: center, $flex: (0 1 auto)) {
+    display: flex;
+    flex-flow: $flex-flow;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex: $flex;
+}
+
+
+//returns the value without its unit
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+    font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}) );
+}

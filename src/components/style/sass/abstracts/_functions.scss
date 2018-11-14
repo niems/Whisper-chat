@@ -1,0 +1,7 @@
+@function pxToRem($px) {
+    @return ($px / 16px) * 1rem;
+}
+
+@function fluid-value($min-vw, $max-vw, $min-size, $max-size) {
+    @return calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}) );
+}

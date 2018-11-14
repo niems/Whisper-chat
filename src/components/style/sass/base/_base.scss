@@ -1,0 +1,26 @@
+$min-vw: pxToRem(300px);
+$max-vw: pxToRem(1000px);
+
+h1, header {
+    $max-header-font: pxToRem(40px);
+    $min-header-font: pxToRem(28px);
+
+    text-align: center;
+    @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
+}
+
+p {
+    $max-paragraph-font: pxToRem(24px);
+    $min-paragraph-font: pxToRem(16px);
+
+    text-align: center;
+    @include fluid-type($min-vw, $max-vw, $min-paragraph-font, $max-paragraph-font);
+}
+
+header {
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+}

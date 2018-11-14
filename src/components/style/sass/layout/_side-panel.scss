@@ -1,0 +1,13 @@
+
+.side-panel {
+    min-width: pxToRem(100px);
+    height: 100vh;
+}
+
+#overview-panel {
+    background-color: $darkest;
+}
+
+#listview-panel {
+    background-color: $dark;
+}

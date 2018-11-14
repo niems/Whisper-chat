@@ -1,0 +1,39 @@
+//this handles the minimum size each page occupies
+
+//main view that encapsulates all other views
+#app {
+    width: 100vw;
+    height: 100vh;
+
+    margin: 0;
+    padding: 0;
+    background-color: $primary;
+}
+
+//column flexbox center-top
+.wrapper {
+    box-sizing: border-box;
+
+    min-height: max-content;
+    @include size(100%, 100%);
+    @include flexbox( (column nowrap), flex-start, center, (1 1 auto) );
+
+    margin: 0;
+    padding: 0;
+
+    color: $light;
+    background-color: inherit;
+}
+
+.wrapper.main {
+    @include flexbox( (row wrap), center, stretch, (1 1 100%) );
+}
+
+.wrapper.center {
+    @include flexbox( (column nowrap), center, center, (1 1 100%) );
+}
+
+
+
+
+
