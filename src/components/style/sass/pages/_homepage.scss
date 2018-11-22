@@ -1,17 +1,16 @@
 #homepage {
     flex: 1 1 100%;
 
-    color: $darkest;
-    background: $primary;
+    background: linear-gradient(45deg, $primary, $dark);
+    color: $light;
 
     .link-to {
-        background: $darkest;
         color: $primary;
-
+        background: $darkest;
         transition: background 0.4s;
 
         &:hover {
-            background: $primary-variant;
+            background: $primary;
             color: $darkest;
         }
     }

@@ -2,10 +2,13 @@ export function getCookie(cname = 'authentication') {
     const decodedCookie = decodeURIComponent( document.cookie ); //gets the cookie if it exists
     const cookieComponents = decodedCookie.split(';'); //pieces of the cookie
     let name = cname + '='; //name of cookie to get
+    const nameRegExp = new RegExp(name);
 
     for(let i = 0; i < cookieComponents.length; i++) { //searches for cookie
-        if ( cookieComponents[i].startsWith(name) ) { //if the cookie is found
-            return cookieComponents[i].substring( name.length ); //returns the value for the cookie
+        if ( nameRegExp.test(cookieComponents[i]) ) { //if the cookie is found
+            console.log(`component: ${cookieComponents[i]}`);
+
+            return cookieComponents[i].substring( name.length + 1 ); //returns the value for the cookie
         }
     }
 
@@ -24,4 +27,5 @@ export function setCookie(cname = 'authenticated', cvalue = false) {
 
 export function deleteCookie(cname='authenticated') {
     document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+    return getCookie(cname);
 }

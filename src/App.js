@@ -1,6 +1,7 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AuthenticationContext from './components/authentication/authenticationContext';
+import { getCookie, deleteCookie } from './components/authentication/cookies';
 import Homepage from './components/homepage/homepage';
 import './components/style/main.css';
 
@@ -17,15 +18,22 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    //set state initially by getting cookie info if it exists
+    const username = getCookie('username');
+
     this.state = {
       isUserAuthenticated: {
-        status: false,
-        username: ''
+        status: (username === undefined) ? false : true,
+        username: (username === undefined) ? '' : username
       }
     };
 
-    //called on successful login or account creation
+    // called on successful login or account creation
     this.authenticate = this.authenticate.bind(this);
+
+    /* deletes authentication cookie and redirects to homepage 
+       (only available if user is logged in)  */
+    this.signout = this.signout.bind(this); 
   }
 
   authenticate(username) {
@@ -37,12 +45,25 @@ class App extends Component {
     });
   }
 
+  signout() {
+    deleteCookie('token');
+    deleteCookie('username');
+
+    this.setState({
+      isUserAuthenticated: {
+        status: false,
+        username: ''
+      }
+    });
+  }
+
   render() {
     return (
       <div id='app'>
         <AuthenticationContext.Provider value={{
           isUserAuthenticated: this.state.isUserAuthenticated,
-          authenticate: this.authenticate
+          authenticate: this.authenticate,
+          signout: this.signout
         }}>
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>

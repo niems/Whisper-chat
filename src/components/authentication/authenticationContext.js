@@ -5,7 +5,9 @@ const AuthenticationContext = React.createContext({
         status: false,
         username: ''
     },
-    authenticate: () => {}
+
+    authenticate: () => {},
+    signout: () => {}
 });
 
 export default AuthenticationContext;

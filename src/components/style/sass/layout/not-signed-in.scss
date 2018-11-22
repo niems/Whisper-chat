@@ -1,25 +1,14 @@
 #login, #create-account {
-    background-color: $primary;
-    background: linear-gradient(45deg, $primary, $primary-variant);
-    color: $darkest;
+    color: $light;
+    background: none;
 
-    form {
-        input {
-            color: $darkest;
-            font-weight: bold;
-            //background: $dark;
-        }
-
-        input::-webkit-input-placeholder {
-            color: gray;
-        }
-
+    form {      
         button[id='submit'] {
             background-color: $secondary;
         }
-
+        
         button[id='submit']:hover {
-            background-color: $secondary-variant;
+            background-color: $light;
         }
     }
 }

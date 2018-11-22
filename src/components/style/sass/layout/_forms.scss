@@ -12,62 +12,23 @@ form {
     $input-padding-vertical: pxToRem(10px);
     $input-padding-horizontal: fluid-value($min-vw, $max-vw, pxToRem(8px), pxToRem(12px) );
 
-    input {
-        box-sizing: border-box;
-        margin: fluid-value($min-vw, $max-vw, pxToRem(4px), pxToRem(6px) ) 0;
-        
-        padding: 5px $input-padding-horizontal;
-
+    input {     
         max-width: 350px;
         width: fluid-value($min-vw, $max-vw, pxToRem(235px), pxToRem(350px) );
-        height: max-content;
         
         @include fluid-type($min-vw, $max-vw, pxToRem(14px), pxToRem(16px) );
-        
-        border: none;
-        outline: none;
-        background: none;
+        font-weight: bold;        
     }
 
     .rounded-border {
-        border: 1px inset $blue-darkest;
-        border-radius: 5px;
-
         padding: $input-padding-vertical $input-padding-horizontal;
-
-        box-shadow: inset 1px 1px 2px black;
-    }
-
-    input[class='underline-border'] {
-        position: relative;
-        z-index: 0;
-
-        border-bottom: 1px inset $blue-darkest;
-
-        &::after {
-            content: 'asdfa';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-
-            z-index: 1;
-        }
-    }
-
-    input[id='username']::before {
-        content: 'Username can consist of letters, numbers, and _';
-        color: red;
-        background: black;
     }
 
     button[id='submit'] {
         align-self: flex-end;
         width: 100%;
 
-        outline: none;
-        padding: 8px 0;
+        padding: 10px 0;
         margin-top: 10px;
 
         border-radius: 5px;

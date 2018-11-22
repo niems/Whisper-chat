@@ -1,33 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, lazy} from 'react';
 import { Redirect } from 'react-router-dom';
 import verifyAccountGet from '../serverRequest/verifyAccountGet';
 
-const UserTokenInvalid = (props) => {
-    return (
-        <article id='profile' className='wrapper center'>
-            <h1>Failed to verify profile</h1>
-            
-            <span>Redirecting to login screen...</span>
-        </article>
-    );
-};
+const UserProfile = lazy(() => import('./userProfile'));
+const UserTokenInvalid = lazy(() => import('./userTokenInvalid'));
+
 
 const VerifyingProfile = (props) => {
     return (
-        <article id='profile' className='wrapper center'>
+        <article className='wrapper center'>
             <h1>Verifying profile</h1>
             
             <span>Please wait...like you have a choice</span>
-        </article>
-    );
-};
-
-const UserProfile = (props) => {
-    return (
-        <article id='profile' className='wrapper center'>
-            <h1>Profile</h1>
-            
-            <span>Successfully logged in :o</span>
         </article>
     );
 };
@@ -44,7 +28,13 @@ class Profile extends Component {
         // checks if user's JWT is valid
         this.checkAccountToken = this.checkAccountToken.bind(this);
 
-        //redirects user to /login if verification fails
+        // checks the response from checkAccountToken
+        this.checkAccountVerification = this.checkAccountVerification.bind(this);
+
+        // server couldn't verify the account
+        this.failedAccountVerification = this.failedAccountVerification.bind(this);
+
+        // redirects user to /login if verification fails
         this.failedVerificationRedirect = this.failedVerificationRedirect.bind(this);
     }
 
@@ -55,29 +45,38 @@ class Profile extends Component {
     checkAccountToken() {
         verifyAccountGet()
         .then(res => res.json())
-        .then(res => {
+        .then(res => this.checkAccountVerification(res))
+        .catch(err => this.failedAccountVerification(err));
+    }
+
+    checkAccountVerification(res) {
+        return new Promise((resolve, reject) => {
+            console.log(`server response: ${JSON.stringify(res)}\n`);
+            
             const { accountVerified } = res;
-    
+        
             if ( accountVerified ) {
                 this.setState({
                     accountVerified: true,
                     component: <UserProfile />
                 });
-            }
 
+                resolve();
+            }
+    
             else {
-                this.setState({
-                    accountVerified: false,
-                    component: <UserTokenInvalid />
-                }, this.failedVerificationRedirect());
+                reject('Account not verified');
             }
         })
-        .catch(err => {
-            this.setState({
-                accountVerified: false,
-                component: <UserTokenInvalid />
-            }, this.failedVerificationRedirect());
-        });
+    }
+
+    failedAccountVerification(err) {
+        console.error(err);
+
+        this.setState({
+            accountVerified: false,
+            component: <UserTokenInvalid />
+        }, this.failedVerificationRedirect());
     }
 
     failedVerificationRedirect() {

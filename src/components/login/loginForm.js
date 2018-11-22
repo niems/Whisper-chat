@@ -14,8 +14,16 @@ class LoginForm extends Component {
             loginSuccessful: false, //redirects to /profile if account is logged into
         };
 
+        this.usernameRef = React.createRef();
+        this.passwordRef = React.createRef();
+        this.focusInput = this.focusInput.bind(this);
+
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.usernameRef.current.focus();
     }
 
     componentWillUnmount() {
@@ -24,6 +32,10 @@ class LoginForm extends Component {
             console.log('updating authentication in App.js now...');
             this.props.authenticate( this.state.username );
         }
+    }
+
+    focusInput(e) {
+        console.log(`id: ${e.target.id}`);
     }
 
     onChange(e) {
@@ -49,22 +61,14 @@ class LoginForm extends Component {
 
         //username & password fields valid
         if ( areFieldsValid( {username: username, password: password} ) ) {
-            console.log('fields valid. Checking if account exists...');
-
             loginPost( {username: username, password: password} )
             .then(res => res.json())
                 .then(res => {
                     console.log(`response: ${JSON.stringify(res)}\n\n`);
                     
                     if ( res.accountExists === true ) { //user account exists - redirecting to /profile
-                        console.log('account exists! Redirecting now...');
                         this.setState({ loginSuccessful: true });
-                    }
-
-                    else {
-                        console.log('account does NOT exist...');
-                    }
-                    
+                    }                    
                 })
                 .catch(err => {
                     console.error(err);
@@ -80,8 +84,11 @@ class LoginForm extends Component {
         return (
             <React.Fragment>
                 <form onSubmit={this.onSubmit}>
-                    <input id='username' className='rounded-border' type='text' placeholder='username' value={this.state.username} onChange={this.onChange} required />
-                    <input id='password' className='rounded-border' type='password' placeholder='password' value={this.state.password} onChange={this.onChange} required />
+                    <input id='username' className='rounded-border' type='text' placeholder='username'
+                           value={this.state.username} onChange={this.onChange} ref={this.usernameRef} required />
+
+                    <input id='password' className='rounded-border' type='password' placeholder='password'
+                           value={this.state.password} onChange={this.onChange} ref={this.passwordRef} required />
 
                     <button id='submit' type='submit' onClick={this.onSubmit}>SIGN IN</button>
                 </form>
@@ -95,7 +102,7 @@ class LoginForm extends Component {
 const LoginFormContext = (props) => {
     return (
         <AuthenticationContext.Consumer>
-            { ({authenticate}) => (
+            { ({ authenticate }) => (
                 <LoginForm {...props} authenticate={authenticate} />    
             )}
         </AuthenticationContext.Consumer>

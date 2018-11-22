@@ -14,18 +14,20 @@ import each file according to the order below:
 @import './abstracts/mixins';
 @import './abstracts/functions';
 @import './abstracts/placeholders';
+@import './abstracts//animations';
 
 @import './base/colors';
 @import './base/base';
 
 @import './layout/main-page';
 @import './layout/forms';
-@import './layout/partial-page';
 @import './layout/side-panel';
 @import './layout/not-signed-in';
 
 @import './components/routeLink';
-@import './components/titlebar';
-@import './components/sidebar-item';
+@import './components//inputfield';
+@import './components//channel-messages';
+@import './components/scrollbar';
 
 @import './pages/homepage';
+@import './pages/chat';

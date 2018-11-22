@@ -3,13 +3,13 @@
     $min-link-font: pxToRem(14px);
     text-decoration: none;
 
-    margin: 10px 15px;
     padding: 8px 16px;
     border-radius: 6px;
     
     border: 1px outset black;
     box-shadow: 1px 1px 2px black;
     font-weight: bold;
+    outline-color: $primary;
     
     text-align: center;
     @include fluid-type($min-vw, $max-vw, $min-link-font, $max-link-font);

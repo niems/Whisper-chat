@@ -1,5 +1,8 @@
 $min-vw: pxToRem(300px);
 $max-vw: pxToRem(1000px);
+body {
+    color: $darkest;
+}
 
 h1, header {
     $max-header-font: pxToRem(40px);
@@ -23,4 +26,5 @@ header {
 
 button {
     cursor: pointer;
+    outline-color: $primary;
 }
