@@ -1,0 +1,25 @@
+.scrollbar {
+    &::-webkit-scrollbar {
+        width: pxToRem(14px);
+        background: none;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: none;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border: 1px solid $primary;
+        background: inherit;
+    }
+    
+    
+    &::-webkit-scrollbar-track-piece {
+    
+    }
+    
+    &::-webkit-scrollbar-button {
+        background: $darkest;
+        border: 1px solid $primary;
+    }
+}
