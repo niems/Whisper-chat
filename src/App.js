@@ -78,7 +78,6 @@ class App extends Component {
           </Suspense>
 
         </AuthenticationContext.Provider>
-        <Notification /> 
       </div>
     );
   }
