@@ -69,7 +69,6 @@ class LoginForm extends Component {
                     
                     if ( res.accountExists === true ) { //user account exists - redirecting to /profile
                         this.setState({ loginSuccessful: true });
-                        this.props.newNotification('Login successful', 3000, 'success');            
                     }
                     
                     else {
