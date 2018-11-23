@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import AuthenticationContext from './components/authentication/authenticationContext';
 import { getCookie, deleteCookie } from './components/authentication/cookies';
 import Homepage from './components/homepage/homepage';
+import Notification from './components/notification/notification';
 import './components/style/main.css';
 
 const CreateAccount = lazy(() => import('./components/createAccount/createAccount'));
@@ -75,7 +76,9 @@ class App extends Component {
               <Route component={NoMatch} />
             </Switch>
           </Suspense>
+
         </AuthenticationContext.Provider>
+        <Notification /> 
       </div>
     );
   }

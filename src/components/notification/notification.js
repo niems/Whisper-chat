@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import NotificationContext from './notificationContext/notificationContext';
 
+
+
+// returns the notification msg if it's active
+const DisplayNotification = ({ isActive, msg }) => {
+    const display = isActive ? (<div className='notification'>{msg}</div>) : null;
+    return (display);
+}
+
 class Notification extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +22,7 @@ class Notification extends Component {
         this.newNotification = this.newNotification.bind(this);
 
         // displays the notification if it's active
-        this.displayNotification = this.displayNotification.bind(this);
+        //this.displayNotification = this.displayNotification.bind(this);
     }
 
     newNotification(msg, duration) {
@@ -33,27 +41,16 @@ class Notification extends Component {
         }, duration);
     }
 
-    displayNotification() {
-        // notification isn't active
-        if ( !this.state.isActive ) {
-            return null;
-        }
-
-        return (
-            <div className='notification'>{this.state.msg}</div>
-        );
-    }
-
     render() {        
         return (
-            <Notification.Provider value={{
+            <NotificationContext.Provider value={{
                 isActive: this.state.isActive,
                 msg: this.state.msg,
                 newNotification: this.newNotification
             }}>
 
-                {this.displayNotification()}
-            </Notification.Provider>
+                <DisplayNotification isActive={this.state.isActive} msg={this.state.msg} />
+            </NotificationContext.Provider>
         );
     }
 }
