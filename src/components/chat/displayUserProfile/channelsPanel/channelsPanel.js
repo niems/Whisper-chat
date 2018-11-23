@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthenticationContext from '../../authentication/authenticationContext';
+import AuthenticationContext from '../../../authentication/authenticationContext';
 
 const ChannelsPanel = ({ username, signout }) => {
     return (

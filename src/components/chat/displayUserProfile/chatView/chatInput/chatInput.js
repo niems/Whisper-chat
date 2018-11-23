@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AuthenticationContext from '../../../authentication/authenticationContext';
+import AuthenticationContext from '../../../../authentication/authenticationContext';
 
 class ChatInput extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class ChatInput extends Component {
             };
 
             this.setState({ input: '' }); // clears inputfield
-            this.props.addMsg(msg); // appends message & sends to server
+            this.props.sendNewMsg(msg); // appends message & sends to server
         }
 
         else {
