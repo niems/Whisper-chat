@@ -61,23 +61,25 @@ class App extends Component {
   render() {
     return (
       <div id='app'>
-        <AuthenticationContext.Provider value={{
-          isUserAuthenticated: this.state.isUserAuthenticated,
-          authenticate: this.authenticate,
-          signout: this.signout
-        }}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route exact path='/' component={Homepage} />
-              <Route path='/create-account' component={CreateAccount} />
-              <Route path='/login' component={Login} />
-              <Route path='/profile' component={Profile} />
+        <Notification>
+          <AuthenticationContext.Provider value={{
+            isUserAuthenticated: this.state.isUserAuthenticated,
+            authenticate: this.authenticate,
+            signout: this.signout
+          }}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <Route exact path='/' component={Homepage} />
+                <Route path='/create-account' component={CreateAccount} />
+                <Route path='/login' component={Login} />
+                <Route path='/profile' component={Profile} />
 
-              <Route component={NoMatch} />
-            </Switch>
-          </Suspense>
+                <Route component={NoMatch} />
+              </Switch>
+            </Suspense>
 
-        </AuthenticationContext.Provider>
+          </AuthenticationContext.Provider>
+        </Notification>
       </div>
     );
   }
