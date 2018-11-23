@@ -56,6 +56,7 @@ class Notification extends Component {
                 newNotification: this.newNotification
             }}>
 
+                {this.props.children}
                 <DisplayNotification isActive={this.state.isActive} msg={this.state.msg} />
             </NotificationContext.Provider>
         );
