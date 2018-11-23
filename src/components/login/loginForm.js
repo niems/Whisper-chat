@@ -69,11 +69,12 @@ class LoginForm extends Component {
                     
                     if ( res.accountExists === true ) { //user account exists - redirecting to /profile
                         this.setState({ loginSuccessful: true });
+                        this.props.newNotification('Login successful', 3000, 'success');            
                     }
                     
                     else {
                         console.log('account does NOT exist');
-                        this.props.newNotification('Invalid username and/or password...', 10000);
+                        this.props.newNotification('Invalid username and/or password...', 5000, 'error');            
                     }
                 })
                 .catch(err => {
@@ -107,17 +108,17 @@ class LoginForm extends Component {
 
 const LoginFormContext = (props) => {
     return (
-        <AuthenticationContext.Consumer>
-            { ({ authenticate }) => (
+        <NotificationContext.Consumer>
+            { ({ newNotification }) => (
 
-                <NotificationContext.Consumer>
-                    { ({ newNotification }) => (
+                <AuthenticationContext.Consumer>
+                    { ({ authenticate }) => (
                         <LoginForm {...props} authenticate={authenticate} newNotification={newNotification} />    
                     )}
-                </NotificationContext.Consumer>
-            
+                </AuthenticationContext.Consumer>
+
             )}
-        </AuthenticationContext.Consumer>
+        </NotificationContext.Consumer>
     );
 };
 
