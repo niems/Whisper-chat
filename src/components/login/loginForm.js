@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import AuthenticationContext from '../authentication/authenticationContext';
+import NotificationContext from '../notification/notificationContext/notificationContext';
 import areFieldsValid from '../formFieldCheck/areFieldsValid';
 import loginPost from '../serverRequest/loginPost';
 
@@ -68,7 +69,12 @@ class LoginForm extends Component {
                     
                     if ( res.accountExists === true ) { //user account exists - redirecting to /profile
                         this.setState({ loginSuccessful: true });
-                    }                    
+                    }
+                    
+                    else {
+                        console.log('account does NOT exist');
+                        this.props.newNotification('Invalid username and/or password...', 10000);
+                    }
                 })
                 .catch(err => {
                     console.error(err);
@@ -103,7 +109,13 @@ const LoginFormContext = (props) => {
     return (
         <AuthenticationContext.Consumer>
             { ({ authenticate }) => (
-                <LoginForm {...props} authenticate={authenticate} />    
+
+                <NotificationContext.Consumer>
+                    { ({ newNotification }) => (
+                        <LoginForm {...props} authenticate={authenticate} newNotification={newNotification} />    
+                    )}
+                </NotificationContext.Consumer>
+            
             )}
         </AuthenticationContext.Consumer>
     );
