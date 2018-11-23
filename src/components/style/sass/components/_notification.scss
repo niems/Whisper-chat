@@ -1,13 +1,36 @@
-
 .notification {
-    position: fixed;
-    width: max-content;
+    box-sizing: border-box;
+    width: 100%;
     height: auto;
-
+    padding: pxToRem(15px) 0;
+    margin: 0;
+    position: fixed;
     bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    //border-radius: pxToRem(5px);
 
-    background: red;
-    color: black;
+    @include fluid-type($min-vw, $max-vw, pxToRem(16px), pxToRem(24px) );
+    color: $light;
+    background: $darkest-transparent;
+
+
+    animation-name: toast-popup;
+    animation-timing-function: ease-out;
 }
+
+.notification.error, .notification.success {
+    font-weight: bold;
+    opacity: 0.85;
+}
+
+.notification.error {
+    background: maroon;
+    color: $light;
+}
+
+.notification.success {
+    background: $secondary;
+    color: $darkest;
+}
+
+
+

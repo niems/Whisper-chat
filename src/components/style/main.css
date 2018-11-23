@@ -50,6 +50,20 @@ import each file according to the order below:
     transform: translateX(0%);
   }
 }
+@keyframes toast-popup {
+  0% {
+    transform: translateY(200%);
+  }
+  15% {
+    transform: translateY(0%);
+  }
+  80% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
 body {
   color: #2E3136;
 }
@@ -301,14 +315,33 @@ input::-webkit-input-placeholder {
 }
 
 .notification {
-  position: fixed;
-  width: max-content;
+  box-sizing: border-box;
+  width: 100%;
   height: auto;
+  padding: 0.9375rem 0;
+  margin: 0;
+  position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: red;
-  color: black;
+  font-size: calc(1rem + 0.5 * ((100vw - 18.75rem) / 43.75) );
+  color: #F1F1F1;
+  background: rgba(46, 49, 54, 0.5);
+  animation-name: toast-popup;
+  animation-timing-function: ease-out;
+}
+
+.notification.error, .notification.success {
+  font-weight: bold;
+  opacity: 0.85;
+}
+
+.notification.error {
+  background: maroon;
+  color: #F1F1F1;
+}
+
+.notification.success {
+  background: #00e5ff;
+  color: #2E3136;
 }
 
 #homepage {
