@@ -8,7 +8,8 @@ $max-msg-font: pxToRem(16px);
 
 #channel-messages-container {
     box-sizing: border-box;
-    overflow: auto;
+    overflow-x: none;
+    overflow-y: auto;
     
     margin: pxToRem(20px) 0;
     border-radius: pxToRem(5px);    
@@ -21,15 +22,15 @@ $max-msg-font: pxToRem(16px);
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-start;
+
     
     margin: 0;
     padding: pxToRem(15px);
 
-    .channel-msg:last-child {
-        background: red;
+    .channel-msg:nth-last-child(-n+3) {
         animation-name: slide-in;
-        animation-duration: 1s;
-        animation-timing-function: ease-out;
+        animation-duration: 0.85s;
+        animation-timing-function: cubic-bezier(0.175, 0.985, 0.32, 1.275);
     }
 }
 

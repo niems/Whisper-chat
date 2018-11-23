@@ -44,10 +44,10 @@ import each file according to the order below:
 
 @keyframes slide-in {
   from {
-    margin-right: -1000px;
+    transform: translateX(-150%);
   }
   to {
-    margin-right: 0;
+    transform: translateX(0%);
   }
 }
 body {
@@ -211,7 +211,8 @@ input::-webkit-input-placeholder {
 
 #channel-messages-container {
   box-sizing: border-box;
-  overflow: auto;
+  overflow-x: none;
+  overflow-y: auto;
   margin: 1.25rem 0;
   border-radius: 0.3125rem;
   background: none;
@@ -225,11 +226,10 @@ input::-webkit-input-placeholder {
   margin: 0;
   padding: 0.9375rem;
 }
-#channel-messages-list .channel-msg:last-child {
-  background: red;
+#channel-messages-list .channel-msg:nth-last-child(-n+3) {
   animation-name: slide-in;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.175, 0.985, 0.32, 1.275);
 }
 
 .channel-msg {

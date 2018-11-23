@@ -16,10 +16,10 @@
 
 @keyframes slide-in {
     from {
-        margin-right: -1000px;
+        transform: translateX(-150%);
     }
 
     to {
-        margin-right: 0;
+        transform: translateX(0%);        
     }
 }
