@@ -300,6 +300,17 @@ input::-webkit-input-placeholder {
   border: 1px solid #728ADC;
 }
 
+.notification {
+  position: fixed;
+  width: max-content;
+  height: auto;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: red;
+  color: black;
+}
+
 #homepage {
   flex: 1 1 100%;
   background: linear-gradient(45deg, #728ADC, #36393E);
