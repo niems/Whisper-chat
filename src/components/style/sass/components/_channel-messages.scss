@@ -1,9 +1,7 @@
 $min-username-font: pxToRem(16px);
 $max-username-font: pxToRem(18px);
 
-$min-timestamp-font: pxToRem(12px);
-$max-timestamp-font: pxToRem(14px);
-
+$timestamp-font: pxToRem(12px);
 
 $min-msg-font: pxToRem(14px);
 $max-msg-font: pxToRem(16px);
@@ -26,6 +24,13 @@ $max-msg-font: pxToRem(16px);
     
     margin: 0;
     padding: pxToRem(15px);
+
+    .channel-msg:last-child {
+        background: red;
+        animation-name: slide-in;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+    }
 }
 
 .channel-msg {
@@ -71,7 +76,7 @@ $max-msg-font: pxToRem(16px);
         padding: 0;
         opacity: 0.7;
         font-style: italic;
-        @include fluid-type($min-vw, $max-vw, $min-timestamp-font, $max-timestamp-font);
+        font-size: $timestamp-font;
     }
 
     .msg.text {
@@ -86,7 +91,7 @@ $max-msg-font: pxToRem(16px);
         background: $darkest-transparent;
 
         &::first-letter {
-            margin-left: pxToRem(24px);
+            margin-left: pxToRem(12px);
         }
     }
 

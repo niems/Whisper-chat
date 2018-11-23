@@ -51,12 +51,30 @@ class ChatInput extends Component {
                     <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
                         placeholder={`Say something in ${this.props.channel}`} onChange={this.onChange} ref={this.inputRef} />
 
-                    <button className='chat-submit' type='submit' onClick={this.onSubmit}>SEND</button>
+                    <img className='chat-submit' src='./assets/svg/placeholder/round-arrow.svg'
+                         alt='send button' onClick={this.onSubmit} />
                 </form>
                 
             </div>
         );
     }
+    /*
+    render() {
+        return (
+            <div id='chat-input-container'>
+                <form id='chat-input-form' onSubmit={this.onSubmit}>
+                    <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
+                        placeholder={`Say something in ${this.props.channel}`} onChange={this.onChange} ref={this.inputRef} />
+
+                    <button className='chat-submit' type='submit' onClick={this.onSubmit}>
+                        <img src='./assets/svg/placeholder/round-arrow.svg' alt='send button' />
+                    </button>
+                </form>
+                
+            </div>
+        );
+    }
+    */
 }
 
 const ChatInputContext = (props) => {

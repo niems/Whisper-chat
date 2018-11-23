@@ -57,25 +57,32 @@
             flex: 1 1 auto;
             
             /*
+            */
             background: $darkest-transparent;
             border: 1px inset $blue-darkest;
             border-radius: 5px;
                 
             box-shadow: inset 1px 1px 2px black;
-            */
         }
         #chat-inputfield {
             max-width: unset;
-            width: 90%;
+            width: 100%;
             @include fluid-type($min-vw, $max-vw, pxToRem(14px), pxToRem(18px) );
-            background: $darkest-transparent;
+            //background: $darkest-transparent;
+            background: none;
+            border: none;
+            box-shadow: none;
         }
 
         .chat-submit {
-            height: 100%;
-            background: $primary;
-            color: $darkest;
-            border: 2px outset $light;
+            display: inline-block;
+            cursor: pointer;
+            width: fluid-value($min-vw, $max-vw, pxToRem(40px), pxToRem(50px) );
+            height: auto;
+            
+            &:hover {
+                filter: $purple-filter;
+            }
         }
     }
 }

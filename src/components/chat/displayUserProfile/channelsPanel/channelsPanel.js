@@ -4,7 +4,7 @@ import AuthenticationContext from '../../../authentication/authenticationContext
 const ChannelsPanel = ({ username, signout }) => {
     return (
         <section className='side-panel'>
-            <button className='link-to' onClick={signout}><small>signout</small></button>
+            <button className='link-to' onClick={signout}>logout</button>
         </section>
     );
 }

@@ -42,6 +42,14 @@ import each file according to the order below:
   animation-timing-function: ease-in;
 }
 
+@keyframes slide-in {
+  from {
+    margin-right: -1000px;
+  }
+  to {
+    margin-right: 0;
+  }
+}
 body {
   color: #2E3136;
 }
@@ -217,6 +225,12 @@ input::-webkit-input-placeholder {
   margin: 0;
   padding: 0.9375rem;
 }
+#channel-messages-list .channel-msg:last-child {
+  background: red;
+  animation-name: slide-in;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
 
 .channel-msg {
   box-sizing: border-box;
@@ -252,7 +266,7 @@ input::-webkit-input-placeholder {
   padding: 0;
   opacity: 0.7;
   font-style: italic;
-  font-size: calc(0.75rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+  font-size: 0.75rem;
 }
 .channel-msg .msg.text {
   max-width: 62.5rem;
@@ -264,7 +278,7 @@ input::-webkit-input-placeholder {
   background: rgba(46, 49, 54, 0.5);
 }
 .channel-msg .msg.text::first-letter {
-  margin-left: 1.5rem;
+  margin-left: 0.75rem;
 }
 .channel-msg hr {
   width: 100%;
@@ -351,24 +365,28 @@ input::-webkit-input-placeholder {
   align-items: center;
   flex: 1 1 auto;
   /*
-  background: $darkest-transparent;
-  border: 1px inset $blue-darkest;
-  border-radius: 5px;
-      
-  box-shadow: inset 1px 1px 2px black;
   */
+  background: rgba(46, 49, 54, 0.5);
+  border: 1px inset #1D2227;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 2px black;
 }
 #chat-view #chat-input-container #chat-inputfield {
   max-width: unset;
-  width: 90%;
+  width: 100%;
   font-size: calc(0.875rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
-  background: rgba(46, 49, 54, 0.5);
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 #chat-view #chat-input-container .chat-submit {
-  height: 100%;
-  background: #728ADC;
-  color: #2E3136;
-  border: 2px outset #F1F1F1;
+  display: inline-block;
+  cursor: pointer;
+  width: calc(2.5rem + 0.625 * ((100vw - 18.75rem) / 43.75) );
+  height: auto;
+}
+#chat-view #chat-input-container .chat-submit:hover {
+  filter: invert(50%) sepia(5%) saturate(4965%) hue-rotate(199deg) brightness(107%) contrast(98%);
 }
 
 /*# sourceMappingURL=main.css.map */
