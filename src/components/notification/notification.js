@@ -16,8 +16,8 @@ class Notification extends Component {
         super(props);
 
         this.state = {
-            isActive: true, // determines if the notification is displayed
-            msg: 'This is a test TOASTER :D', // notification message to display
+            isActive: false, // determines if the notification is displayed
+            msg: '', // notification message to display
         };
 
         // creates the new notification
