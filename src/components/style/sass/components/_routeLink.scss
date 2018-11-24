@@ -54,6 +54,7 @@
         display: inline-block;
         width: fluid-value($min-vw, $max-vw, $min-img-width, $max-img-width);
         height: auto;
+        transition:  transform 0.4s;
     }
 
     &:hover {
@@ -63,6 +64,7 @@
         
         img {
             filter: invert(1);
+            transform: rotateZ(-90deg);
         }
     }
 }

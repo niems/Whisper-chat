@@ -222,12 +222,14 @@ form button[id=submit] {
   display: inline-block;
   width: calc(3.125rem + 0.625 * ((100vw - 18.75rem) / 43.75) );
   height: auto;
+  transition: transform 0.4s;
 }
 .navigate.home:hover::after {
   transform: translate(-50%, 100%);
 }
 .navigate.home:hover img {
   filter: invert(1);
+  transform: rotateZ(-90deg);
 }
 
 input {
