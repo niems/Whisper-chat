@@ -2,11 +2,14 @@
     box-sizing: border-box;
     width: 100%;
     height: auto;
+
     padding: pxToRem(15px) 0;
     margin: 0;
+
     position: fixed;
     bottom: 0;
-    //border-radius: pxToRem(5px);
+    transform: translateY(200%); // to ensure it doesn't flash onto the page once the animation is done
+    
 
     @include fluid-type($min-vw, $max-vw, pxToRem(16px), pxToRem(24px) );
     color: $light;

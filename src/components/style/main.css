@@ -322,6 +322,7 @@ input::-webkit-input-placeholder {
   margin: 0;
   position: fixed;
   bottom: 0;
+  transform: translateY(200%);
   font-size: calc(1rem + 0.5 * ((100vw - 18.75rem) / 43.75) );
   color: #F1F1F1;
   background: rgba(46, 49, 54, 0.5);
