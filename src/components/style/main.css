@@ -202,6 +202,34 @@ form button[id=submit] {
   color: #00e5ff;
 }
 
+.navigate.home {
+  display: inline-block;
+  margin: 0.9375rem;
+}
+.navigate.home::after {
+  content: "Home";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-220%, 100%);
+  font-size: calc(1.125rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+  font-weight: bold;
+  color: #F1F1F1;
+  background: none;
+  transition: transform 0.4s;
+}
+.navigate.home img {
+  display: inline-block;
+  width: calc(3.125rem + 0.625 * ((100vw - 18.75rem) / 43.75) );
+  height: auto;
+}
+.navigate.home:hover::after {
+  transform: translate(-50%, 100%);
+}
+.navigate.home:hover img {
+  filter: invert(1);
+}
+
 input {
   box-sizing: border-box;
   width: 100%;

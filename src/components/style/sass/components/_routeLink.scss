@@ -26,5 +26,43 @@
 }
 
 .navigate.home {
+    $min-img-width: pxToRem(50px);
+    $max-img-width: pxToRem(60px);
 
+    $min-font-size: pxToRem(18px);
+    $max-font-size: pxToRem(20px);
+
+    display: inline-block;
+    margin: pxToRem(15px);
+
+    &::after {
+        content: 'Home';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-220%, 100%);
+
+        @include fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size);
+        font-weight: bold;
+
+        color: $light;
+        background: none;
+        transition:  transform 0.4s;
+    }
+
+    img {
+        display: inline-block;
+        width: fluid-value($min-vw, $max-vw, $min-img-width, $max-img-width);
+        height: auto;
+    }
+
+    &:hover {
+        &::after {
+            transform: translate(-50%, 100%);
+        }
+        
+        img {
+            filter: invert(1);
+        }
+    }
 }
