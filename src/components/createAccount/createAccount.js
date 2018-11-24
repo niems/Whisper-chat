@@ -8,7 +8,7 @@ const CreateAccount = (props) => {
             <h1>Create Account</h1>
             <CreateAccountForm />
 
-            <span>Already have an account? <Link className='link-to-default' to='/login'>Login here</Link></span>
+            <p className='related-info'>Already have an account? <Link className='link-to-default' to='/login'>Login here</Link></p>
         </article>
     );
 };
