@@ -26,14 +26,23 @@ class Notification extends Component {
 
         // creates the new notification
         this.newNotification = this.newNotification.bind(this);
+
+        // setup for new notification
+        this.newNotificationSetup = this.newNotificationSetup.bind(this);
+
+        // the previous notification is still active and needs to be removed first
+        this.previousNotificationActive = this.previousNotificationActive.bind(this);
     }
+    
 
     newNotification(msg, duration, type='') {
-        if ( this.state.isActive ) { // resets timerID
-            clearTimeout( this.timerID );
-            this.timerID = null;
-        }
+        this.previousNotificationActive()
+        .then(() => this.newNotificationSetup(msg, duration, type))
+        .catch(err => console.error(err) );
+    }
 
+
+    newNotificationSetup(msg, duration, type) {
         this.setState({
             isActive: true,
             msg: msg,
@@ -51,6 +60,27 @@ class Notification extends Component {
             });
         }, duration);
     }
+
+
+    previousNotificationActive() {
+        return new Promise(resolve => {
+            if ( this.state.isActive ) { // previous notification still active
+                clearTimeout( this.timerID );
+                this.timerID = null;
+
+                this.setState({
+                    isActive: false,
+                }, () => {
+                    resolve(); //clears old notification before adding new one
+                });
+            }
+
+            else {
+                resolve(); // no notification currently active
+            }
+        });
+    }
+
 
     render() {        
         return (
