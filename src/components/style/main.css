@@ -193,6 +193,14 @@ form button[id=submit] {
   font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
 }
 
+.link-to-default {
+  color: #F1F1F1;
+  text-decoration-color: #00e5ff;
+}
+.link-to-default:hover {
+  color: #00e5ff;
+}
+
 input {
   box-sizing: border-box;
   width: 100%;

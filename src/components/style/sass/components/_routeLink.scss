@@ -14,3 +14,12 @@
     text-align: center;
     @include fluid-type($min-vw, $max-vw, $min-link-font, $max-link-font);
 }
+
+.link-to-default {
+    color: $light;
+    text-decoration-color: $secondary;
+
+    &:hover {
+        color: $secondary;
+    }
+}

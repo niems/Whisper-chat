@@ -1,5 +1,6 @@
 import React from 'react';
 import CreateAccountForm from './createAccountForm';
+import { Link } from 'react-router-dom';
 
 const CreateAccount = (props) => {
     return (
@@ -7,7 +8,7 @@ const CreateAccount = (props) => {
             <h1>Create Account</h1>
             <CreateAccountForm />
 
-            <span>Already have an account? Tough shit...</span>
+            <span>Already have an account? <Link className='link-to-default' to='/login'>Login here</Link></span>
         </article>
     );
 };
