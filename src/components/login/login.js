@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HomeNavigation from '../navigation/homeNavigation/homeNavigation';
 import LoginForm from './loginForm';
 
 const Login = (props) => {
     return (
         <article id='login' className='wrapper center'>
+            <HomeNavigation />
             <h1>Login</h1>
             <LoginForm />
 
