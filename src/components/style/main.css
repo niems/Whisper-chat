@@ -353,6 +353,11 @@ input::-webkit-input-placeholder {
   color: #2E3136;
 }
 
+.related-info {
+  line-height: 180%;
+  font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+}
+
 #homepage {
   flex: 1 1 100%;
   background: linear-gradient(45deg, #728ADC, #36393E);

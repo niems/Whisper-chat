@@ -1,0 +1,7 @@
+.related-info {
+    $min-paragraph-font: pxToRem(14px);
+    $max-paragraph-font: pxToRem(16px);
+    line-height: 180%;
+    @include fluid-type($min-vw, $max-vw, $min-paragraph-font, $max-paragraph-font);
+}
+
