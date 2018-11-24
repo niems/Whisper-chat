@@ -21,11 +21,19 @@ class Notification extends Component {
             type: '', // (optional) error/success will change the color to red or green, respectively
         };
 
+        // timeout id (clears when a new ID is set if one is currently active)
+        this.timerID = null;
+
         // creates the new notification
         this.newNotification = this.newNotification.bind(this);
     }
 
     newNotification(msg, duration, type='') {
+        if ( this.state.isActive ) { // resets timerID
+            clearTimeout( this.timerID );
+            this.timerID = null;
+        }
+
         this.setState({
             isActive: true,
             msg: msg,
@@ -34,7 +42,7 @@ class Notification extends Component {
         });
 
         // notification becomes inactive after the duration has elapsed
-        setTimeout(() => {
+        this.timerID = setTimeout(() => {
             this.setState({
                 isActive: false,
                 msg: '',
