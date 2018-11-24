@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import AuthenticationContext from '../authentication/authenticationContext';
+import NotificationContext from '../notification/notificationContext/notificationContext';
 import areFieldsValid from '../formFieldCheck/areFieldsValid';
 import createAccountPost from '../serverRequest/createAccountPost';
 
@@ -73,6 +74,7 @@ class CreateAccountForm extends Component {
 
                     else {
                         console.log('account not created...');
+                        this.props.newNotification('Create account failed: username taken', 5000, 'error');
                     }
                 })
                 .catch(err => {
@@ -109,11 +111,17 @@ class CreateAccountForm extends Component {
 
 const CreateAccountFormContext = (props) => {
     return (
-        <AuthenticationContext.Consumer>
-            { ({authenticate}) => (
-                <CreateAccountForm {...props} authenticate={authenticate} />    
+        <NotificationContext.Consumer>
+            { ({newNotification}) => (
+
+                <AuthenticationContext.Consumer>
+                    { ({authenticate}) => (
+                        <CreateAccountForm {...props} authenticate={authenticate} newNotification={newNotification} />    
+                    )}
+                </AuthenticationContext.Consumer>
+
             )}
-        </AuthenticationContext.Consumer>
+        </NotificationContext.Consumer>
     )
 };
 
