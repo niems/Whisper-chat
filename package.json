@@ -28,6 +28,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^3.0.8"
+    "electron": "^3.0.8",
+    "react-test-renderer": "^16.6.3"
   }
 }
