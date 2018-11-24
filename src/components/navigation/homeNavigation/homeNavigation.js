@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const HomeNavigation = (props) => {
     return (
-        <Link to='/' className='navigate home'>Back arrow here</Link>
+        <Link to='/' className='navigate home abs-top-left'>Back arrow here</Link>
     );
 };
 
