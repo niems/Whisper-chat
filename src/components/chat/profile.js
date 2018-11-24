@@ -1,6 +1,7 @@
 import React, {Component, lazy} from 'react';
 import { Redirect } from 'react-router-dom';
 import verifyAccountGet from '../serverRequest/verifyAccountGet';
+import NotificationContext from '../notification/notificationContext/notificationContext';
 
 const UserProfile = lazy(() => import('./userProfile'));
 const UserTokenInvalid = lazy(() => import('./userTokenInvalid'));
@@ -60,7 +61,8 @@ class Profile extends Component {
                     accountVerified: true,
                     component: <UserProfile />
                 });
-
+                
+                this.props.newNotification('Account Verified', 3000, 'success');
                 resolve();
             }
     
@@ -103,4 +105,14 @@ class Profile extends Component {
 
 //waiting message - "Verifying account info..."
 
-export default Profile;
+const ProfileContext = (props) => {
+    return (
+        <NotificationContext.Consumer>
+            { ({ newNotification }) => (
+                <Profile {...props} newNotification={newNotification} />
+            )}
+        </NotificationContext.Consumer>
+    );
+}
+
+export default ProfileContext;
