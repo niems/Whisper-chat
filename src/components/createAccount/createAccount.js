@@ -1,10 +1,12 @@
 import React from 'react';
-import CreateAccountForm from './createAccountForm';
 import { Link } from 'react-router-dom';
+import HomeNavigation from '../navigation/homeNavigation/homeNavigation';
+import CreateAccountForm from './createAccountForm';
 
 const CreateAccount = (props) => {
     return (
         <article id='create-account' className='wrapper center'>
+            <HomeNavigation />
             <h1>Create Account</h1>
             <CreateAccountForm />
 
