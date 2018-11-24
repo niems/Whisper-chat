@@ -18,8 +18,13 @@
 .link-to-default {
     color: $light;
     text-decoration-color: $secondary;
+    font-style: italic;
 
     &:hover {
         color: $secondary;
     }
+}
+
+.navigate.home {
+
 }
