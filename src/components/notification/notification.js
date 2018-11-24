@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import NotificationContext from './notificationContext/notificationContext';
 
-
-
-// returns the notification msg if it's active
-const DisplayNotification = ({ isActive, msg, duration, type }) => {
-    console.log('DisplayNotification() enter');
-    
-    const display = isActive ? (<p className={`notification ${type}`} style={{animationDuration: `${duration}ms`}}>{msg}</p>) : null;
-    return (display);
+// returns the notification msg if it's active, otherwise null
+const DisplayNotification = ({ isActive, msg, duration, type }) => {    
+    return (
+        isActive ? 
+        (<p className={`notification ${type}`}
+            style={{animationDuration: `${duration}ms`}}>{msg}</p>) : null
+    );
 }
 
 class Notification extends Component {
@@ -19,21 +18,14 @@ class Notification extends Component {
             isActive: false, // determines if the notification is displayed
             msg: '', // notification message to display
             duration: 0, // how long the notification lasts in ms
-            type: '', // error/success will change the color to red or green, respectively
+            type: '', // (optional) error/success will change the color to red or green, respectively
         };
 
         // creates the new notification
         this.newNotification = this.newNotification.bind(this);
-
-        // displays the notification if it's active
-        //this.displayNotification = this.displayNotification.bind(this);
     }
 
     newNotification(msg, duration, type='') {
-        console.log('newNotification(): ');
-        console.log(`\tmsg: ${msg}`);
-        console.log(`\tduration: ${duration}\n`);
-
         this.setState({
             isActive: true,
             msg: msg,
@@ -43,8 +35,6 @@ class Notification extends Component {
 
         // notification becomes inactive after the duration has elapsed
         setTimeout(() => {
-            console.log('newNotification deactivating');
-
             this.setState({
                 isActive: false,
                 msg: '',
