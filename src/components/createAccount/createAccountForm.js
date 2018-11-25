@@ -13,17 +13,15 @@ class CreateAccountForm extends Component {
             username: '',
             password: '',
             confirmPassword: '',
-            accountCreated: false, //redirects to /profile if account is created
+            accountCreated: false, // redirects to /profile if account is created
         };
 
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this); // the user modified one of the input fields
+        this.onSubmit = this.onSubmit.bind(this); // the user submitted the form
     }
 
     componentWillUnmount() {
-        //update authenticate provider info here
-        if ( this.state.accountCreated ) {
-            console.log('updating accountCreated in App.js now...');
+        if ( this.state.accountCreated ) { // successfully created account
             this.props.authenticate( this.state.username );
         }
     }
@@ -53,32 +51,26 @@ class CreateAccountForm extends Component {
         e.preventDefault();
         const {username, password, confirmPassword} = this.state;
 
-        //username & password fields valid
-        if ( areFieldsValid( {username: username, password: password} ) ) {
+        if ( areFieldsValid( {username: username, password: password} ) ) { // username & password fields valid
+            if ( confirmPassword === password ) { // confirm password matches password
 
-            //confirm password matches password
-            if ( confirmPassword === password ) {
-
-                //put up "checking username availability" display while waiting
-                console.log('fields valid. Checking username availability');
+                // put up "checking username availability" display while waiting
+                this.props.newNotification('Confirming new account with server...', 5000);                        
     
-                createAccountPost({ username: username, password: password })
+                createAccountPost({ username: username, password: password }) // asks the server to create a new account
                 .then(res => res.json())
                 .then(res => {
-                    console.log(`response: ${JSON.stringify(res)}\n\n`);
-
-                    if ( res.createAccount === true ) {
-                        console.log('account created! Redirecting now...');
+                    if ( res.createAccount === true ) { // account successfully created
                         this.setState({ accountCreated: true });
                     }
 
                     else {
-                        console.log('account not created...');
-                        this.props.newNotification('Create account failed: username taken', 5000, 'error');
+                        this.props.newNotification('Failed to create new account: username taken', 5000, 'error');
                     }
                 })
                 .catch(err => {
                     console.error(err);
+                    this.props.newNotification('Failed to connect to server', 5000, 'error');            
                 });
             }
 
@@ -109,6 +101,9 @@ class CreateAccountForm extends Component {
     }
 };
 
+
+/* used to pass in the authenticate and notification functions as props so they can be used in 
+ create account's lifecycle methods */
 const CreateAccountFormContext = (props) => {
     return (
         <NotificationContext.Consumer>
