@@ -62,23 +62,26 @@ class LoginForm extends Component {
 
         //username & password fields valid
         if ( areFieldsValid( {username: username, password: password} ) ) {
+            this.props.newNotification('Verifying account...', 5000);            
+
             loginPost( {username: username, password: password} )
             .then(res => res.json())
-                .then(res => {
-                    console.log(`response: ${JSON.stringify(res)}\n\n`);
-                    
-                    if ( res.accountExists === true ) { //user account exists - redirecting to /profile
-                        this.setState({ loginSuccessful: true });
-                    }
-                    
-                    else {
-                        console.log('account does NOT exist');
-                        this.props.newNotification('Invalid username and/or password...', 5000, 'error');            
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                });
+            .then(res => {
+                console.log(`response: ${JSON.stringify(res)}\n\n`);
+                
+                if ( res.accountExists === true ) { //user account exists - redirecting to /profile
+                    this.setState({ loginSuccessful: true });
+                }
+                
+                else {
+                    console.log('account does NOT exist');
+                    this.props.newNotification('Invalid username and/or password...', 5000, 'error');            
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                this.props.newNotification('Failed to connect to server', 5000, 'error');            
+            });
         }
 
         else {
