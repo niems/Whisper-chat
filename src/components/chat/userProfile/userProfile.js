@@ -25,6 +25,14 @@ class UserProfile extends Component {
                     text: 'Wubba lubba dub dub! ',
                     timestamp: (new Date()).toUTCString()
                 }
+            ],
+
+            "#random": [
+                { // test message
+                    username: 'ThatOneGuy',
+                    text: 'Ayyyyy! ',
+                    timestamp: (new Date()).toUTCString()
+                }
             ]
         }
 
@@ -65,8 +73,10 @@ class UserProfile extends Component {
                 messages: this.allMessages['#general'], // messages from selected channel
             },
 
-            viewComponent: <DisplayUserProfile channelInfo={{name: '#general', messages: this.allMessages['#general']}}
-                                               sendNewMsg={this.sendMsgToServer} signout={this.userSignout} /> 
+            allChannels: Object.keys( this.allMessages ), // all the channels currently stored
+
+            viewComponent: <DisplayUserProfile channelInfo={{name: '#general', messages: this.allMessages['#general']}} sendNewMsg={this.sendMsgToServer}
+                                               allChannels={Object.keys(this.allMessages)} signout={this.userSignout} /> 
         };
     }
 
@@ -104,8 +114,8 @@ class UserProfile extends Component {
             // updates messages from current channel & the displayed component
             this.setState({ 
                 channel: updatedChannel,
-                viewComponent: <DisplayUserProfile channelInfo={{name: channel, messages: this.allMessages[channel]}}
-                                               sendNewMsg={this.sendMsgToServer} signout={this.userSignout} /> 
+                viewComponent: <DisplayUserProfile channelInfo={{name: channel, messages: this.allMessages[channel]}} sendNewMsg={this.sendMsgToServer}
+                                                   allChannels={ this.state.allChannels } signout={this.userSignout} /> 
             });
         }
     }
