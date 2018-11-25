@@ -31,6 +31,13 @@ class UserProfile extends Component {
         // when user sends or receives a message, this appends it to its channel messages
         this.addNewMsg = this.addNewMsg.bind(this);
 
+        /* creates a new channel if the user creates a new channel or receives a message 
+           on a channel that isn't stored in this.allMessages */
+        this.createChannel = this.createChannel.bind(this);
+
+        // adds the new message to this.allMessages
+        this.addMsgToAllMessages = this.addMsgToAllMessages.bind(this);
+
         /* once a new message is added to allMessages, this checks if the state for the 
           current channel's messages needs to update */
         this.updateMessagesState = this.updateMessagesState.bind(this);
@@ -51,8 +58,6 @@ class UserProfile extends Component {
            sets a timeout before redirecting to homepage */
         this.signoutRedirect = this.signoutRedirect.bind(this);
 
-
-
         // current channel selected & component displayed (default #general channel)
         this.state = {
             channel: {
@@ -72,18 +77,24 @@ class UserProfile extends Component {
     addNewMsg(msg) {
         const { channel } = msg; // channel the current message is intended for
 
-        if ( this.allMessages[channel] === undefined ) { // channel doesn't exist yet
-            this.allMessages[channel] = []; // creates channel with no entries
-        }
+        this.createChannel(channel); // creates channel if it doesn't exist
+        this.addMsgToAllMessages(msg); // adds message to this.allMessages
+        this.updateMessagesState(channel); // checks if selected channel's messages should update
+    }
 
+    createChannel(channel) {
+        if ( this.allMessages[channel] === undefined ) { // channel doesn't exist yet
+            this.allMessages[channel] = []; // creates channel
+        }
+    }
+
+    addMsgToAllMessages(msg) {
         // adds new message to channel
-        this.allMessages[channel].push({
+        this.allMessages[msg.channel].push({
             username: msg.username,
             text: msg.text,
             timestamp: msg.timestamp
         });
-
-        this.updateMessagesState(channel); // checks if selected channel's messages should update
     }
 
     updateMessagesState(channel) {
