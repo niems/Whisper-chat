@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom';
 import verifyAccountGet from '../serverRequest/verifyAccountGet';
 import NotificationContext from '../notification/notificationContext/notificationContext';
 
-const UserProfile = lazy(() => import('./userProfile'));
-const UserTokenInvalid = lazy(() => import('./userTokenInvalid'));
+const UserProfile = lazy(() => import('./userProfile/userProfile'));
+const UserTokenInvalid = lazy(() => import('./userTokenInvalid/userTokenInvalid'));
 
 
 const VerifyingProfile = (props) => {
@@ -17,7 +17,7 @@ const VerifyingProfile = (props) => {
     );
 };
 
-class Profile extends Component {
+class VerifyUserProfile extends Component {
     constructor(props) {
         super(props);
 
@@ -95,24 +95,14 @@ class Profile extends Component {
 };
 
 
-//verify token before allowing Profile component to load
-//display "You're not logged in" if they attempt to navigate 
-//to /profile and the verification fails
-
-//when verifying token, need to pass token as well as username (both from cookie)
-//in case user modified cookie. Once token is confirmed, it will also need to match
-//the username passed, otherwise it should be rejected
-
-//waiting message - "Verifying account info..."
-
-const ProfileContext = (props) => {
+const VerifyUserProfileContext = (props) => {
     return (
         <NotificationContext.Consumer>
             { ({ newNotification }) => (
-                <Profile {...props} newNotification={newNotification} />
+                <VerifyUserProfile {...props} newNotification={newNotification} />
             )}
         </NotificationContext.Consumer>
     );
 }
 
-export default ProfileContext;
+export default VerifyUserProfileContext;

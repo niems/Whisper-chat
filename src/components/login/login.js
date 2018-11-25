@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomeNavigation from '../navigation/homeNavigation/homeNavigation';
-import LoginForm from './loginForm';
+import LoginForm from './loginForm/loginForm';
 
 const Login = (props) => {
     return (
@@ -14,7 +14,6 @@ const Login = (props) => {
             Think you have an account? We'll just see...<br />
             Or create a new account <Link to='/create-account' className='link-to-default'>here</Link>
             </p>
-            <span></span>
         </article>
     );
 };

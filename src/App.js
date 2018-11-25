@@ -8,7 +8,7 @@ import './components/style/main.css';
 
 const CreateAccount = lazy(() => import('./components/createAccount/createAccount'));
 const Login = lazy(() => import('./components/login/login'));
-const Profile = lazy(() => import('./components/chat/profile'));
+const VerifyUserProfile = lazy(() => import('./components/chat/verifyUserProfile'));
 const NoMatch = lazy(() => import('./components/noMatch'));
 
 class App extends Component {
@@ -72,7 +72,7 @@ class App extends Component {
                 <Route exact path='/' component={Homepage} />
                 <Route path='/create-account' component={CreateAccount} />
                 <Route path='/login' component={Login} />
-                <Route path='/profile' component={Profile} />
+                <Route path='/profile' component={VerifyUserProfile} />
 
                 <Route component={NoMatch} />
               </Switch>

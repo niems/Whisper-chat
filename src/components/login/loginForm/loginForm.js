@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import AuthenticationContext from '../authentication/authenticationContext';
-import NotificationContext from '../notification/notificationContext/notificationContext';
-import areFieldsValid from '../formFieldCheck/areFieldsValid';
-import loginPost from '../serverRequest/loginPost';
+import AuthenticationContext from '../../authentication/authenticationContext';
+import NotificationContext from '../../notification/notificationContext/notificationContext';
+import areFieldsValid from '../../formFieldCheck/areFieldsValid';
+import loginPost from '../../serverRequest/loginPost';
 
 class LoginForm extends Component {
     constructor(props) {

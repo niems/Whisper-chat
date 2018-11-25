@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AuthenticationContext from '../../../../authentication/authenticationContext';
+import AuthenticationContext from '../../../../../authentication/authenticationContext';
 
 class ChatInput extends Component {
     constructor(props) {

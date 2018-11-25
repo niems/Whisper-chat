@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import io from 'socket.io-client';
-import AuthenticationContext from '../authentication/authenticationContext';
+import AuthenticationContext from '../../authentication/authenticationContext';
 import DisplayUserProfile from './displayUserProfile/displayUserProfile';
 
 const SigningOut = (props) => {
@@ -89,8 +89,7 @@ class UserProfile extends Component {
     }
 
     addMsgToAllMessages(msg) {
-        // adds new message to channel
-        this.allMessages[msg.channel].push({
+        this.allMessages[msg.channel].push({ // adds new message to channel
             username: msg.username,
             text: msg.text,
             timestamp: msg.timestamp
@@ -98,8 +97,7 @@ class UserProfile extends Component {
     }
 
     updateMessagesState(channel) {
-        // new message is from the current channel
-        if ( channel === this.state.channel.name ) {
+        if ( channel === this.state.channel.name ) { // new message is from the current channel
             let updatedChannel = this.state.channel;
             updatedChannel.messages = this.allMessages[channel];
             

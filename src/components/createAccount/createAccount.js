@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomeNavigation from '../navigation/homeNavigation/homeNavigation';
-import CreateAccountForm from './createAccountForm';
+import CreateAccountForm from './createAccountForm/createAccountForm';
 
 const CreateAccount = (props) => {
     return (
