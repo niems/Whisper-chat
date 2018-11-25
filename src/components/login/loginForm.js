@@ -12,25 +12,23 @@ class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
-            loginSuccessful: false, //redirects to /profile if account is logged into
+            loginSuccessful: false, // redirects to /profile if account is logged into
         };
 
         this.usernameRef = React.createRef();
         this.passwordRef = React.createRef();
         this.focusInput = this.focusInput.bind(this);
 
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this); // user modified one of the inputfields
+        this.onSubmit = this.onSubmit.bind(this); // user submitted form
     }
 
     componentDidMount() {
-        this.usernameRef.current.focus();
+        this.usernameRef.current.focus(); // focuses the username inputfield when the page loads
     }
 
     componentWillUnmount() {
-        //update authenticate provider info here
-        if ( this.state.loginSuccessful ) {
-            console.log('updating authentication in App.js now...');
+        if ( this.state.loginSuccessful ) { // updates authentication context in App.js
             this.props.authenticate( this.state.username );
         }
     }
@@ -60,26 +58,21 @@ class LoginForm extends Component {
         e.preventDefault();
         const { username, password } = this.state;
 
-        //username & password fields valid
-        if ( areFieldsValid( {username: username, password: password} ) ) {
+        if ( areFieldsValid( {username: username, password: password} ) ) { // username & password fields valid
             this.props.newNotification('Verifying account...', 5000);            
 
-            loginPost( {username: username, password: password} )
+            loginPost( {username: username, password: password} ) // checks with server if account exists
             .then(res => res.json())
-            .then(res => {
-                console.log(`response: ${JSON.stringify(res)}\n\n`);
-                
-                if ( res.accountExists === true ) { //user account exists - redirecting to /profile
+            .then(res => {                
+                if ( res.accountExists === true ) { // user account exists - redirecting to /profile
                     this.setState({ loginSuccessful: true });
                 }
                 
                 else {
-                    console.log('account does NOT exist');
                     this.props.newNotification('Invalid username and/or password...', 5000, 'error');            
                 }
             })
             .catch(err => {
-                console.error(err);
                 this.props.newNotification('Failed to connect to server', 5000, 'error');            
             });
         }
@@ -108,6 +101,9 @@ class LoginForm extends Component {
     }
 };
 
+
+/* used to pass in the authenticate and notification functions as props so they can be used in 
+ create account's lifecycle methods */
 const LoginFormContext = (props) => {
     return (
         <NotificationContext.Consumer>
