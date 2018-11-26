@@ -186,9 +186,9 @@ form button[id=submit] {
     padding: 0.625rem 0.9375rem;
     box-shadow: 2px 0 1px #2E3136;
     color: #F1F1F1;
-    background: rgba(46, 49, 54, 0.5);
+    background: linear-gradient(45deg, #728ADC, #36393E);
     animation-name: panel-slide-in;
-    animation-duration: 0.65s;
+    animation-duration: 0.5s;
     animation-timing-function: linear;
   }
   .side-panel #all-categories {
@@ -220,7 +220,6 @@ form button[id=submit] {
     position: relative;
     top: 0;
     left: -1rem;
-    border-bottom: 1px solid #F1F1F1;
     font-weight: bold;
     text-align: left;
     color: #F1F1F1;
@@ -230,17 +229,17 @@ form button[id=submit] {
     box-sizing: border-box;
     margin: 0.25rem 0;
     list-style: none;
-    font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+    font-size: calc(0.75rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
   }
   .side-panel .hashtag {
     font-size: 150%;
     font-weight: bold;
     color: #728ADC;
-    text-shadow: 1px 2px 1px black;
+    text-shadow: 2px 2px 2px black;
   }
   .side-panel .channel-text {
     background: rgba(114, 139, 220, 0.788);
-    color: #2E3136;
+    color: black;
     font-weight: bold;
     border-radius: 0.3125rem;
     padding: 0.125rem 0.5rem;

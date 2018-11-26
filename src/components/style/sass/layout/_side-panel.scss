@@ -30,11 +30,10 @@
         box-shadow: 2px 0 1px $darkest;
         
         color: $light;
-        background: $dark-transparent;
+        background: $primary-gradient;
 
         animation-name: panel-slide-in;
-        //animation-duration: 0.3s;
-        animation-duration: 0.65s;
+        animation-duration: 0.5s;
         animation-timing-function: linear;
 
         #all-categories {
@@ -56,6 +55,7 @@
 
             border-right: none;
             background: $darkest-transparent;
+
         }
 
         .category-channels-list {
@@ -78,7 +78,6 @@
             top: 0;
             left: -1rem;
 
-            border-bottom: 1px solid $light;
             font-weight: bold;
             text-align: left;
             color: $light;
@@ -86,8 +85,8 @@
         }
 
         .channel {
-            $max-item-font: pxToRem(16px);
-            $min-item-font: pxToRem(14px);
+            $max-item-font: pxToRem(14px);
+            $min-item-font: pxToRem(12px);
             
             box-sizing: border-box;
             margin: pxToRem(4px) 0;
@@ -101,13 +100,12 @@
             font-weight: bold;
             //color: $darkest;
             color: $purple-accent;
-            text-shadow: 1px 2px 1px black;
+            text-shadow: 2px 2px 2px black;
         }
 
         .channel-text {
-            //background: $darkest-transparent;
             background: $purple-accent-transparent;
-            color: $darkest;
+            color: black;
             font-weight: bold;
             border-radius: pxToRem(5px);
             padding: pxToRem(2px) pxToRem(8px);

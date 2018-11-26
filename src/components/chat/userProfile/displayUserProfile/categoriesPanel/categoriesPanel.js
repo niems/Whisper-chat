@@ -30,16 +30,16 @@ import CategoryList from './CategoryList/categoryList';
 
 // testing data for structuring channel panel
 const testChannelCategories = {
-    "Default Channels": [
+    "Default Channels": [ // user cannot add channels to this category
         'general',
         'random',
     ],
 
-    "User Channels": [
+    "My Channels": [ // user CAN manually create channels under this category
         'listenHereGuy',
     ], 
 
-    "PM's": [
+    "PM's": [ // user CANNOT manually create channels under this category: they're automatically added when selecting a user to message or receiving a message
         'Rick',
         'Morty',
         'BirdPerson'
