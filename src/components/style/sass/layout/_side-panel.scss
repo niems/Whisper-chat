@@ -30,7 +30,7 @@
         box-shadow: 2px 0 1px $darkest;
         
         color: $light;
-        background: $primary-gradient;
+        background: $darkest-transparent;
 
         animation-name: panel-slide-in;
         animation-duration: 0.5s;
@@ -41,8 +41,9 @@
             overflow-x: hidden;
             overflow-y: auto;
     
-            position: relative;
+            //position: relative;
             margin: pxToRem(20px) 0;
+            padding: 0 pxToRem(10px);
 
             display: flex;
             flex-flow: column nowrap;
@@ -54,29 +55,33 @@
             box-shadow: inset 2px 3px 2px black;
 
             border-right: none;
-            background: $darkest-transparent;
+            background: none;
+        }
 
+        .category-section {
+            margin-bottom: pxToRem(4px);
+            padding: 0;
         }
 
         .category-channels-list {
             box-sizing: border-box;
+            display: block;
             width: 100%;
             height: max-content;
+            padding: pxToRem(4px) pxToRem(12px);
+            margin-top: 0;
         }
 
         .category-title {
-            $max-header-font: pxToRem(16px);
+            $max-header-font: pxToRem(18px);
             $min-header-font: pxToRem(14px);
 
             box-sizing: border-box;
-            width: max-content;
+            display: inline-block;
+            width: 90%;
             
-            padding: 0 pxToRem(8px);
-            margin: 0;
-            
-            position: relative;
-            top: 0;
-            left: -1rem;
+            padding: 0; 
+            margin: 0 0 0 pxToRem(5px);
 
             font-weight: bold;
             text-align: left;
@@ -85,31 +90,47 @@
         }
 
         .channel {
-            $max-item-font: pxToRem(14px);
-            $min-item-font: pxToRem(12px);
+            $max-item-font: pxToRem(16px);
+            $min-item-font: pxToRem(14px);
             
             box-sizing: border-box;
             margin: pxToRem(4px) 0;
+            width: max-content;
 
             list-style: none;
             @include fluid-type($min-vw, $max-vw, $min-item-font, $max-item-font);
+
+            &:hover {
+                > .hashtag {
+                    color: $light;
+                }
+
+                > .channel-text {
+                    background: $light;
+                }
+            }
         }
         
         .hashtag {
             font-size: 150%;
             font-weight: bold;
-            //color: $darkest;
+
             color: $purple-accent;
             text-shadow: 2px 2px 2px black;
+
+            transition: color 0.25s;
         }
 
         .channel-text {
-            background: $purple-accent-transparent;
-            color: black;
-            font-weight: bold;
             border-radius: pxToRem(5px);
             padding: pxToRem(2px) pxToRem(8px);
             margin-left: 2px;
+            
+            color: black;
+            background: $purple-accent-transparent;
+            box-shadow: 2px 2px 2px black;
+
+            transition: background 0.25s;
         }
 
         #current-user {

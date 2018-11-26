@@ -186,7 +186,7 @@ form button[id=submit] {
     padding: 0.625rem 0.9375rem;
     box-shadow: 2px 0 1px #2E3136;
     color: #F1F1F1;
-    background: linear-gradient(45deg, #728ADC, #36393E);
+    background: rgba(46, 49, 54, 0.64);
     animation-name: panel-slide-in;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -195,8 +195,8 @@ form button[id=submit] {
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
-    position: relative;
     margin: 1.25rem 0;
+    padding: 0 0.625rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
@@ -205,45 +205,59 @@ form button[id=submit] {
     border-radius: 0.625rem;
     box-shadow: inset 2px 3px 2px black;
     border-right: none;
-    background: rgba(46, 49, 54, 0.64);
+    background: none;
+  }
+  .side-panel .category-section {
+    margin-bottom: 0.25rem;
+    padding: 0;
   }
   .side-panel .category-channels-list {
     box-sizing: border-box;
+    display: block;
     width: 100%;
     height: max-content;
+    padding: 0.25rem 0.75rem;
+    margin-top: 0;
   }
   .side-panel .category-title {
     box-sizing: border-box;
-    width: max-content;
-    padding: 0 0.5rem;
-    margin: 0;
-    position: relative;
-    top: 0;
-    left: -1rem;
+    display: inline-block;
+    width: 90%;
+    padding: 0;
+    margin: 0 0 0 0.3125rem;
     font-weight: bold;
     text-align: left;
     color: #F1F1F1;
-    font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+    font-size: calc(0.875rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
   }
   .side-panel .channel {
     box-sizing: border-box;
     margin: 0.25rem 0;
+    width: max-content;
     list-style: none;
-    font-size: calc(0.75rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+    font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+  }
+  .side-panel .channel:hover > .hashtag {
+    color: #F1F1F1;
+  }
+  .side-panel .channel:hover > .channel-text {
+    background: #F1F1F1;
   }
   .side-panel .hashtag {
     font-size: 150%;
     font-weight: bold;
     color: #728ADC;
     text-shadow: 2px 2px 2px black;
+    transition: color 0.25s;
   }
   .side-panel .channel-text {
-    background: rgba(114, 139, 220, 0.788);
-    color: black;
-    font-weight: bold;
     border-radius: 0.3125rem;
     padding: 0.125rem 0.5rem;
     margin-left: 2px;
+    color: black;
+    background: rgba(114, 139, 220, 0.788);
+    box-shadow: 2px 2px 2px black;
+    transition: background 0.25s;
   }
   .side-panel #current-user {
     display: block;
