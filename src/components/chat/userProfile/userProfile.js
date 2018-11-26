@@ -1,17 +1,8 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
 import io from 'socket.io-client';
 import AuthenticationContext from '../../authentication/authenticationContext';
 import DisplayUserProfile from './displayUserProfile/displayUserProfile';
-
-const SigningOut = (props) => {
-    return (
-        <section className='wrapper center'>
-            <h1>Signing out...</h1>
-        </section>
-    );
-};
-
+import Signout from './signout/signout';
 
 class UserProfile extends Component {
     constructor(props) {
@@ -62,10 +53,6 @@ class UserProfile extends Component {
         // on user signout, deletes the authentication data & displays <SigningOut />
         this.userSignout = this.userSignout.bind(this);
 
-        /* on user signout (after <SigningOut /> is displayed),
-           sets a timeout before redirecting to homepage */
-        this.signoutRedirect = this.signoutRedirect.bind(this);
-
         // current channel selected & component displayed (default #general channel)
         this.state = {
             channel: {
@@ -73,10 +60,8 @@ class UserProfile extends Component {
                 messages: this.allMessages['#general'], // messages from selected channel
             },
 
+            isSigningOut: false, // determines if the sign out screen is displayed
             allChannels: Object.keys( this.allMessages ), // all the channels currently stored
-
-            viewComponent: <DisplayUserProfile channelInfo={{name: '#general', messages: this.allMessages['#general']}} sendNewMsg={this.sendMsgToServer}
-                                               allChannels={Object.keys(this.allMessages)} signout={this.userSignout} /> 
         };
     }
 
@@ -110,13 +95,8 @@ class UserProfile extends Component {
         if ( channel === this.state.channel.name ) { // new message is from the current channel
             let updatedChannel = this.state.channel;
             updatedChannel.messages = this.allMessages[channel];
-            
-            // updates messages from current channel & the displayed component
-            this.setState({ 
-                channel: updatedChannel,
-                viewComponent: <DisplayUserProfile channelInfo={{name: channel, messages: this.allMessages[channel]}} sendNewMsg={this.sendMsgToServer}
-                                                   allChannels={ this.state.allChannels } signout={this.userSignout} /> 
-            });
+
+            this.setState({ channel: updatedChannel });
         }
     }
 
@@ -143,17 +123,15 @@ class UserProfile extends Component {
 
     userSignout() {
         this.props.signout(); // deletes authentication data        
-        this.setState({ viewComponent: <SigningOut /> }, () => this.signoutRedirect() );
-    }
-
-    signoutRedirect() {
-        setTimeout(() => {
-            this.setState({ viewComponent: <Redirect to='/' /> });
-        }, 2000);
+        this.setState({ isSigningOut: true }); // displays the signout screen, then redirects to homepage
     }
 
     render() {
-        return ( this.state.viewComponent );
+        const display = this.state.isSigningOut ? (<Signout />) :
+            (<DisplayUserProfile channelInfo={this.state.channel} sendNewMsg={this.sendMsgToServer}
+                                allChannels={this.state.allChannels} signout={this.userSignout} />);
+
+        return display;
     }
 }
 
