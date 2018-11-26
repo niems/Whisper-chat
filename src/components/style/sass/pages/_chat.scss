@@ -4,19 +4,37 @@
     @include flexbox( (row nowrap), flex-start, stretch, (1 1 auto));
 
     > .side-panel {
-        .link-to {
-            background: $darkest;
-            color: $primary;
-            transition: background 0.4s;
-    
-            &:hover {
-                background: $primary;
-                color: $darkest;
-            }
-        }
+        #logout {
+            all: unset;
+            cursor: pointer;
 
-        #user-logged-in {
-            text-align: right;
+            box-sizing: border-box;
+            min-width: max-content;
+            min-height: pxToRem(35px);
+
+            width: pxToRem(35px);            
+            height: pxToRem(35px);                        
+            padding: pxToRem(2px);
+            border-radius: pxToRem(8px);
+            
+            border: 2px outset black;
+            margin: 0 0 5px 0;
+            
+            box-shadow: 1px 2px 2px black;
+            background: $dark-transparent;
+            
+            transition: background 0.35s;
+            
+            img {
+                width: 100%;
+                height: auto;
+            }
+            
+            &:hover {
+                background: $purple-accent;
+            }
+
+            
         }
     }
 }

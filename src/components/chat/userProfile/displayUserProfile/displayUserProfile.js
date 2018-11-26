@@ -1,11 +1,11 @@
 import React from 'react';
-import ChannelsPanel from './channelsPanel/channelsPanel';
+import CategoriesPanel from './categoriesPanel/categoriesPanel';
 import ChatView from './chatView/chatView';
 
-const DisplayUserProfile = ({ channelInfo, sendNewMsg, signout }) => {
+const DisplayUserProfile = ({ channelInfo, sendNewMsg, allChannels, signout }) => {
     return (
         <article id='profile'>
-            <ChannelsPanel signout={signout} />
+            <CategoriesPanel allChannels={allChannels} signout={signout} />
             <ChatView channelInfo={channelInfo} sendNewMsg={sendNewMsg} />
         </article>
     );

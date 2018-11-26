@@ -166,25 +166,90 @@ form button[id=submit] {
 
 @keyframes panel-slide-in {
   from {
-    transform: translateX(-100%);
+    opacity: 0;
   }
   to {
-    transform: translateX(0%);
+    opacity: 1;
   }
 }
 @media only screen and (min-width: 46.875rem) {
   .side-panel {
     box-sizing: border-box;
-    display: block;
+    width: 100%;
+    height: 100%;
     min-width: 180px;
-    max-width: 180px;
-    padding: 10px;
+    max-width: 250px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    padding: 0.625rem 0.9375rem;
     box-shadow: 2px 0 1px #2E3136;
     color: #F1F1F1;
     background: rgba(46, 49, 54, 0.5);
     animation-name: panel-slide-in;
-    animation-duration: 0.3s;
+    animation-duration: 0.65s;
     animation-timing-function: linear;
+  }
+  .side-panel #all-categories {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    margin: 1.25rem 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex: 1 1 auto;
+    border-radius: 0.625rem;
+    box-shadow: inset 2px 3px 2px black;
+    border-right: none;
+    background: rgba(46, 49, 54, 0.64);
+  }
+  .side-panel .category-channels-list {
+    box-sizing: border-box;
+    width: 100%;
+    height: max-content;
+  }
+  .side-panel .category-title {
+    box-sizing: border-box;
+    width: max-content;
+    padding: 0 0.5rem;
+    margin: 0;
+    position: relative;
+    top: 0;
+    left: -1rem;
+    border-bottom: 1px solid #F1F1F1;
+    font-weight: bold;
+    text-align: left;
+    color: #F1F1F1;
+    font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+  }
+  .side-panel .channel {
+    box-sizing: border-box;
+    margin: 0.25rem 0;
+    list-style: none;
+    font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+  }
+  .side-panel .hashtag {
+    font-size: 150%;
+    font-weight: bold;
+    color: #728ADC;
+    text-shadow: 1px 2px 1px black;
+  }
+  .side-panel .channel-text {
+    background: rgba(114, 139, 220, 0.788);
+    color: #2E3136;
+    font-weight: bold;
+    border-radius: 0.3125rem;
+    padding: 0.125rem 0.5rem;
+    margin-left: 2px;
+  }
+  .side-panel #current-user {
+    display: block;
+    width: 100px;
+    height: 20px;
   }
 }
 #login, #create-account {
@@ -345,7 +410,7 @@ input::-webkit-input-placeholder {
   font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
   text-align: justify;
   border-radius: 2px 10px 10px 10px;
-  background: rgba(46, 49, 54, 0.5);
+  background: rgba(46, 49, 54, 0.64);
 }
 .channel-msg .msg.text::first-letter {
   margin-left: 0.75rem;
@@ -365,6 +430,9 @@ input::-webkit-input-placeholder {
   border: 1px solid #728ADC;
   background: inherit;
 }
+.scrollbar::-webkit-scrollbar-track-piece {
+  background: none;
+}
 .scrollbar::-webkit-scrollbar-button {
   background: #2E3136;
   border: 1px solid #728ADC;
@@ -381,7 +449,7 @@ input::-webkit-input-placeholder {
   transform: translateY(200%);
   font-size: calc(1rem + 0.5 * ((100vw - 18.75rem) / 43.75) );
   color: #F1F1F1;
-  background: rgba(46, 49, 54, 0.5);
+  background: rgba(46, 49, 54, 0.64);
   animation-name: toast-popup;
   animation-timing-function: ease-out;
 }
@@ -430,17 +498,28 @@ input::-webkit-input-placeholder {
   align-items: stretch;
   flex: 1 1 auto;
 }
-#profile > .side-panel .link-to {
-  background: #2E3136;
-  color: #728ADC;
-  transition: background 0.4s;
+#profile > .side-panel #logout {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  min-width: max-content;
+  min-height: 2.1875rem;
+  width: 2.1875rem;
+  height: 2.1875rem;
+  padding: 0.125rem;
+  border-radius: 0.5rem;
+  border: 2px outset black;
+  margin: 0 0 5px 0;
+  box-shadow: 1px 2px 2px black;
+  background: rgba(46, 49, 54, 0.5);
+  transition: background 0.35s;
 }
-#profile > .side-panel .link-to:hover {
+#profile > .side-panel #logout img {
+  width: 100%;
+  height: auto;
+}
+#profile > .side-panel #logout:hover {
   background: #728ADC;
-  color: #2E3136;
-}
-#profile > .side-panel #user-logged-in {
-  text-align: right;
 }
 
 #chat-view {
@@ -472,7 +551,7 @@ input::-webkit-input-placeholder {
   flex: 1 1 auto;
   /*
   */
-  background: rgba(46, 49, 54, 0.5);
+  background: rgba(46, 49, 54, 0.64);
   border: 1px inset #1D2227;
   border-radius: 5px;
   box-shadow: inset 1px 1px 2px black;
