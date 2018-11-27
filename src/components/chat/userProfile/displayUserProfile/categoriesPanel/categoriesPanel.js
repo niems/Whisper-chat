@@ -18,30 +18,14 @@ const testChannelCategories = {
     ]
 };
 
-const testOnlineUsers = [
-    'Marky',
-    'Ricky',
-    'Danny',
-    'Terry',
-    'Mickey',
-    'Davie',
-    'Timmy',
-    'Tommy',
-    'Joey',
-    'Robie',
-    'Johnny',
-    'Brian'
-];
-
-const CategoriesPanel = ({ username, allChannels, channelsRef, allChannelRefs, onChannelSelect, signout }) => {
-    console.log(`all channels: ${JSON.stringify(allChannels)}\n`);
+const CategoriesPanel = ({ username, allChannelRefs, allOnlineUsers, onChannelSelect, signout }) => {
     
     // get all the categories to be displayed in the panel
     const channelCategories = Object.keys( testChannelCategories ).map(category => (
         <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={allChannelRefs[category]} onChannelSelect={onChannelSelect} channelList={testChannelCategories[category]} />
     )); 
 
-    const onlineUsers =  (<CategoryList category={'online-users'} channelRef={allChannelRefs['Online Users']} onChannelSelect={onChannelSelect} channelList={testOnlineUsers} />);
+    const onlineUsers =  (<CategoryList category={'online-users'} channelRef={allChannelRefs['Online Users']} onChannelSelect={onChannelSelect} channelList={allOnlineUsers} />);
 
     return (
         <section className='side-panel'>

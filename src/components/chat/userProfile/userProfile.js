@@ -8,6 +8,8 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
 
+        
+        // REMOVE AND UPDATE FUNCTIONS THAT MODIFY THIS TO INSTEAD MODIFY this.allChannelData
         // stores messages from all the channels
         this.allMessages = {
             "#general": [ // default channel
@@ -26,7 +28,60 @@ class UserProfile extends Component {
                 }
             ]
         }
+        
 
+
+
+        // stores all channel categories --> channels (within category) --> messages (within channel)
+        this.allChannelData = {
+            'Groups': {
+                'general': [ // default channel (displayed on first chat-view render). all users subscribed to this on connection
+                    { // test message
+                        username: 'Rick',
+                        text: 'Wubba lubba dub dub! ',
+                        timestamp: (new Date()).toUTCString()
+                    }
+                ],
+
+                'random': [ // all users subscribed to this on connection
+                    { // test message
+                        username: 'ThatOneGuy',
+                        text: 'Ayyyyy! ',
+                        timestamp: (new Date()).toUTCString()
+                    }
+                ],
+
+                'listenHereGuy': [] // testing - user defined group
+            },
+
+            'PMs': {
+                'Jerry': [
+                    {
+                        username: 'Jerry',
+                        text: 'Is this thing on?',
+                        timestamp: (new Date()).toUTCString()
+                    }
+                ],
+
+                'BirdPerson': [
+                    {
+                        username: 'BirdPerson',
+                        text: 'This is considered a dick move',
+                        timestamp: (new Date()).toUTCString()
+                    }
+                ]
+            }
+        };
+
+        // test online users - will be synced with server after testing
+        this.allOnlineUsers = [
+            'Rick',
+            'Morty',
+            'BirdPerson',
+            'Jerry',
+        ];
+        
+        // currently not being used. May use this for imperative animation, but might just move to css
         this.allChannelRefs = {
             "Groups": React.createRef(),
             "PMs": React.createRef(),
@@ -63,6 +118,7 @@ class UserProfile extends Component {
         this.userSignout = this.userSignout.bind(this);
 
         // current channel selected & component displayed (default #general channel)
+
         this.state = {
             channel: {
                 name: '#general', // name of selected channel
@@ -81,7 +137,7 @@ class UserProfile extends Component {
     onChannelSelect(e) {
         e.preventDefault();
         console.log(`onChannelSelect() target id: ${e.target.id}`);
-        console.log(`onChannelSelect() current target id: ${e.currentTarget.id}`);
+        console.log(`onChannelSelect() current target id: ${e.currentTarget.id}\n\n`);
     }
 
     addNewMsg(msg) {
@@ -143,8 +199,8 @@ class UserProfile extends Component {
 
     render() {
         const display = this.state.isSigningOut ? (<Signout />) :
-            (<DisplayUserProfile channelInfo={this.state.channel} sendNewMsg={this.sendMsgToServer} allChannels={this.state.allChannels} allChannelRefs={this.allChannelRefs}
-                                 channelsRef={this.channelsRef} onChannelSelect={this.onChannelSelect}  signout={this.userSignout} />);
+            (<DisplayUserProfile channelInfo={this.state.channel} sendNewMsg={this.sendMsgToServer} allChannelRefs={this.allChannelRefs}
+                                 allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect}  signout={this.userSignout} />);
 
         return display;
     }

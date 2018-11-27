@@ -29,6 +29,7 @@ class ChatInput extends Component {
 
             // send to parent to append msg and send to server
             const msg = {
+                // add channel-category attribute
                 channel: this.props.channel, // channel msg is intended for
                 username: this.props.username,
                 text: this.state.input,
