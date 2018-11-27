@@ -2,33 +2,6 @@ import React from 'react';
 import CategoryList from './CategoryList/categoryList';
 import ChannelItem from './CategoryList/channelItem/channelItem';
 
-/* the structure of this.allMessages should be changed from 
-    {
-        "channel": [ 
-            {...},     // messages
-        ] 
-    }
-
-
-    TO 
-
-    {
-        "category1": {
-            "channel": [
-                {...},      // messages
-            ],
-        },
-        "category2": {
-            "anotherChannel": [
-                {...}       // more messages
-            ],
-        },
-        .
-        .
-        .
-    }
-*/
-
 // testing data for structuring channel panel
 const testChannelCategories = {
     "Groups": [ // user CAN manually create channels under this category
@@ -60,15 +33,15 @@ const testOnlineUsers = [
     'Brian'
 ];
 
-const CategoriesPanel = ({ username, allChannels, signout }) => {
+const CategoriesPanel = ({ username, allChannels, channelsRef, allChannelRefs, onChannelSelect, signout }) => {
     console.log(`all channels: ${JSON.stringify(allChannels)}\n`);
     
     // get all the categories to be displayed in the panel
     const channelCategories = Object.keys( testChannelCategories ).map(category => (
-        <CategoryList key={category} category={category} channelList={testChannelCategories[category]} />
+        <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={allChannelRefs[category]} onChannelSelect={onChannelSelect} channelList={testChannelCategories[category]} />
     )); 
 
-    const onlineUsers =  (<CategoryList channelList={testOnlineUsers} />);
+    const onlineUsers =  (<CategoryList category={'online-users'} channelRef={allChannelRefs['Online Users']} onChannelSelect={onChannelSelect} channelList={testOnlineUsers} />);
 
     return (
         <section className='side-panel'>

@@ -27,6 +27,15 @@ class UserProfile extends Component {
             ]
         }
 
+        this.allChannelRefs = {
+            "Groups": React.createRef(),
+            "PMs": React.createRef(),
+            "Online Users": React.createRef(),
+        };
+        
+        this.onChannelSelect = this.onChannelSelect.bind(this); // channel clicked in categoriesPanel
+        this.channelsRef = React.createRef(); // reference to the channels section of the categoriesPanel
+
         // when user sends or receives a message, this appends it to its channel messages
         this.addNewMsg = this.addNewMsg.bind(this);
 
@@ -67,6 +76,12 @@ class UserProfile extends Component {
 
     componentDidMount() {
         this.socketSetup();
+    }
+
+    onChannelSelect(e) {
+        e.preventDefault();
+        console.log(`onChannelSelect() target id: ${e.target.id}`);
+        console.log(`onChannelSelect() current target id: ${e.currentTarget.id}`);
     }
 
     addNewMsg(msg) {
@@ -128,8 +143,8 @@ class UserProfile extends Component {
 
     render() {
         const display = this.state.isSigningOut ? (<Signout />) :
-            (<DisplayUserProfile channelInfo={this.state.channel} sendNewMsg={this.sendMsgToServer}
-                                allChannels={this.state.allChannels} signout={this.userSignout} />);
+            (<DisplayUserProfile channelInfo={this.state.channel} sendNewMsg={this.sendMsgToServer} allChannels={this.state.allChannels} allChannelRefs={this.allChannelRefs}
+                                 channelsRef={this.channelsRef} onChannelSelect={this.onChannelSelect}  signout={this.userSignout} />);
 
         return display;
     }

@@ -196,7 +196,7 @@ form button[id=submit] {
     overflow-x: hidden;
     overflow-y: auto;
     margin: 1.25rem 0;
-    padding: 0 0.625rem;
+    padding: 0 1rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
@@ -207,9 +207,16 @@ form button[id=submit] {
     border-right: none;
     background: none;
   }
-  .side-panel .category-section {
-    margin-bottom: 0.25rem;
-    padding: 0;
+  .side-panel .category-section-header {
+    box-sizing: border-box;
+    width: max-content;
+    margin-bottom: 0.625rem;
+    padding: 0 0.625rem;
+    border-bottom: 1px solid #728ADC;
+    text-align: center;
+    font-weight: bold;
+    color: #F1F1F1;
+    font-size: calc(1rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
   }
   .side-panel .category-channels-list {
     box-sizing: border-box;
@@ -225,32 +232,19 @@ form button[id=submit] {
     width: 90%;
     padding: 0;
     margin: 0 0 0 0.3125rem;
-    font-weight: bold;
+    font-weight: normal;
     text-align: left;
     color: #F1F1F1;
     font-size: calc(0.875rem + 0.25 * ((100vw - 18.75rem) / 43.75) );
   }
   .side-panel .channel {
+    position: relative;
+    cursor: pointer;
     box-sizing: border-box;
-    margin: 0.25rem 0;
+    margin: 0.3125rem 0 0.75rem 0;
     width: max-content;
     list-style: none;
     font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
-  }
-  .side-panel .channel:hover > .hashtag {
-    color: #F1F1F1;
-  }
-  .side-panel .channel:hover > .channel-text {
-    background: #F1F1F1;
-  }
-  .side-panel .hashtag {
-    font-size: 150%;
-    font-weight: bold;
-    color: #728ADC;
-    text-shadow: 2px 2px 2px black;
-    transition: color 0.25s;
-  }
-  .side-panel .channel-text {
     border-radius: 0.3125rem;
     padding: 0.125rem 0.5rem;
     margin-left: 2px;
@@ -258,6 +252,24 @@ form button[id=submit] {
     background: rgba(114, 139, 220, 0.788);
     box-shadow: 2px 2px 2px black;
     transition: background 0.25s;
+  }
+  .side-panel .channel::before {
+    content: "#";
+    position: absolute;
+    top: 0;
+    left: calc(-1rem + -0.125 * ((100vw - 18.75rem) / 43.75) );
+    transform: translateY(-15%);
+    font-size: 150%;
+    font-weight: bold;
+    color: #728ADC;
+    text-shadow: 2px 2px 2px black;
+    transition: color 0.25s;
+  }
+  .side-panel .channel:hover {
+    background: #F1F1F1;
+  }
+  .side-panel .channel:hover::before {
+    color: #F1F1F1;
   }
   .side-panel #current-user {
     display: block;

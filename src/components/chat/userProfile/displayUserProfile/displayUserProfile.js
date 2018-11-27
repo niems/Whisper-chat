@@ -2,10 +2,10 @@ import React from 'react';
 import CategoriesPanel from './categoriesPanel/categoriesPanel';
 import ChatView from './chatView/chatView';
 
-const DisplayUserProfile = ({ channelInfo, sendNewMsg, allChannels, signout }) => {
+const DisplayUserProfile = ({ channelInfo, sendNewMsg, allChannels, channelsRef, allChannelRefs, onChannelSelect, signout }) => {
     return (
         <article id='profile'>
-            <CategoriesPanel allChannels={allChannels} signout={signout} />
+            <CategoriesPanel allChannels={allChannels} channelsRef={channelsRef} allChannelRefs={allChannelRefs} onChannelSelect={onChannelSelect} signout={signout} />
             <ChatView channelInfo={channelInfo} sendNewMsg={sendNewMsg} />
         </article>
     );

@@ -43,7 +43,7 @@
     
             //position: relative;
             margin: pxToRem(20px) 0;
-            padding: 0 pxToRem(10px);
+            padding: 0 pxToRem(16px);
 
             display: flex;
             flex-flow: column nowrap;
@@ -58,9 +58,22 @@
             background: none;
         }
 
-        .category-section {
-            margin-bottom: pxToRem(4px);
-            padding: 0;
+        .category-section-header {
+            
+            $max-header-font: pxToRem(20px);
+            $min-header-font: pxToRem(16px);
+            
+            box-sizing: border-box;
+            width: max-content;
+            margin-bottom: pxToRem(10px);
+            padding: 0 pxToRem(10px);
+
+            border-bottom: 1px solid $purple-accent;
+            text-align: center;
+
+            font-weight: bold;
+            color: $light;
+            @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
         }
 
         .category-channels-list {
@@ -82,8 +95,7 @@
             
             padding: 0; 
             margin: 0 0 0 pxToRem(5px);
-
-            font-weight: bold;
+            font-weight: normal;
             text-align: left;
             color: $light;
             @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
@@ -93,35 +105,16 @@
             $max-item-font: pxToRem(16px);
             $min-item-font: pxToRem(14px);
             
+            position: relative;
+
+            cursor: pointer;
             box-sizing: border-box;
-            margin: pxToRem(4px) 0;
+            margin: pxToRem(5px) 0 pxToRem(12px) 0;
             width: max-content;
 
             list-style: none;
             @include fluid-type($min-vw, $max-vw, $min-item-font, $max-item-font);
 
-            &:hover {
-                > .hashtag {
-                    color: $light;
-                }
-
-                > .channel-text {
-                    background: $light;
-                }
-            }
-        }
-        
-        .hashtag {
-            font-size: 150%;
-            font-weight: bold;
-
-            color: $purple-accent;
-            text-shadow: 2px 2px 2px black;
-
-            transition: color 0.25s;
-        }
-
-        .channel-text {
             border-radius: pxToRem(5px);
             padding: pxToRem(2px) pxToRem(8px);
             margin-left: 2px;
@@ -131,6 +124,34 @@
             box-shadow: 2px 2px 2px black;
 
             transition: background 0.25s;
+
+            &::before {
+                $max-hashtag-space: pxToRem(-18px);
+                $min-hashtag-space: pxToRem(-16px);
+                
+                content: '#';
+                position: absolute;
+                top: 0;
+                left: fluid-value($min-vw, $max-vw, $min-hashtag-space, $max-hashtag-space);
+                transform: translateY(-15%);
+                
+                font-size: 150%;
+                font-weight: bold;
+
+                color: $purple-accent;
+                text-shadow: 2px 2px 2px black;
+
+                transition: color 0.25s;
+
+            }
+
+            &:hover {
+                background: $light;
+
+                &::before {
+                    color: $light;
+                }
+            }
         }
 
         #current-user {
