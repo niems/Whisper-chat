@@ -27,12 +27,12 @@ class ChatInput extends Component {
         if ( isMessageValid.test( this.state.input ) ) {
             console.log('valid input');
 
-            // send to parent to append msg and send to server
+            // sent to userProfile to append msg and send to server
             const msg = {
-                // add channel-category attribute
-                channel: this.props.channel, // channel msg is intended for
-                username: this.props.username,
-                text: this.state.input,
+                category: this.props.channelInfo.category, // category msg is intended for
+                channel: this.props.channelInfo.name,      // channel msg is intended for
+                username: this.props.username,             // username of sender (current user)
+                text: this.state.input,                    // msg being sent
                 timestamp: (new Date()).toUTCString()
             };
 
@@ -50,7 +50,7 @@ class ChatInput extends Component {
             <div id='chat-input-container'>
                 <form id='chat-input-form' onSubmit={this.onSubmit}>
                     <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
-                        placeholder={`Say something in ${this.props.channel}`} onChange={this.onChange} ref={this.inputRef} />
+                        placeholder={`Say something in #${this.props.channelInfo.name}`} onChange={this.onChange} ref={this.inputRef} />
 
                     <img className='chat-submit' src='./assets/svg/placeholder/round-arrow.svg'
                          alt='send button' onClick={this.onSubmit} />
@@ -59,23 +59,6 @@ class ChatInput extends Component {
             </div>
         );
     }
-    /*
-    render() {
-        return (
-            <div id='chat-input-container'>
-                <form id='chat-input-form' onSubmit={this.onSubmit}>
-                    <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
-                        placeholder={`Say something in ${this.props.channel}`} onChange={this.onChange} ref={this.inputRef} />
-
-                    <button className='chat-submit' type='submit' onClick={this.onSubmit}>
-                        <img src='./assets/svg/placeholder/round-arrow.svg' alt='send button' />
-                    </button>
-                </form>
-                
-            </div>
-        );
-    }
-    */
 }
 
 const ChatInputContext = (props) => {

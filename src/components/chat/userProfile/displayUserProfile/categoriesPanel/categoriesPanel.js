@@ -1,11 +1,11 @@
 import React from 'react';
 import CategoryList from './CategoryList/categoryList';
 
-const CategoriesPanel = ({ username, allChannelRefs, allChannelData, allOnlineUsers, onChannelSelect, signout }) => {
+const CategoriesPanel = ({ username, allChannelRefs, allChannels, allOnlineUsers, onChannelSelect, signout }) => {
     
     // get all the categories to be displayed in the panel
-   const channelCategories = Object.keys( allChannelData ).map(category => (
-        <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={allChannelRefs[category]} onChannelSelect={onChannelSelect} channelList={Object.keys(allChannelData[category])} />
+   const channelCategories = Object.keys( allChannels ).map(category => (
+        <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={allChannelRefs[category]} onChannelSelect={onChannelSelect} channelList={allChannels[category]} />
     ));
 
     const onlineUsers =  (<CategoryList category={'online-users'} channelRef={allChannelRefs['Online Users']} onChannelSelect={onChannelSelect} channelList={allOnlineUsers} />);
