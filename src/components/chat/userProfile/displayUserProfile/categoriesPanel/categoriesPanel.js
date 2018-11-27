@@ -1,29 +1,12 @@
 import React from 'react';
 import CategoryList from './CategoryList/categoryList';
-import ChannelItem from './CategoryList/channelItem/channelItem';
 
-// testing data for structuring channel panel
-const testChannelCategories = {
-    "Groups": [ // user CAN manually create channels under this category
-        'general', // default channel
-        'random', // default channel
-
-        'listenHereGuy', // user-defined channel
-    ], 
-
-    "PMs": [ // user CANNOT manually create channels under this category: they're automatically added when selecting a user to message or receiving a message
-        'Rick',
-        'Morty',
-        'BirdPerson'
-    ]
-};
-
-const CategoriesPanel = ({ username, allChannelRefs, allOnlineUsers, onChannelSelect, signout }) => {
+const CategoriesPanel = ({ username, allChannelRefs, allChannelData, allOnlineUsers, onChannelSelect, signout }) => {
     
     // get all the categories to be displayed in the panel
-    const channelCategories = Object.keys( testChannelCategories ).map(category => (
-        <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={allChannelRefs[category]} onChannelSelect={onChannelSelect} channelList={testChannelCategories[category]} />
-    )); 
+   const channelCategories = Object.keys( allChannelData ).map(category => (
+        <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={allChannelRefs[category]} onChannelSelect={onChannelSelect} channelList={Object.keys(allChannelData[category])} />
+    ));
 
     const onlineUsers =  (<CategoryList category={'online-users'} channelRef={allChannelRefs['Online Users']} onChannelSelect={onChannelSelect} channelList={allOnlineUsers} />);
 

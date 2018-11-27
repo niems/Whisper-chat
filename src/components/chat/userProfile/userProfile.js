@@ -37,8 +37,8 @@ class UserProfile extends Component {
             'Groups': {
                 'general': [ // default channel (displayed on first chat-view render). all users subscribed to this on connection
                     { // test message
-                        username: 'Rick',
-                        text: 'Wubba lubba dub dub! ',
+                        username: 'BirdPerson',
+                        text: 'In bird culture, this is considered a dick move',
                         timestamp: (new Date()).toUTCString()
                     }
                 ],
@@ -66,7 +66,7 @@ class UserProfile extends Component {
                 'BirdPerson': [
                     {
                         username: 'BirdPerson',
-                        text: 'This is considered a dick move',
+                        text: 'You appear to be dying. I will make efforts to prevent this, but can promise nothing.',
                         timestamp: (new Date()).toUTCString()
                     }
                 ]
@@ -200,7 +200,7 @@ class UserProfile extends Component {
     render() {
         const display = this.state.isSigningOut ? (<Signout />) :
             (<DisplayUserProfile channelInfo={this.state.channel} sendNewMsg={this.sendMsgToServer} allChannelRefs={this.allChannelRefs}
-                                 allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect}  signout={this.userSignout} />);
+                                 allChannelData={this.allChannelData} allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect}  signout={this.userSignout} />);
 
         return display;
     }
