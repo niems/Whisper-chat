@@ -50,7 +50,7 @@ class ChatInput extends Component {
             <div id='chat-input-container'>
                 <form id='chat-input-form' onSubmit={this.onSubmit}>
                     <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
-                        placeholder={`Say something in #${this.props.channelInfo.name}`} onChange={this.onChange} ref={this.inputRef} />
+                        placeholder={'Say something ' + (this.props.channelInfo.category === 'Groups' ? 'in' : 'to') + ` #${this.props.channelInfo.name}`} onChange={this.onChange} ref={this.inputRef} />
 
                     <img className='chat-submit' src='./assets/svg/placeholder/round-arrow.svg'
                          alt='send button' onClick={this.onSubmit} />
