@@ -81,6 +81,8 @@ class UserProfile extends Component {
          this checks if the state for the selected channel's messages needs to update */
         this.updateSelectedChannelMessages = this.updateSelectedChannelMessages.bind(this);
 
+        // updates the allChannels state when a new channel is added
+        this.updateAllChannels = this.updateAllChannels.bind(this);
 
         // socket.IO connection with the application server
         this.socket = null;
@@ -117,15 +119,31 @@ class UserProfile extends Component {
 
     onChannelSelect(e) {
         e.preventDefault();
-        console.log(`onChannelSelect() current target id: ${e.currentTarget.id}`);
-        console.log(`onChannelSelect() target id: ${e.target.id}\n\n`);
 
-        /*
         // update selectedChannel state ONLY if a new channel is selected
-        if ( !( e.currentTarget.id === this.state.selectedChannel.category && e.target.id === this.state.selectedChannel.name) ) {
+        if ( e.target.id !== this.state.selectedChannel.name && e.currentTarget.id !== e.target.id ) {
+            let newCategory = e.currentTarget.id.replace('-list', ''); // category selected
+            let newChannel = e.target.id; // channel selected
 
+            //  user selected the online users category, which is saved in the PMs category
+            if ( newCategory === 'online-users' ) {
+                newCategory = 'PMs';
+            }
+
+            this.createChannel(newCategory, newChannel); // creates a new channel if one doesn't exist
+
+            const selectedChannel = {
+                category: newCategory,
+                name: newChannel,
+                messages: this.allChannelData[newCategory][newChannel]
+            };
+
+            this.setState({ selectedChannel });
         }
-        */
+        
+        else {
+            console.log('same channel selected');
+        }
     }
 
     addNewMsg(msg) { // need category to be included in msg to determine where to add msg
@@ -137,10 +155,12 @@ class UserProfile extends Component {
     }
     
 
-    // creates channel with no messages if it doesn't exist
+    // creates channel with no messages if it doesn't exist & updates allChannels state
     createChannel(category, channel) {
         if ( this.allChannelData[category][channel] === undefined ) { //channel doesn't exist
             this.allChannelData[category][channel] = []; // creates channel
+
+            this.updateAllChannels(category, channel); // updates allChannels state
         }
     }
 
@@ -153,6 +173,7 @@ class UserProfile extends Component {
         });
     }
 
+    // updates selected channel messages state when a new message is added to the selected channel
     updateSelectedChannelMessages(channel) {
         if ( channel === this.state.selectedChannel.name ) { // new msg from selected channel
             const { category, name } = this.state.selectedChannel;
@@ -163,6 +184,19 @@ class UserProfile extends Component {
             };
 
             this.setState({ selectedChannel });
+        }
+    }
+
+    // updates the state of allChannels - called when a new channel is added
+    updateAllChannels(category) {
+        const allChannels = this.state.allChannels; // gets current allChannels state to modify
+
+        if ( category === 'Groups' ) { // new channel added to Groups category
+            allChannels['Groups'] = Object.keys( this.allChannelData['Groups'] );
+        }
+
+        else { // new channel added to PMs category
+            allChannels['PMs'] = Object.keys( this.allChannelData['PMs'] );
         }
     }
 
