@@ -215,8 +215,8 @@ class UserProfile extends Component {
         const app_server = 'http://localhost:8081';
         this.socket = comms(app_server);
 
-        // joins user to general and random channels
-        this.socket.join(['general', 'random']); 
+        // joins all the group channels initially in state
+        this.socket.join( this.state.allChannels.Groups ); 
     }
 
     sendMsgToServer(msg) {
