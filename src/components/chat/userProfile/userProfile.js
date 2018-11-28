@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
+import comms from './comms/comms';
 import AuthenticationContext from '../../authentication/authenticationContext';
 import DisplayUserProfile from './displayUserProfile/displayUserProfile';
 import Signout from './signout/signout';
@@ -15,6 +16,12 @@ class UserProfile extends Component {
                     { // test message
                         username: 'BirdPerson',
                         text: 'In bird culture, this is considered a dick move',
+                        timestamp: (new Date()).toUTCString()
+                    },
+
+                    { // test message
+                        username: 'Morty',
+                        text: 'Ah jeez!',
                         timestamp: (new Date()).toUTCString()
                     }
                 ],
@@ -202,23 +209,14 @@ class UserProfile extends Component {
 
     socketSetup() {
         const app_server = 'http://localhost:8081';
-        this.socket = io(app_server);
-
-        this.socket.on('server.test', msg => {
-            console.log(`Server msg: ${JSON.stringify(msg)}`);
-
-            setTimeout(() => {
-                this.socket.emit('user.test', {
-                    test: 'Ayyyy serverrr'
-                });
-            }, 5000);
-        });
+        this.socket = comms(app_server);
     }
 
     sendMsgToServer(msg) {
         this.addNewMsg(msg); // appends new message to channel's messages
 
         // sends message to the server
+        // send to the specified room based on the msg here
     }
 
     userSignout() {

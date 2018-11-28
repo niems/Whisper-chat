@@ -21,8 +21,8 @@
             margin: 0 0 5px 0;
             
             box-shadow: 1px 2px 2px black;
-            background: $dark-transparent;
-            
+            //background: $dark-transparent;
+            background: none;
             transition: background 0.35s;
             
             img {
