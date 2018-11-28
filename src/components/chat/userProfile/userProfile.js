@@ -124,6 +124,10 @@ class UserProfile extends Component {
         this.socketSetup();
     }
 
+    componentWillUnmount() {
+        this.socket.close(); // disconnects from server
+    }
+
     onChannelSelect(e) {
         e.preventDefault();
 
@@ -210,6 +214,9 @@ class UserProfile extends Component {
     socketSetup() {
         const app_server = 'http://localhost:8081';
         this.socket = comms(app_server);
+
+        // joins user to general and random channels
+        this.socket.join(['general', 'random']); 
     }
 
     sendMsgToServer(msg) {
