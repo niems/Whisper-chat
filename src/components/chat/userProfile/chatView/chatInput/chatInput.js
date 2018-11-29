@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import AuthenticationContext from '../../../../../authentication/authenticationContext';
+import AuthenticationContext from '../../../../authentication/authenticationContext';
 
 // using pure component so if a message is received in the current channel, this component won't needlessly re-render
 class ChatInput extends PureComponent {

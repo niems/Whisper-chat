@@ -3,6 +3,8 @@ import ChatInput from './chatInput/chatInput';
 import ChannelMessages from './channelMessages/channelMessages';
 
 const ChatView = ({ channelInfo, sendNewMsg }) => {
+    console.log('chat-view re-rendered');
+    
     return (
         <main id='chat-view'>
             <div id='channel-title'>

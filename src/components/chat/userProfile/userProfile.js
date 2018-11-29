@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-//import io from 'socket.io-client';
 import comms from './comms/comms';
 import AuthenticationContext from '../../authentication/authenticationContext';
-import DisplayUserProfile from './displayUserProfile/displayUserProfile';
+import CategoriesPanel from './categoriesPanel/categoriesPanel';
+import ChatView from './chatView/chatView';
 import Signout from './signout/signout';
 
 class UserProfile extends Component {
@@ -224,6 +224,7 @@ class UserProfile extends Component {
 
         // sends message to the server
         // send to the specified room based on the msg here
+        
     }
 
     userSignout() {
@@ -232,11 +233,18 @@ class UserProfile extends Component {
     }
 
     render() {
-        const display = this.state.isSigningOut ? (<Signout />) :
-            (<DisplayUserProfile channelInfo={this.state.selectedChannel} sendNewMsg={this.sendMsgToServer} allChannelRefs={this.allChannelRefs}
-                                 allChannels={this.state.allChannels} allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect}  signout={this.userSignout} />);
+        return (
+            this.state.isSigningOut ? 
+            (<Signout />) :
+            (
+                <article id='profile'>
+                    <CategoriesPanel allChannelRefs={this.allChannelRefs} allChannels={this.state.allChannels}
+                                     allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect} signout={this.userSignout} />
 
-        return display;
+                    <ChatView channelInfo={this.state.selectedChannel} sendNewMsg={this.sendMsgToServer} />
+                </article>
+            )
+        );
     }
 }
 
