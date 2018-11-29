@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import AuthenticationContext from '../../../../../authentication/authenticationContext';
 
-class ChatInput extends Component {
+// using pure component so if a message is received in the current channel, this component won't needlessly re-render
+class ChatInput extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -25,7 +26,6 @@ class ChatInput extends Component {
         const isMessageValid = /\S+/; // only non-empty not-only space strings are valid
 
         if ( isMessageValid.test( this.state.input ) ) {
-            console.log('valid input');
 
             // sent to userProfile to append msg and send to server
             const msg = {
@@ -46,6 +46,8 @@ class ChatInput extends Component {
     }
 
     render() {
+        console.log('chat input re-render');
+        
         return (
             <div id='chat-input-container'>
                 <form id='chat-input-form' onSubmit={this.onSubmit}>
