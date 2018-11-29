@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
 
 const SigningOut = (props) => {
@@ -9,22 +9,26 @@ const SigningOut = (props) => {
     );
 };
 
-class Signout extends Component {
+class Signout extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = { viewComponent: <SigningOut /> };
+
+        // once true, user's login data has been removed and they're redirected to the homepage
+        this.state = { isSignoutComplete: false }; 
     }
 
+    // displays "signing out" screen for two seconds before redirect
     componentDidMount() {
         setTimeout(() => {
-            this.setState({
-                viewComponent: <Redirect to='/' />
-            });
+            this.setState({ isSignoutComplete: true });
         }, 2000);
     }
 
     render() {
-        return this.state.viewComponent;
+        return (
+            this.state.isSignoutComplete ?
+            (<Redirect to='/' />) : (<SigningOut />)
+        );
     }
 }
 
