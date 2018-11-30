@@ -29,8 +29,8 @@ class ChatInput extends PureComponent {
 
             // sent to userProfile to append msg and send to server
             const msg = {
-                category: this.props.channelInfo.category, // category msg is intended for
-                channel: this.props.channelInfo.name,      // channel msg is intended for
+                category: this.props.category, // category msg is intended for
+                channel: this.props.name,      // channel msg is intended for
                 username: this.props.username,             // username of sender (current user)
                 text: this.state.input,                    // msg being sent
                 timestamp: (new Date()).toUTCString()
@@ -52,7 +52,7 @@ class ChatInput extends PureComponent {
             <div id='chat-input-container'>
                 <form id='chat-input-form' onSubmit={this.onSubmit}>
                     <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
-                        placeholder={'Say something ' + (this.props.channelInfo.category === 'Groups' ? 'in' : 'to') + ` #${this.props.channelInfo.name}`} onChange={this.onChange} ref={this.inputRef} />
+                        placeholder={'Say something ' + (this.props.category === 'Groups' ? 'in' : 'to') + ` #${this.props.name}`} onChange={this.onChange} ref={this.inputRef} />
 
                     <img className='chat-submit' src='./assets/svg/placeholder/round-arrow.svg'
                          alt='send button' onClick={this.onSubmit} />
