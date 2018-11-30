@@ -81,6 +81,10 @@ class UserProfile extends Component {
            on a channel that isn't stored in this.allMessages */
         this.createChannel = this.createChannel.bind(this);
 
+        
+        // deletes the current channel & updates allChannels state, given the category and channel name
+        this.deleteChannel = this.deleteChannel.bind(this);
+
         // adds the new message to the specified channel
         this.addMsgToChannel = this.addMsgToChannel.bind(this);
 
@@ -144,6 +148,11 @@ class UserProfile extends Component {
                 newCategory = 'PMs';
             }
 
+            // if no messages were sent / received on the current channel, remove it from the channel list
+            if ( this.state.selectedChannel.messages.length === 0 ) {
+                this.deleteChannel(this.state.selectedChannel.category, this.state.selectedChannel.name);
+            }
+
             this.createChannel(newCategory, newChannel); // creates a new channel if one doesn't exist
 
             const selectedChannel = {
@@ -160,7 +169,8 @@ class UserProfile extends Component {
         }
     }
 
-    addNewMsg(msg) { // need category to be included in msg to determine where to add msg
+    // adds new message to specified channel
+    addNewMsg(msg) { 
         const { category, channel } = msg; // channel the current message is intended for
 
         this.createChannel(category, channel); // creates channel if it doesn't exist
@@ -168,7 +178,6 @@ class UserProfile extends Component {
         this.updateSelectedChannelMessages(channel); // updates selected channel's msgs ONLY if a new msg was added
     }
     
-
     // creates channel with no messages if it doesn't exist & updates allChannels state
     createChannel(category, channel) {
         if ( this.allChannelData[category][channel] === undefined ) { //channel doesn't exist
@@ -176,6 +185,12 @@ class UserProfile extends Component {
 
             this.updateAllChannels(category, channel); // updates allChannels state
         }
+    }
+
+    // deletes the current channel & updates allChannels state, given the category and channel name
+    deleteChannel(category, channel) {
+        delete this.allChannelData[category][channel]; // deletes the specified channel
+        this.updateAllChannels(category); // updates the allChannel state
     }
 
     // appends new message to specified channel
@@ -190,15 +205,6 @@ class UserProfile extends Component {
     // updates selected channel messages state when a new message is added to the selected channel
     updateSelectedChannelMessages(channel) {
         if ( channel === this.state.selectedChannel.name ) { // new msg from selected channel
-            /*
-            const { category, name } = this.state.selectedChannel;
-            const selectedChannel = {
-                category: category,
-                name: name,
-                messages: this.allChannelData[category][name] // use new msg list
-            };
-            */
-
             const selectedChannel = this.state.selectedChannel;
             const { category, name } = this.state.selectedChannel;
             selectedChannel.messages = this.allChannelData[category][name]; // use new msg list
@@ -207,17 +213,19 @@ class UserProfile extends Component {
         }
     }
 
-    // updates the state of allChannels - called when a new channel is added
+    // updates the state of allChannels - called when a new channel is added or a channel is deleted
     updateAllChannels(category) {
-        const allChannels = this.state.allChannels; // gets current allChannels state to modify
+        const allChannels = {...this.state.allChannels}; // gets current allChannels state to modify
 
-        if ( this.isGroupMsg(category) ) { // new channel added to Groups category
+        if ( this.isGroupMsg(category) ) { // updating Groups category
             allChannels['Groups'] = Object.keys( this.allChannelData['Groups'] );
         }
 
-        else { // new channel added to PMs category
+        else { // updating PMs category
             allChannels['PMs'] = Object.keys( this.allChannelData['PMs'] );
         }
+
+        this.setState({ allChannels });
     }
 
     isGroupMsg(category) {

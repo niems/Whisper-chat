@@ -45,9 +45,7 @@ class ChatInput extends PureComponent {
         }
     }
 
-    render() {
-        console.log('chat input re-render');
-        
+    render() {       
         return (
             <div id='chat-input-container'>
                 <form id='chat-input-form' onSubmit={this.onSubmit}>
