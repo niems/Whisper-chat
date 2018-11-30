@@ -190,12 +190,18 @@ class UserProfile extends Component {
     // updates selected channel messages state when a new message is added to the selected channel
     updateSelectedChannelMessages(channel) {
         if ( channel === this.state.selectedChannel.name ) { // new msg from selected channel
+            /*
             const { category, name } = this.state.selectedChannel;
             const selectedChannel = {
                 category: category,
                 name: name,
                 messages: this.allChannelData[category][name] // use new msg list
             };
+            */
+
+            const selectedChannel = this.state.selectedChannel;
+            const { category, name } = this.state.selectedChannel;
+            selectedChannel.messages = this.allChannelData[category][name]; // use new msg list
 
             this.setState({ selectedChannel });
         }
