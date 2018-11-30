@@ -100,6 +100,9 @@ class UserProfile extends Component {
         // appends new message from user to list, then sends to server
         this.sendMsgToServer = this.sendMsgToServer.bind(this);
 
+        // msg received from server - either from a group or a specific user
+        this.onMsgReceived = this.onMsgReceived.bind(this);
+
         // on user signout, deletes the authentication data & displays <SigningOut />
         this.userSignout = this.userSignout.bind(this);
 
@@ -187,12 +190,18 @@ class UserProfile extends Component {
     // updates selected channel messages state when a new message is added to the selected channel
     updateSelectedChannelMessages(channel) {
         if ( channel === this.state.selectedChannel.name ) { // new msg from selected channel
+            /*
             const { category, name } = this.state.selectedChannel;
             const selectedChannel = {
                 category: category,
                 name: name,
                 messages: this.allChannelData[category][name] // use new msg list
             };
+            */
+
+            const selectedChannel = this.state.selectedChannel;
+            const { category, name } = this.state.selectedChannel;
+            selectedChannel.messages = this.allChannelData[category][name]; // use new msg list
 
             this.setState({ selectedChannel });
         }
@@ -202,7 +211,7 @@ class UserProfile extends Component {
     updateAllChannels(category) {
         const allChannels = this.state.allChannels; // gets current allChannels state to modify
 
-        if ( category === 'Groups' ) { // new channel added to Groups category
+        if ( this.isGroupMsg(category) ) { // new channel added to Groups category
             allChannels['Groups'] = Object.keys( this.allChannelData['Groups'] );
         }
 
@@ -211,9 +220,17 @@ class UserProfile extends Component {
         }
     }
 
+    isGroupMsg(category) {
+        if ( category === 'Groups' ) { // msg is for the Groups category
+            return true;
+        }
+
+        return false; // msg if for the PMs category
+    }
+
     socketSetup() {
         const app_server = 'http://localhost:8081';
-        this.socket = comms(app_server);
+        this.socket = comms(app_server, this.onMsgReceived);
 
         // joins all the group channels initially in state
         this.socket.join( this.state.allChannels.Groups ); 
@@ -224,7 +241,20 @@ class UserProfile extends Component {
 
         // sends message to the server
         // send to the specified room based on the msg here
-        
+        console.log(`sendMsgToServer() msg: ${JSON.stringify(msg)}\n`);
+
+        if ( this.isGroupMsg(msg.category) ) { // send as group msg to server
+            this.socket.sendGroupMsg(msg);
+        }
+
+        else { // send as PM msg to server
+            console.log('PM msg - functionality not implemented yet D:');
+        }
+    }
+
+    onMsgReceived(msg) {
+        console.log(`onMsgReceived: ${msg}\n\n`);
+        this.addNewMsg( JSON.parse(msg) );
     }
 
     userSignout() {

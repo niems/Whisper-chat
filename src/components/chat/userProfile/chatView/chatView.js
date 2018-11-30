@@ -12,7 +12,7 @@ const ChatView = ({ channelInfo, sendNewMsg }) => {
             </div>
 
             <ChannelMessages messages={channelInfo.messages} />
-            <ChatInput channelInfo={channelInfo} sendNewMsg={sendNewMsg} />
+            <ChatInput category={channelInfo.category} name={channelInfo.name} sendNewMsg={sendNewMsg} />
         </main>
     );
 };
