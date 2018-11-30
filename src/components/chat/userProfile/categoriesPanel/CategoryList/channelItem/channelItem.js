@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-const ChannelItem = ({ channel }) => {
-   return (
-      <li id={channel} className='channel'>{channel}</li>
-   );
-};
+class ChannelItem extends PureComponent {
+   render() {
+      return (
+         <li id={this.props.channel} className='channel'>{this.props.channel}</li>
+      );
+   }
+}
 
 export default ChannelItem;
