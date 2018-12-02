@@ -10,9 +10,14 @@ function comms(username, url, onMsgReceived) {
     // events listening on here
     socket.on('users.count', count => console.log(`current users online: ${count}\n`));
 
+    // object of all users containing each socket.id & username - received on initial server connection
+    socket.on('users.all-online', users => {
+        onMsgReceived('all online users', users); // sends users to userProfile to update onlineUsers state
+    });
+
     // user received a message from a group they're subscribed to
     socket.on('user.receive-group-msg', msg => {
-        onMsgReceived(msg);  // adds message to group's channel
+        onMsgReceived('new message', msg);  // adds message to group's channel
     });
 
 

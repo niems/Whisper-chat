@@ -95,6 +95,9 @@ class UserProfile extends Component {
         // updates the allChannels state when a new channel is added
         this.updateAllChannels = this.updateAllChannels.bind(this);
 
+        // updates the current onlineUsers state when a user connects, disconnects, or when you initially get the user list
+        this.updateOnlineUsers = this.updateOnlineUsers.bind(this);
+
         // socket.IO connection with the application server
         this.socket = null;
 
@@ -123,7 +126,9 @@ class UserProfile extends Component {
             allChannels: { // all channels for each of the two groups
                 "Groups": Object.keys( this.allChannelData['Groups'] ),
                 "PMs": Object.keys( this.allChannelData['PMs'] )
-            }
+            },
+
+            onlineUsers: {} // updated after initial socket connection
         };
     }
 
@@ -228,6 +233,11 @@ class UserProfile extends Component {
         this.setState({ allChannels });
     }
 
+    updateOnlineUsers(users) {
+        const onlineUsers = {...users};
+        this.setState({ onlineUsers });
+    }
+
     isGroupMsg(category) {
         if ( category === 'Groups' ) { // msg is for the Groups category
             return true;
@@ -260,9 +270,29 @@ class UserProfile extends Component {
         }
     }
 
-    onMsgReceived(msg) {
-        console.log(`onMsgReceived: ${msg}\n\n`);
-        this.addNewMsg( JSON.parse(msg) );
+    // received a message from the server
+    onMsgReceived(type, data) {
+
+        // new message received
+        if ( type === 'new message' ) {
+            this.addNewMsg( JSON.parse(data) );
+        }
+
+        // update all online users state - initial server connection
+        else if ( type === 'all online users' ) {
+            this.updateOnlineUsers(data); 
+        }
+
+        //  new user joined
+        else if ( type === 'add online user' ) {
+            
+        }
+
+        // user disconnected
+        else if ( type === 'remove online user' ) {
+
+        }
+
     }
 
     userSignout() {
