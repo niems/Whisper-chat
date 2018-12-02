@@ -8,7 +8,7 @@ $max-msg-font: pxToRem(16px);
 
 #channel-messages-container {
     box-sizing: border-box;
-    overflow-x: none;
+    overflow-x: hidden;
     overflow-y: auto;
     
     margin: pxToRem(20px) 0;

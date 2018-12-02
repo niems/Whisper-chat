@@ -371,7 +371,7 @@ input::-webkit-input-placeholder {
 
 #channel-messages-container {
   box-sizing: border-box;
-  overflow-x: none;
+  overflow-x: hidden;
   overflow-y: auto;
   margin: 1.25rem 0;
   border-radius: 0.3125rem;
