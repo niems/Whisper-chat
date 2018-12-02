@@ -272,9 +272,25 @@ form button[id=submit] {
     color: #F1F1F1;
   }
   .side-panel #current-user {
-    display: block;
-    width: 100px;
+    position: relative;
+    display: inline-block;
     height: 20px;
+    margin-left: 1rem;
+    font-size: calc(1rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 1px 1px 1px black;
+  }
+  .side-panel #current-user::before {
+    content: "#";
+    position: absolute;
+    top: 0;
+    left: calc(-0.875rem + -0.125 * ((100vw - 18.75rem) / 43.75) );
+    transform: translateY(-8%);
+    font-size: 125%;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
+    transition: color 0.25s;
   }
 }
 #login, #create-account {

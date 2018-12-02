@@ -1,7 +1,11 @@
 import io from 'socket.io-client';
 
-function comms(url, onMsgReceived) {
-    const socket = io(url);
+function comms(username, url, onMsgReceived) {
+    const socket = io(url, {
+        query: {
+            username: username
+        }
+    });
 
     // events listening on here
     socket.on('users.count', count => console.log(`current users online: ${count}\n`));

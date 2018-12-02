@@ -238,7 +238,7 @@ class UserProfile extends Component {
 
     socketSetup() {
         const app_server = 'http://localhost:8081';
-        this.socket = comms(app_server, this.onMsgReceived);
+        this.socket = comms(this.props.username, app_server, this.onMsgReceived);
 
         // joins all the group channels initially in state
         this.socket.join( this.state.allChannels.Groups ); 
@@ -276,7 +276,7 @@ class UserProfile extends Component {
             (<Signout />) :
             (
                 <article id='profile'>
-                    <CategoriesPanel allChannelRefs={this.allChannelRefs} allChannels={this.state.allChannels}
+                    <CategoriesPanel allChannelRefs={this.allChannelRefs} allChannels={this.state.allChannels} username={this.props.username}
                                      allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect} signout={this.userSignout} />
 
                     <ChatView channelInfo={this.state.selectedChannel} sendNewMsg={this.sendMsgToServer} />
@@ -289,8 +289,8 @@ class UserProfile extends Component {
 const UserProfileContext = (props) => {
     return (
         <AuthenticationContext.Consumer>
-            { ({ signout }) => (
-                <UserProfile {...props} signout={signout} />
+            { ({ isUserAuthenticated, signout }) => (
+                <UserProfile {...props} username={isUserAuthenticated.username} signout={signout} />
             )}
         </AuthenticationContext.Consumer>
     );
