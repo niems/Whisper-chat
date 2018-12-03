@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import CategoryList from './CategoryList/categoryList';
+import ChannelsCategory from './ChannelsCategory/channelsCategory';
 import OnlineUsersCategory from './OnlineUsersCategory/onlineUsersCategory';
 
 class CategoriesPanel extends PureComponent {
@@ -13,13 +13,8 @@ class CategoriesPanel extends PureComponent {
                 </button>
     
                 <nav id='all-categories' className='scrollbar'>
-                    <h2 className='category-section-header'>Channels</h2>
-                    <div className='category-section'>
-                        { Object.keys( this.props.allChannels ).map(category => (
-                            <CategoryList key={category} category={category} displayCategoryTitle={true} channelRef={this.props.allChannelRefs[category]}
-                                          onChannelSelect={this.props.onChannelSelect} channelList={this.props.allChannels[category]} />
-                        ))}
-                    </div>
+                    <ChannelsCategory allChannels={this.props.allChannels} allChannelRefs={this.props.allChannelRefs}
+                                      onChannelSelect={this.props.onChannelSelect} />
     
                     <OnlineUsersCategory channelRef={this.props.allChannelRefs['Online Users']} onUserSelect={this.props.onChannelSelect}
                                          userList={this.props.allOnlineUsers} />
@@ -31,14 +26,4 @@ class CategoriesPanel extends PureComponent {
     }
 }
 
-
 export default CategoriesPanel;
-
-/*
-<div className='category-section'>
-                        { Object.keys( this.props.allOnlineUsers ).map(user => (
-                            <CategoryList category={'online-users'} channelRef={this.props.allChannelRefs['Online Users']}
-                                      onChannelSelect={this.props.onChannelSelect} channelList={this.props.allOnlineUsers} />
-                        ))}
-                    </div>
-*/
