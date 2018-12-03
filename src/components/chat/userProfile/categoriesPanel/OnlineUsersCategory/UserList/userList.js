@@ -10,7 +10,7 @@ class UserList extends PureComponent {
         ));
 
         return (
-            <ul id={`online-users-list`} className='category-channels-list' onClick={this.props.onChannelSelect}>
+            <ul id={`online-users-list`} className='category-channels-list' onClick={this.props.onUserSelect}>
                 {list}
             </ul>
         );

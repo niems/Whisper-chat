@@ -56,13 +56,7 @@ class UserProfile extends Component {
             }
         };
 
-        // (probably move this to state...) test online users - will be synced with server after testing
-        this.allOnlineUsers = [
-            'Rick',
-            'Morty',
-            'BirdPerson',
-            'Jerry',
-        ];
+      
         
         // currently not being used. May use this for imperative animation, but might just move to css
         this.allChannelRefs = {
@@ -142,15 +136,21 @@ class UserProfile extends Component {
 
     onChannelSelect(e) {
         e.preventDefault();
+        console.log('onChannelSelect()');
 
         // update selectedChannel state ONLY if a new channel is selected
         if ( e.target.id !== this.state.selectedChannel.name && e.currentTarget.id !== e.target.id ) {
             let newCategory = e.currentTarget.id.replace('-list', ''); // category selected
             let newChannel = e.target.id; // channel selected
 
+            console.log(`\tcategory: ${newCategory}`);
+            console.log(`\tchannel: ${newChannel}\n`);
+
             //  user selected the online users category, which is saved in the PMs category
             if ( newCategory === 'online-users' ) {
                 newCategory = 'PMs';
+
+                console.log(`\tdata id: ${e.target.getAttribute('data-socketid')}\n`);
             }
 
             // if no messages were sent / received on the current channel, remove it from the channel list
@@ -266,16 +266,26 @@ class UserProfile extends Component {
         }
 
         else { // send as PM msg to server
-            console.log('PM msg - functionality not implemented yet D:');
+            // pulls the socketId of the user the message is being sent to for the server
+            const sendTo = this.state.onlineUsers[msg.channel].socketId;
+            this.socket.sendPrivateMsg({sendTo: sendTo, msg: msg});
         }
     }
 
     // received a message from the server
     onMsgReceived(type, data) {
 
-        // new message received
-        if ( type === 'new message' ) {
+        // new group message received
+        if ( type === 'new group message' ) {
             this.addNewMsg( JSON.parse(data) );
+        }
+
+        // new private message received
+        else if ( type === 'new private message' ) {
+            data = JSON.parse(data);
+            data.channel = data.username; // updates channel to user who sent message
+
+            this.addNewMsg(data);
         }
 
         // update all online users state - initial server connection
@@ -286,7 +296,7 @@ class UserProfile extends Component {
         //  new user joined - user object sent
         else if ( type === 'add online user' ) {
             const updatedOnlineUsers = this.state.onlineUsers;
-            updatedOnlineUsers[data.socketId] = data; // adds the new online user
+            updatedOnlineUsers[data.username] = data; // adds the new online user
 
             this.updateOnlineUsers(updatedOnlineUsers); // updates onlineUsers state
         }

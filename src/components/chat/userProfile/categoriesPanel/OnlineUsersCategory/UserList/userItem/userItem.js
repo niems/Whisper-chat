@@ -5,7 +5,7 @@ class UserItem extends PureComponent {
        console.log(`user item re-render: ${JSON.stringify(this.props)}\n`);
        
       return (
-         <li id={this.props.userId} className='channel'>{this.props.username}</li>
+         <li id={this.props.username} data-socketid={this.props.userId} className='channel'>{this.props.username}</li>
       );
    }
 }
