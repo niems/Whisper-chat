@@ -21,13 +21,17 @@ function comms(username, url, onMsgReceived) {
 
     socket.on('users.remove-online-user', userId => {
         onMsgReceived('remove online user', userId);
-    })
+    });
 
     // user received a message from a group they're subscribed to
     socket.on('user.receive-group-msg', msg => {
-        onMsgReceived('new message', msg);  // adds message to group's channel
+        onMsgReceived('new group message', msg);  // adds message to group's channel
     });
 
+    // user received a private message from an online user
+    socket.on('user.receive-private-msg', msg => {
+        onMsgReceived('new private message', msg); // adds message to PMs
+    });
 
     // returns functions available for client
     return {
@@ -52,7 +56,7 @@ function comms(username, url, onMsgReceived) {
 
         // user sending message to specific user
         sendPrivateMsg: function(data) {
-
+            socket.emit('user.send-private-msg', {sendTo: data.sendTo, msg: JSON.stringify(data.msg)} );
         },  
 
         // manually disconnect socket - user signs out / navigates away from page
