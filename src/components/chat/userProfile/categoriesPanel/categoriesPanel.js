@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import CategoryList from './CategoryList/categoryList';
+import UserList from './UserList/userList';
 
 class CategoriesPanel extends PureComponent {
     render() {
+        console.log('categoriesPanel re-render');
+        
         return (
             <section className='side-panel'>
                 <button id='logout' className='link-to' onClick={this.props.signout}>
@@ -20,8 +23,8 @@ class CategoriesPanel extends PureComponent {
     
                     <h2 className='category-section-header'>Online Users</h2>
                     <div className='category-section'>
-                        <CategoryList category={'online-users'} channelRef={this.props.allChannelRefs['Online Users']}
-                                      onChannelSelect={this.props.onChannelSelect} channelList={this.props.allOnlineUsers} />
+                        <UserList channelRef={this.props.allChannelRefs['Online Users']} onUserSelect={this.props.onChannelSelect}
+                                        userList={this.props.allOnlineUsers} />
                     </div>
                 </nav>
     
@@ -33,3 +36,12 @@ class CategoriesPanel extends PureComponent {
 
 
 export default CategoriesPanel;
+
+/*
+<div className='category-section'>
+                        { Object.keys( this.props.allOnlineUsers ).map(user => (
+                            <CategoryList category={'online-users'} channelRef={this.props.allChannelRefs['Online Users']}
+                                      onChannelSelect={this.props.onChannelSelect} channelList={this.props.allOnlineUsers} />
+                        ))}
+                    </div>
+*/

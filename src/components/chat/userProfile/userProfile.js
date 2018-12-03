@@ -285,7 +285,7 @@ class UserProfile extends Component {
 
         //  new user joined
         else if ( type === 'add online user' ) {
-            
+
         }
 
         // user disconnected
@@ -307,7 +307,7 @@ class UserProfile extends Component {
             (
                 <article id='profile'>
                     <CategoriesPanel allChannelRefs={this.allChannelRefs} allChannels={this.state.allChannels} username={this.props.username}
-                                     allOnlineUsers={this.allOnlineUsers} onChannelSelect={this.onChannelSelect} signout={this.userSignout} />
+                                     allOnlineUsers={this.state.onlineUsers} onChannelSelect={this.onChannelSelect} signout={this.userSignout} />
 
                     <ChatView channelInfo={this.state.selectedChannel} sendNewMsg={this.sendMsgToServer} />
                 </article>
