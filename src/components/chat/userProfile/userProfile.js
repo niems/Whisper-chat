@@ -266,16 +266,26 @@ class UserProfile extends Component {
         }
 
         else { // send as PM msg to server
-            console.log('PM msg - functionality not implemented yet D:');
+            // pulls the socketId of the user the message is being sent to for the server
+            const sendTo = this.state.onlineUsers[msg.channel].socketId;
+            this.socket.sendPrivateMsg({sendTo: sendTo, msg: msg});
         }
     }
 
     // received a message from the server
     onMsgReceived(type, data) {
 
-        // new message received
-        if ( type === 'new message' ) {
+        // new group message received
+        if ( type === 'new group message' ) {
             this.addNewMsg( JSON.parse(data) );
+        }
+
+        // new private message received
+        else if ( type === 'new private message' ) {
+            data = JSON.parse(data);
+            data.channel = data.username; // updates channel to user who sent message
+
+            this.addNewMsg(data);
         }
 
         // update all online users state - initial server connection
@@ -286,7 +296,7 @@ class UserProfile extends Component {
         //  new user joined - user object sent
         else if ( type === 'add online user' ) {
             const updatedOnlineUsers = this.state.onlineUsers;
-            updatedOnlineUsers[data.socketId] = data; // adds the new online user
+            updatedOnlineUsers[data.username] = data; // adds the new online user
 
             this.updateOnlineUsers(updatedOnlineUsers); // updates onlineUsers state
         }
