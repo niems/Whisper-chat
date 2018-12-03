@@ -283,14 +283,20 @@ class UserProfile extends Component {
             this.updateOnlineUsers(data); 
         }
 
-        //  new user joined
+        //  new user joined - user object sent
         else if ( type === 'add online user' ) {
+            const updatedOnlineUsers = this.state.onlineUsers;
+            updatedOnlineUsers[data.socketId] = data; // adds the new online user
 
+            this.updateOnlineUsers(updatedOnlineUsers); // updates onlineUsers state
         }
 
-        // user disconnected
+        // user disconnected - user id sent
         else if ( type === 'remove online user' ) {
+            const updatedOnlineUsers = this.state.onlineUsers;
+            delete updatedOnlineUsers[data]; // removes the disconnected user
 
+            this.updateOnlineUsers(updatedOnlineUsers); // updates onlineUsers state
         }
 
     }
