@@ -15,6 +15,14 @@ function comms(username, url, onMsgReceived) {
         onMsgReceived('all online users', users); // sends users to userProfile to update onlineUsers state
     });
 
+    socket.on('users.add-online-user', user => {
+        onMsgReceived('add online user', user);
+    });
+
+    socket.on('users.remove-online-user', userId => {
+        onMsgReceived('remove online user', userId);
+    })
+
     // user received a message from a group they're subscribed to
     socket.on('user.receive-group-msg', msg => {
         onMsgReceived('new message', msg);  // adds message to group's channel
