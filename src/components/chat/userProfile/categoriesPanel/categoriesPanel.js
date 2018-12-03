@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import CategoryList from './CategoryList/categoryList';
-import UserList from './UserList/userList';
+import OnlineUsersCategory from './OnlineUsersCategory/onlineUsersCategory';
 
 class CategoriesPanel extends PureComponent {
     render() {
@@ -21,11 +21,8 @@ class CategoriesPanel extends PureComponent {
                         ))}
                     </div>
     
-                    <h2 className='category-section-header'>Online Users</h2>
-                    <div className='category-section'>
-                        <UserList channelRef={this.props.allChannelRefs['Online Users']} onUserSelect={this.props.onChannelSelect}
-                                        userList={this.props.allOnlineUsers} />
-                    </div>
+                    <OnlineUsersCategory channelRef={this.props.allChannelRefs['Online Users']} onUserSelect={this.props.onChannelSelect}
+                                         userList={this.props.allOnlineUsers} />
                 </nav>
     
                 <span id='current-user'>{this.props.username}</span>
