@@ -2,7 +2,7 @@
   "name": "Whisper",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://niems.github.io/whisper",
   "dependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -13,6 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron src/main.js",
@@ -31,6 +32,7 @@
     "electron": "^3.0.8",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
+    "gh-pages": "^2.0.1",
     "react-test-renderer": "^16.6.3"
   }
 }
