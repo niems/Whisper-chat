@@ -267,8 +267,15 @@ class UserProfile extends Component {
 
         else { // send as PM msg to server
             // pulls the socketId of the user the message is being sent to for the server
-            const sendTo = this.state.onlineUsers[msg.channel].socketId;
-            this.socket.sendPrivateMsg({sendTo: sendTo, msg: msg});
+            const sendTo = this.state.onlineUsers[msg.channel];
+
+            if ( sendTo ) {
+                this.socket.sendPrivateMsg({sendTo: sendTo.socketId, msg: msg});
+            }
+
+            else {
+                console.log('user offline');
+            }
         }
     }
 
