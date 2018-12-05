@@ -2,7 +2,7 @@
   "name": "Whisper-chat",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://niems.github.io/whisper-chat",
+  "homepage": "https://niems.github.io/Whisper-chat",
   "dependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
