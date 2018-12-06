@@ -9,7 +9,7 @@ class CategoriesPanel extends PureComponent {
         return (
             <section className='side-panel'>
                 <button id='logout' className='link-to' onClick={this.props.signout}>
-                    <img src='./assets/svg/placeholder/logout-black.svg' alt='user logout' />
+                    <img src='../assets/svg/placeholder/logout-black.svg' alt='user logout' />
                 </button>
     
                 <nav id='all-categories' className='scrollbar'>
