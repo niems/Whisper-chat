@@ -4,7 +4,7 @@ class MessageItem extends PureComponent {
     render() {
         return (
             <li className='channel-msg'>
-                <img className='avatar' src='../assets/svg/user-icon.svg' alt='user avatar' />
+                <img className='avatar' src='./assets/svg/user-icon.svg' alt='user avatar' />
                 <div className='msg-container'>
                     <div>
                         <span className='msg username'>{this.props.msg.username}</span>
