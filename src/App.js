@@ -1,5 +1,6 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import UrlContext from './components/urlContext/urlContext';
 import AuthenticationContext from './components/authentication/authenticationContext';
 import { getCookie, deleteCookie } from './components/authentication/cookies';
 import Homepage from './components/homepage/homepage';
@@ -21,7 +22,7 @@ class App extends Component {
 
     //set state initially by getting cookie info if it exists
     const username = getCookie('username');
-
+ 
     this.state = {
       isUserAuthenticated: {
         status: (username === undefined) ? false : true,
@@ -29,15 +30,16 @@ class App extends Component {
       }
     };
 
-    // use only if build is live
-    this.productionPath = '/Whisper-chat'; 
-
     // called on successful login or account creation
     this.authenticate = this.authenticate.bind(this);
 
     /* deletes authentication cookie and redirects to homepage 
        (only available if user is logged in)  */
     this.signout = this.signout.bind(this); 
+  }
+
+  componentDidMount() {
+    console.log(`basePath: ${JSON.stringify(this.props.basePath)}\n`);
   }
 
   authenticate(username) {
@@ -70,17 +72,18 @@ class App extends Component {
             authenticate: this.authenticate,
             signout: this.signout
           }}>
+
             <Suspense fallback={<div>Loading...</div>}>
               <Switch>
-                <Route exact path={`${this.productionPath}`} component={Homepage} />
-                <Route path={`${this.productionPath}/create-account`} component={CreateAccount} />
-                <Route path={`${this.productionPath}/login`} component={Login} />
-                <Route path={`${this.productionPath}/profile`} component={VerifyUserProfile} />
+                <Route exact path={this.props.basePath} component={Homepage} />
+                <Route path={`${this.props.basePath}create-account`} component={CreateAccount} />
+                <Route path={`${this.props.basePath}login`} component={Login} />
+                <Route path={`${this.props.basePath}profile`} component={VerifyUserProfile} />
 
                 <Route component={NoMatch} />
               </Switch>
             </Suspense>
-
+          
           </AuthenticationContext.Provider>
         </Notification>
       </div>
@@ -88,4 +91,18 @@ class App extends Component {
   }
 }
 
-export default App;
+function AppContext(props) {
+  const production = true; // updates the url path based on if site is live
+  const basePath = production ? '/Whisper-chat/' : '/';
+
+  return (
+    <UrlContext.Provider value={{
+      production: production,
+      basePath: basePath
+    }}>
+        <App {...props} basePath={basePath} />
+    </UrlContext.Provider>
+  );
+}
+
+export default AppContext;
