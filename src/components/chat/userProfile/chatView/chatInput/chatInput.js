@@ -52,7 +52,7 @@ class ChatInput extends PureComponent {
                     <input id='chat-inputfield' className='rounded-border' type='text' value={this.state.input}
                         placeholder={'Say something ' + (this.props.category === 'Groups' ? 'in' : 'to') + ` #${this.props.name}`} onChange={this.onChange} ref={this.inputRef} />
 
-                    <img className='chat-submit' src='./assets/svg/placeholder/round-arrow.svg'
+                    <img className='chat-submit' src='../assets/svg/placeholder/round-arrow.svg'
                          alt='send button' onClick={this.onSubmit} />
                 </form>
                 
