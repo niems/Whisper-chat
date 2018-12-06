@@ -29,6 +29,9 @@ class App extends Component {
       }
     };
 
+    // use only if build is live
+    this.productionPath = '/Whisper-chat'; 
+
     // called on successful login or account creation
     this.authenticate = this.authenticate.bind(this);
 
@@ -69,10 +72,10 @@ class App extends Component {
           }}>
             <Suspense fallback={<div>Loading...</div>}>
               <Switch>
-                <Route exact path='/' component={Homepage} />
-                <Route path='/create-account' component={CreateAccount} />
-                <Route path='/login' component={Login} />
-                <Route path='/profile' component={VerifyUserProfile} />
+                <Route exact path={`${this.productionPath}`} component={Homepage} />
+                <Route path={`${this.productionPath}/create-account`} component={CreateAccount} />
+                <Route path={`${this.productionPath}/login`} component={Login} />
+                <Route path={`${this.productionPath}/profile`} component={VerifyUserProfile} />
 
                 <Route component={NoMatch} />
               </Switch>
