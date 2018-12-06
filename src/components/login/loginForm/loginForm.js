@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import UrlContext from '../../urlContext/urlContext';
 import AuthenticationContext from '../../authentication/authenticationContext';
 import NotificationContext from '../../notification/notificationContext/notificationContext';
 import areFieldsValid from '../../formFieldCheck/areFieldsValid';
@@ -84,19 +85,23 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <form onSubmit={this.onSubmit}>
-                    <input id='username' className='rounded-border' type='text' placeholder='username'
-                           value={this.state.username} onChange={this.onChange} ref={this.usernameRef} required />
-
-                    <input id='password' className='rounded-border' type='password' placeholder='password'
-                           value={this.state.password} onChange={this.onChange} ref={this.passwordRef} required />
-
-                    <button id='submit' type='submit' onClick={this.onSubmit}>SIGN IN</button>
-                </form>
-
-                {this.state.loginSuccessful ? <Redirect to='/profile' /> : null}
-            </React.Fragment>
+            <UrlContext.Consumer>
+                { ({ basePath }) => (
+                    <React.Fragment>
+                        <form onSubmit={this.onSubmit}>
+                            <input id='username' className='rounded-border' type='text' placeholder='username'
+                                   value={this.state.username} onChange={this.onChange} ref={this.usernameRef} required />
+        
+                            <input id='password' className='rounded-border' type='password' placeholder='password'
+                                   value={this.state.password} onChange={this.onChange} ref={this.passwordRef} required />
+        
+                            <button id='submit' type='submit' onClick={this.onSubmit}>SIGN IN</button>
+                        </form>
+        
+                        {this.state.loginSuccessful ? <Redirect to={`${basePath}profile`} /> : null}
+                    </React.Fragment>
+                )}
+            </UrlContext.Consumer>
         );
     }
 };

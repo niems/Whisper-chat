@@ -1,5 +1,6 @@
 import React, {Component, lazy} from 'react';
 import { Redirect } from 'react-router-dom';
+import UrlContext from '../urlContext/urlContext';
 import verifyAccountGet from '../serverRequest/verifyAccountGet';
 import NotificationContext from '../notification/notificationContext/notificationContext';
 
@@ -84,7 +85,7 @@ class VerifyUserProfile extends Component {
     failedVerificationRedirect() {
         setTimeout(() => {
             this.setState({
-                component: <Redirect to='/login' /> 
+                component: <Redirect to={`${this.props.basePath}login`} /> 
             });
         }, 3000);
     }
@@ -99,7 +100,11 @@ const VerifyUserProfileContext = (props) => {
     return (
         <NotificationContext.Consumer>
             { ({ newNotification }) => (
-                <VerifyUserProfile {...props} newNotification={newNotification} />
+                <UrlContext.Consumer>
+                    { ({ basePath }) => (
+                        <VerifyUserProfile {...props} basePath={basePath} newNotification={newNotification} />
+                    )}
+                </UrlContext.Consumer>
             )}
         </NotificationContext.Consumer>
     );
