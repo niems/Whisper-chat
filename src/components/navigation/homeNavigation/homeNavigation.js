@@ -7,7 +7,7 @@ const HomeNavigation = (props) => {
         <UrlContext.Consumer>
             { ({ basePath }) => (
                 <Link to={basePath} className='navigate home abs-top-left'>
-                    <img src='../assets/svg/placeholder/round-back-arrow.svg' alt='navigate back to homepage' />
+                    <img src='./assets/svg/placeholder/round-back-arrow.svg' alt='navigate back to homepage' />
                 </Link>
             )}
         </UrlContext.Consumer>
