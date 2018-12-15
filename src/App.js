@@ -102,8 +102,8 @@ class App extends Component {
 }
 
 function AppContext(props) {
-  const production = false; // updates the url path based on if site is live
-  const basePath = production ? "/Whisper-chat/" : "/";
+  const production = true; // updates the url path based on if site is live
+  const basePath = production ? "/whisper-chat/" : "/";
 
   return (
     <UrlContext.Provider
