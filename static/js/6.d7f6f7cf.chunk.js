@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{93:function(e,n,t){"use strict";t.r(n);var a=t(0),r=t.n(a);n.default=function(e){return r.a.createElement("article",{className:"wrapper center"},r.a.createElement("h1",null,"Failed to verify profile"),r.a.createElement("span",null,"Redirecting to login screen..."))}}}]);
+//# sourceMappingURL=6.d7f6f7cf.chunk.js.map
