@@ -1,16 +1,20 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import UrlContext from './components/urlContext/urlContext';
-import AuthenticationContext from './components/authentication/authenticationContext';
-import { getCookie, deleteCookie } from './components/authentication/cookies';
-import Homepage from './components/homepage/homepage';
-import Notification from './components/notification/notification';
-import './components/style/main.css';
+import React, { Component, lazy, Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
+import UrlContext from "./components/urlContext/urlContext";
+import AuthenticationContext from "./components/authentication/authenticationContext";
+import { getCookie, deleteCookie } from "./components/authentication/cookies";
+import Homepage from "./components/homepage/homepage";
+import Notification from "./components/notification/notification";
+import "./components/style/main.css";
 
-const CreateAccount = lazy(() => import('./components/createAccount/createAccount'));
-const Login = lazy(() => import('./components/login/login'));
-const VerifyUserProfile = lazy(() => import('./components/chat/verifyUserProfile'));
-const NoMatch = lazy(() => import('./components/noMatch'));
+const CreateAccount = lazy(() =>
+  import("./components/createAccount/createAccount")
+);
+const Login = lazy(() => import("./components/login/login"));
+const VerifyUserProfile = lazy(() =>
+  import("./components/chat/verifyUserProfile")
+);
+const NoMatch = lazy(() => import("./components/noMatch"));
 
 class App extends Component {
   /*setup cookie here, then render routes based on it
@@ -21,12 +25,12 @@ class App extends Component {
     super(props);
 
     //set state initially by getting cookie info if it exists
-    const username = getCookie('username');
- 
+    const username = getCookie("username");
+
     this.state = {
       isUserAuthenticated: {
-        status: (username === undefined) ? false : true,
-        username: (username === undefined) ? '' : username
+        status: username === undefined ? false : true,
+        username: username === undefined ? "" : username
       }
     };
 
@@ -35,7 +39,7 @@ class App extends Component {
 
     /* deletes authentication cookie and redirects to homepage 
        (only available if user is logged in)  */
-    this.signout = this.signout.bind(this); 
+    this.signout = this.signout.bind(this);
   }
 
   componentDidMount() {
@@ -52,38 +56,44 @@ class App extends Component {
   }
 
   signout() {
-    deleteCookie('token');
-    deleteCookie('username');
+    deleteCookie("token");
+    deleteCookie("username");
 
     this.setState({
       isUserAuthenticated: {
         status: false,
-        username: ''
+        username: ""
       }
     });
   }
 
   render() {
     return (
-      <div id='app'>
+      <div id="app">
         <Notification>
-          <AuthenticationContext.Provider value={{
-            isUserAuthenticated: this.state.isUserAuthenticated,
-            authenticate: this.authenticate,
-            signout: this.signout
-          }}>
-
+          <AuthenticationContext.Provider
+            value={{
+              isUserAuthenticated: this.state.isUserAuthenticated,
+              authenticate: this.authenticate,
+              signout: this.signout
+            }}
+          >
             <Suspense fallback={<div>Loading...</div>}>
               <Switch>
                 <Route exact path={this.props.basePath} component={Homepage} />
-                <Route path={`${this.props.basePath}create-account`} component={CreateAccount} />
+                <Route
+                  path={`${this.props.basePath}create-account`}
+                  component={CreateAccount}
+                />
                 <Route path={`${this.props.basePath}login`} component={Login} />
-                <Route path={`${this.props.basePath}profile`} component={VerifyUserProfile} />
+                <Route
+                  path={`${this.props.basePath}profile`}
+                  component={VerifyUserProfile}
+                />
 
                 <Route component={NoMatch} />
               </Switch>
             </Suspense>
-          
           </AuthenticationContext.Provider>
         </Notification>
       </div>
@@ -92,15 +102,17 @@ class App extends Component {
 }
 
 function AppContext(props) {
-  const production = true; // updates the url path based on if site is live
-  const basePath = production ? '/Whisper-chat/' : '/';
+  const production = false; // updates the url path based on if site is live
+  const basePath = production ? "/Whisper-chat/" : "/";
 
   return (
-    <UrlContext.Provider value={{
-      production: production,
-      basePath: basePath
-    }}>
-        <App {...props} basePath={basePath} />
+    <UrlContext.Provider
+      value={{
+        production: production,
+        basePath: basePath
+      }}
+    >
+      <App {...props} basePath={basePath} />
     </UrlContext.Provider>
   );
 }

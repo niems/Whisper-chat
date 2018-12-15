@@ -1,8 +1,8 @@
 import React from 'react';
 
 const UrlContext = React.createContext({
-    production: false,
-    basePath: ''
+  production: false,
+  basePath: ''
 });
 
 export default UrlContext;
