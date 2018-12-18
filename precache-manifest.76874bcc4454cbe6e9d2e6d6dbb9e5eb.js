@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/whisper-chat/static/js/2.a04acb68.chunk.js"
   },
   {
-    "revision": "2481f0aab7db925ae85c",
-    "url": "/whisper-chat/static/js/3.2481f0aa.chunk.js"
+    "revision": "6a7010601ca48380226c",
+    "url": "/whisper-chat/static/js/3.6a701060.chunk.js"
   },
   {
     "revision": "6a0079d1511d6afb610b",
@@ -40,11 +40,11 @@ self.__precacheManifest = [
     "url": "/whisper-chat/static/js/8.bdc81b30.chunk.js"
   },
   {
-    "revision": "d5fa2d441883518836e7",
-    "url": "/whisper-chat/static/js/runtime~main.d5fa2d44.js"
+    "revision": "a1430e040b5abf7fae5e",
+    "url": "/whisper-chat/static/js/runtime~main.a1430e04.js"
   },
   {
-    "revision": "edf5ffeea1126d2bfc09290b8b4bfadb",
+    "revision": "c508201747f1633cfebcb84d57ef5763",
     "url": "/whisper-chat/index.html"
   }
 ];
