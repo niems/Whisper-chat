@@ -262,7 +262,7 @@ class UserProfile extends Component {
 
   socketSetup() {
     const app_server = this.props.isProduction
-      ? 'https://git.heroku.com/afternoon-springs-45644.git'
+      ? 'https://afternoon-springs-45644.herokuapp.com/'
       : 'http://localhost:8081';
 
     this.socket = comms(this.props.username, app_server, this.onMsgReceived);
