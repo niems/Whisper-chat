@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import comms from './comms/comms';
 import AuthenticationContext from '../../authentication/authenticationContext';
+import UrlContext from '../../urlContext/urlContext';
 import CategoriesPanel from './categoriesPanel/categoriesPanel';
 import ChatView from './chatView/chatView';
 import Signout from './signout/signout';
@@ -260,7 +261,10 @@ class UserProfile extends Component {
   }
 
   socketSetup() {
-    const app_server = 'http://localhost:8081';
+    const app_server = this.props.isProduction
+      ? 'https://git.heroku.com/afternoon-springs-45644.git'
+      : 'http://localhost:8081';
+
     this.socket = comms(this.props.username, app_server, this.onMsgReceived);
 
     // joins all the group channels initially in state
@@ -357,15 +361,20 @@ class UserProfile extends Component {
 
 const UserProfileContext = props => {
   return (
-    <AuthenticationContext.Consumer>
-      {({ isUserAuthenticated, signout }) => (
-        <UserProfile
-          {...props}
-          username={isUserAuthenticated.username}
-          signout={signout}
-        />
+    <UrlContext.Consumer>
+      {({ production }) => (
+        <AuthenticationContext.Consumer>
+          {({ isUserAuthenticated, signout }) => (
+            <UserProfile
+              {...props}
+              isProduction={production}
+              username={isUserAuthenticated.username}
+              signout={signout}
+            />
+          )}
+        </AuthenticationContext.Consumer>
       )}
-    </AuthenticationContext.Consumer>
+    </UrlContext.Consumer>
   );
 };
 
