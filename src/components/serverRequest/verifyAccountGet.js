@@ -8,7 +8,9 @@ export default function verifyAccountGet() {
 
     const verifyOptions = {
       method: 'GET',
-      credentials: 'include'
+      credentials: 'include',
+      referrer: 'https://niems.github.io/whisper-chat/profile',
+      referrerPolicy: 'origin-when-cross-origin'
     };
 
     fetch(verificationURL, verifyOptions)
