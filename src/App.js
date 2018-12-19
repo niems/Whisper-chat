@@ -1,20 +1,20 @@
-import React, { Component, lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
-import UrlContext from "./components/urlContext/urlContext";
-import AuthenticationContext from "./components/authentication/authenticationContext";
-import { getCookie, deleteCookie } from "./components/authentication/cookies";
-import Homepage from "./components/homepage/homepage";
-import Notification from "./components/notification/notification";
-import "./components/style/main.css";
+import React, { Component, lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import UrlContext from './components/urlContext/urlContext';
+import AuthenticationContext from './components/authentication/authenticationContext';
+import { getCookie, deleteCookie } from './components/authentication/cookies';
+import Homepage from './components/homepage/homepage';
+import Notification from './components/notification/notification';
+import './components/style/main.css';
 
 const CreateAccount = lazy(() =>
-  import("./components/createAccount/createAccount")
+  import('./components/createAccount/createAccount')
 );
-const Login = lazy(() => import("./components/login/login"));
+const Login = lazy(() => import('./components/login/login'));
 const VerifyUserProfile = lazy(() =>
-  import("./components/chat/verifyUserProfile")
+  import('./components/chat/verifyUserProfile')
 );
-const NoMatch = lazy(() => import("./components/noMatch"));
+const NoMatch = lazy(() => import('./components/noMatch'));
 
 class App extends Component {
   /*setup cookie here, then render routes based on it
@@ -25,12 +25,12 @@ class App extends Component {
     super(props);
 
     //set state initially by getting cookie info if it exists
-    const username = getCookie("username");
+    const username = getCookie('username');
 
     this.state = {
       isUserAuthenticated: {
         status: username === undefined ? false : true,
-        username: username === undefined ? "" : username
+        username: username === undefined ? '' : username
       }
     };
 
@@ -56,13 +56,13 @@ class App extends Component {
   }
 
   signout() {
-    deleteCookie("token");
-    deleteCookie("username");
+    deleteCookie('token');
+    deleteCookie('username');
 
     this.setState({
       isUserAuthenticated: {
         status: false,
-        username: ""
+        username: ''
       }
     });
   }
@@ -103,8 +103,7 @@ class App extends Component {
 
 function AppContext(props) {
   const production = true; // updates the url path based on if site is live
-  //const basePath = production ? "/whisper-chat/" : "/";
-  const basePath = '/';
+  const basePath = production ? "/whisper-chat/" : "/";
 
   return (
     <UrlContext.Provider
