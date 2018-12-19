@@ -1,7 +1,7 @@
 {
   "main.css": "/whisper-chat/static/css/main.144eec02.chunk.css",
-  "main.js": "/whisper-chat/static/js/main.8f267eac.chunk.js",
-  "main.js.map": "/whisper-chat/static/js/main.8f267eac.chunk.js.map",
+  "main.js": "/whisper-chat/static/js/main.52ca2cbb.chunk.js",
+  "main.js.map": "/whisper-chat/static/js/main.52ca2cbb.chunk.js.map",
   "static/js/1.0fcdbb4d.chunk.js": "/whisper-chat/static/js/1.0fcdbb4d.chunk.js",
   "static/js/1.0fcdbb4d.chunk.js.map": "/whisper-chat/static/js/1.0fcdbb4d.chunk.js.map",
   "static/js/2.fa5ec14d.chunk.js": "/whisper-chat/static/js/2.fa5ec14d.chunk.js",
@@ -22,6 +22,6 @@
   "runtime~main.js.map": "/whisper-chat/static/js/runtime~main.457c5cd2.js.map",
   "static/css/main.144eec02.chunk.css.map": "/whisper-chat/static/css/main.144eec02.chunk.css.map",
   "index.html": "/whisper-chat/index.html",
-  "precache-manifest.fea02fe36612f545606bff1336c4beed.js": "/whisper-chat/precache-manifest.fea02fe36612f545606bff1336c4beed.js",
+  "precache-manifest.fb6e1545b27f84a18c10f9de5b0b5f3a.js": "/whisper-chat/precache-manifest.fb6e1545b27f84a18c10f9de5b0b5f3a.js",
   "service-worker.js": "/whisper-chat/service-worker.js"
 }
