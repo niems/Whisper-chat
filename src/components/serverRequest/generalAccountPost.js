@@ -19,19 +19,24 @@ export default function generalAccountPost(data, url) {
       body: encoded
     };
 
-    return fetch(url, postOptions)
-      //.then(res => resolve(res))
-      .then(res => {
-        console.log(`response status: ${res.status}`);
-        console.log(`\theaders: ${JSON.stringify(res.headers)}\n`);
+    return (
+      fetch(url, postOptions)
+        //.then(res => resolve(res))
+        .then(res => {
+          console.log(
+            `response status: ${res.status} | type: ${typeof res.status}`
+          );
+          console.log(`\theaders: ${JSON.stringify(res.headers)}\n`);
 
-        if (res.status === 404) {
-          return reject('404 status - rejecteddddd');
-        }
-          
-        //* attempting to pull json from response
-        return resolve(res);
-      })
-      .catch(err => reject(err));
+          if (res.status === 404) {
+            console.log('\t-404 status - rejecteddddd');
+            return reject('404 status - rejecteddddd');
+          }
+
+          //* attempting to pull json from response
+          return resolve(res);
+        })
+        .catch(err => reject(err))
+    );
   });
 }
