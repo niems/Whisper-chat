@@ -49,7 +49,18 @@ class VerifyUserProfile extends Component {
 
   checkAccountToken() {
     verifyAccountGet()
-      .then(res => res.json())
+      .then(res => {
+        console.log(`response status: ${res.status}`);
+        console.log(`\theaders: ${JSON.stringify(res.headers)}\n`);
+
+          if(res.status === 404) {
+            return Promise.reject('404 status - rejecteddddd');
+          }
+          
+        //* attempting to pull json from response
+        return res.json();
+      })
+      //.then(res => res.json())
       .then(res => this.checkAccountVerification(res))
       .catch(err => this.failedAccountVerification(err));
   }
@@ -77,11 +88,9 @@ class VerifyUserProfile extends Component {
   failedAccountVerification(err) {
     console.error(err);
 
-    this.setState(
-      {
-        accountVerified: false,
+    this.setState({ accountVerified: false,
         component: <UserTokenInvalid />
-      },
+    },
       this.failedVerificationRedirect()
     );
   }

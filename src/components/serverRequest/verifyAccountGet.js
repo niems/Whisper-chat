@@ -10,7 +10,7 @@ export default function verifyAccountGet() {
       method: 'GET',
       credentials: 'include',
       referrer: 'https://niems.github.io/whisper-chat/profile',
-      referrerPolicy: 'origin-when-cross-origin'
+      referrerPolicy: 'origin-when-cross-origin',
     };
 
     fetch(verificationURL, verifyOptions)

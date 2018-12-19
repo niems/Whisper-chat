@@ -73,7 +73,7 @@ class CreateAccountForm extends Component {
               this.props.newNotification(
                 'Failed to create new account: username taken',
                 5000,
-                'error'
+                'error',
               );
             }
           })
