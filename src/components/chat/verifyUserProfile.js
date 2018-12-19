@@ -49,14 +49,15 @@ class VerifyUserProfile extends Component {
 
   checkAccountToken() {
     verifyAccountGet()
+      //? maybe move to verifyAccountGet() file since it's only used here...
       .then(res => {
         console.log(`response status: ${res.status}`);
         console.log(`\theaders: ${JSON.stringify(res.headers)}\n`);
 
-          if(res.status === 404) {
-            return Promise.reject('404 status - rejecteddddd');
-          }
-          
+        if (res.status === 404) {
+          return Promise.reject('404 status - rejecteddddd');
+        }
+
         //* attempting to pull json from response
         return res.json();
       })
@@ -65,22 +66,27 @@ class VerifyUserProfile extends Component {
       .catch(err => this.failedAccountVerification(err));
   }
 
+  //? maybe move to verifyAccountGet() file since it's only used here...
   checkAccountVerification(res) {
     return new Promise((resolve, reject) => {
-      console.log(`server response: ${JSON.stringify(res)}\n`);
+      try {
+        console.log(`server response: ${JSON.stringify(res)}\n`);
 
-      const { accountVerified } = res;
+        const { accountVerified } = res;
 
-      if (accountVerified) {
-        this.setState({
-          accountVerified: true,
-          component: <UserProfile />
-        });
+        if (accountVerified) {
+          this.setState({
+            accountVerified: true,
+            component: <UserProfile />
+          });
 
-        this.props.newNotification('Account Verified', 3000, 'success');
-        resolve();
-      } else {
-        reject('Account not verified');
+          this.props.newNotification('Account Verified', 3000, 'success');
+          resolve();
+        } else {
+          reject('Account not verified');
+        }
+      } catch (err) {
+        reject(err);
       }
     });
   }
@@ -88,9 +94,8 @@ class VerifyUserProfile extends Component {
   failedAccountVerification(err) {
     console.error(err);
 
-    this.setState({ accountVerified: false,
-        component: <UserTokenInvalid />
-    },
+    this.setState(
+      { accountVerified: false, component: <UserTokenInvalid /> },
       this.failedVerificationRedirect()
     );
   }
