@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
-import UrlContext from '../../../urlContext/urlContext';
+import env from '../../../../env';
 
 const SigningOut = () => {
   return (
@@ -26,16 +26,10 @@ class Signout extends PureComponent {
   }
 
   render() {
-    return (
-      <UrlContext.Consumer>
-        {({ basePath }) =>
-          this.state.isSignoutComplete ? (
-            <Redirect to={basePath} />
-          ) : (
-            <SigningOut />
-          )
-        }
-      </UrlContext.Consumer>
+    return this.state.isSignoutComplete ? (
+      <Redirect to={env.routePath} />
+    ) : (
+      <SigningOut />
     );
   }
 }

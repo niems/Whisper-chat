@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import UrlContext from '../../urlContext/urlContext';
+import env from '../../../env';
 import AuthenticationContext from '../../authentication/authenticationContext';
 import NotificationContext from '../../notification/notificationContext/notificationContext';
 import areFieldsValid from '../../formFieldCheck/areFieldsValid';
@@ -43,16 +43,16 @@ class LoginForm extends Component {
     e.preventDefault();
 
     switch (e.target.id) {
-    case 'username':
-      this.setState({ username: e.target.value });
-      break;
+      case 'username':
+        this.setState({ username: e.target.value });
+        break;
 
-    case 'password':
-      this.setState({ password: e.target.value });
-      break;
+      case 'password':
+        this.setState({ password: e.target.value });
+        break;
 
-    default:
-      console.log(`ID "${e.target.id}" not found - no action taken`);
+      default:
+        console.log(`ID "${e.target.id}" not found - no action taken`);
     }
   }
 
@@ -92,43 +92,39 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <UrlContext.Consumer>
-        {({ basePath }) => (
-          <React.Fragment>
-            <form onSubmit={this.onSubmit}>
-              <input
-                id="username"
-                className="rounded-border"
-                type="text"
-                placeholder="username"
-                value={this.state.username}
-                onChange={this.onChange}
-                ref={this.usernameRef}
-                required
-              />
+      <React.Fragment>
+        <form onSubmit={this.onSubmit}>
+          <input
+            id="username"
+            className="rounded-border"
+            type="text"
+            placeholder="username"
+            value={this.state.username}
+            onChange={this.onChange}
+            ref={this.usernameRef}
+            required
+          />
 
-              <input
-                id="password"
-                className="rounded-border"
-                type="password"
-                placeholder="password"
-                value={this.state.password}
-                onChange={this.onChange}
-                ref={this.passwordRef}
-                required
-              />
+          <input
+            id="password"
+            className="rounded-border"
+            type="password"
+            placeholder="password"
+            value={this.state.password}
+            onChange={this.onChange}
+            ref={this.passwordRef}
+            required
+          />
 
-              <button id="submit" type="submit" onClick={this.onSubmit}>
-                SIGN IN
-              </button>
-            </form>
+          <button id="submit" type="submit" onClick={this.onSubmit}>
+            SIGN IN
+          </button>
+        </form>
 
-            {this.state.loginSuccessful ? (
-              <Redirect to={`${basePath}profile`} />
-            ) : null}
-          </React.Fragment>
-        )}
-      </UrlContext.Consumer>
+        {this.state.loginSuccessful ? (
+          <Redirect to={`${env.routePath}profile`} />
+        ) : null}
+      </React.Fragment>
     );
   }
 }

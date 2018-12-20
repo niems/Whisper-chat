@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import comms from './comms/comms';
 import AuthenticationContext from '../../authentication/authenticationContext';
-import UrlContext from '../../urlContext/urlContext';
+import env from '../../../env';
 import CategoriesPanel from './categoriesPanel/categoriesPanel';
 import ChatView from './chatView/chatView';
 import Signout from './signout/signout';
@@ -261,11 +261,8 @@ class UserProfile extends Component {
   }
 
   socketSetup() {
-    const app_server = this.props.isProduction
-      ? 'https://afternoon-springs-45644.herokuapp.com/'
-      : 'http://localhost:8081';
-
-    this.socket = comms(this.props.username, app_server, this.onMsgReceived);
+    const appServer = env.socketDomain;
+    this.socket = comms(this.props.username, appServer, this.onMsgReceived);
 
     // joins all the group channels initially in state
     this.socket.join(this.state.allChannels.Groups);
@@ -361,20 +358,15 @@ class UserProfile extends Component {
 
 const UserProfileContext = props => {
   return (
-    <UrlContext.Consumer>
-      {({ production }) => (
-        <AuthenticationContext.Consumer>
-          {({ isUserAuthenticated, signout }) => (
-            <UserProfile
-              {...props}
-              isProduction={production}
-              username={isUserAuthenticated.username}
-              signout={signout}
-            />
-          )}
-        </AuthenticationContext.Consumer>
+    <AuthenticationContext.Consumer>
+      {({ isUserAuthenticated, signout }) => (
+        <UserProfile
+          {...props}
+          username={isUserAuthenticated.username}
+          signout={signout}
+        />
       )}
-    </UrlContext.Consumer>
+    </AuthenticationContext.Consumer>
   );
 };
 

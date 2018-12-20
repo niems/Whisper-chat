@@ -1,19 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import UrlContext from '../../urlContext/urlContext';
+import env from '../../../env';
+
 
 const HomeNavigation = () => {
   return (
-    <UrlContext.Consumer>
-      {({ basePath }) => (
-        <Link to={basePath} className="navigate home abs-top-left">
-          <img
-            src="./assets/svg/placeholder/round-back-arrow.svg"
-            alt="navigate back to homepage"
-          />
-        </Link>
-      )}
-    </UrlContext.Consumer>
+    <Link to={env.routePath} className="navigate home abs-top-left">
+      <img
+        src="./assets/svg/placeholder/round-back-arrow.svg"
+        alt="navigate back to homepage"
+      />
+    </Link>
   );
 };
 
