@@ -1,10 +1,10 @@
 const production = true;
-const routePath = production ? 'whisper-chat/' : '/';
+const routePath = production ? '/whisper-chat/' : '/';
 
 const env = {
   isProduction: production,
   routePath: routePath,
-  domain: production ? `https://niems.github.io/${routePath}` : routePath,
+  domain: production ? `https://niems.github.io${routePath}` : routePath,
 
   socketDomain: production
     ? 'https://afternoon-springs-45644.herokuapp.com/'
