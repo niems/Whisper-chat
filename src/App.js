@@ -43,6 +43,10 @@ class App extends Component {
     this.signout = this.signout.bind(this);
   }
 
+  componentDidMount() {
+    console.log(`App componentDidMount() env: ${JSON.stringify(env)}\n`);
+  }
+
   authenticate(username) {
     this.setState({
       isUserAuthenticated: {
