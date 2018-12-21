@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/whisper-chat/precache-manifest.492f060f7fbcffd51389d8de354eb592.js"
+  "/whisper-chat/precache-manifest.146ef7ba62bdb29079cc0bde0fd11b92.js"
 );
 
 workbox.clientsClaim();
