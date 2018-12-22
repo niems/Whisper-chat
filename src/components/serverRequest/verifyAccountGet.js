@@ -13,9 +13,9 @@ export default function verifyAccountGet() {
       method: 'GET',
       credentials: 'include',
       referrerPolicy: 'no-referrer-when-downgrade',
-      //referrer: referrer,
-      //referrer: 'https://niems.github.io/whisper-chat/profile',
-      //referrerPolicy: 'origin-when-cross-origin'
+      //? referrer: referrer,
+      //? referrer: 'https://niems.github.io/whisper-chat/profile',
+      //? referrerPolicy: 'origin-when-cross-origin'
     };
 
     fetch(verificationURL, verifyOptions)
