@@ -20,8 +20,8 @@ export default function verifyAccountGet() {
 
     fetch(verificationURL, verifyOptions)
       .then(res => {
+        console.log(`verifyAccountGet() response headers: ${JSON.stringify(res.headers)}\n`);
         resolve(res);
-        console.log(`verifyAccountGet() response headers: ${res.headers}\n`);
       })
       .catch(err => reject(err));
   });
