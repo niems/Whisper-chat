@@ -1,4 +1,4 @@
-const production = false;
+const production = true;
 const routePath = production ? '/whisper-chat/' : '/';
 
 const env = {
