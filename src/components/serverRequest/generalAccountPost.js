@@ -10,7 +10,7 @@ export default function generalAccountPost(data, url) {
 
     const postOptions = {
       method: 'POST',
-      credentials: 'include',
+      credentials: 'include', 
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },

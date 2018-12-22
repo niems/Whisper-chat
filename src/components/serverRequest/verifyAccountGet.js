@@ -12,13 +12,17 @@ export default function verifyAccountGet() {
     const verifyOptions = {
       method: 'GET',
       credentials: 'include',
-      referrer: referrer,
+      referrerPolicy: 'no-referrer-when-downgrade',
+      //referrer: referrer,
       //referrer: 'https://niems.github.io/whisper-chat/profile',
-      referrerPolicy: 'origin-when-cross-origin',
+      //referrerPolicy: 'origin-when-cross-origin'
     };
 
     fetch(verificationURL, verifyOptions)
-      .then(res => resolve(res))
+      .then(res => {
+        resolve(res);
+        console.log(`verifyAccountGet() response headers: ${res.headers}\n`);
+      })
       .catch(err => reject(err));
   });
 }
