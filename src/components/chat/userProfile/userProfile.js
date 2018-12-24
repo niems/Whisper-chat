@@ -261,7 +261,7 @@ class UserProfile extends Component {
   }
 
   socketSetup() {
-    const appServer = env.socketDomain;
+    const appServer = env.applicationServer;
     this.socket = comms(this.props.username, appServer, this.onMsgReceived);
 
     // joins all the group channels initially in state
