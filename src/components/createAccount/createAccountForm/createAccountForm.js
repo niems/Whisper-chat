@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import env from '../../../env';
 import AuthenticationContext from '../../authentication/authenticationContext';
 import NotificationContext from '../../notification/notificationContext/notificationContext';
 import areFieldsValid from '../../formFieldCheck/areFieldsValid';
@@ -16,6 +17,7 @@ class CreateAccountForm extends Component {
       accountCreated: false // redirects to /profile if account is created
     };
 
+    this.redirectPath = env.routePath + 'profile'; //* redirects user to profile if account is created 
     this.onChange = this.onChange.bind(this); // the user modified one of the input fields
     this.onSubmit = this.onSubmit.bind(this); // the user submitted the form
   }
@@ -130,7 +132,7 @@ class CreateAccountForm extends Component {
           </button>
         </form>
 
-        {this.state.accountCreated ? <Redirect to="/profile" /> : null}
+        {this.state.accountCreated ? <Redirect to={this.redirectPath} /> : null}
       </React.Fragment>
     );
   }
