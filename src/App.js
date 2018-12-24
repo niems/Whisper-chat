@@ -77,7 +77,6 @@ class App extends Component {
           >
             <Suspense fallback={<div>Loading...</div>}>
               <Switch>
-                <Route exact path={env.routePath} component={Homepage} />
                 <Route
                   path={`${env.routePath}create-account`}
                   component={CreateAccount}
@@ -88,6 +87,7 @@ class App extends Component {
                   component={VerifyUserProfile}
                 />
 
+                <Route exact path={env.routePath} component={Homepage} />
                 <Route component={NoMatch} />
               </Switch>
             </Suspense>
@@ -119,4 +119,3 @@ function AppContext(props) {
 
 export default AppContext;
 */
-
