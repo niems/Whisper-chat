@@ -1,14 +1,20 @@
 import React, { PureComponent } from 'react';
+import env from '../../../../env';
 import ChannelsCategory from './ChannelsCategory/channelsCategory';
 import OnlineUsersCategory from './OnlineUsersCategory/onlineUsersCategory';
 
 class CategoriesPanel extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.logoutImgSrc = env.routePath + 'assets/svg/placeholder/logout-black.svg';
+  }
+
   render() {
     return (
       <section className="side-panel">
         <button id="logout" className="link-to" onClick={this.props.signout}>
           <img
-            src="../assets/svg/placeholder/logout-black.svg"
+            src={this.logoutImgSrc}
             alt="user logout"
           />
         </button>
