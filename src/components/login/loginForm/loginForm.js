@@ -20,6 +20,7 @@ class LoginForm extends Component {
     this.passwordRef = React.createRef();
     this.focusInput = this.focusInput.bind(this);
 
+    this.redirectPath = env.routePath + 'profile'; //* redirects user to profile on user login
     this.onChange = this.onChange.bind(this); // user modified one of the inputfields
     this.onSubmit = this.onSubmit.bind(this); // user submitted form
   }
@@ -122,7 +123,7 @@ class LoginForm extends Component {
         </form>
 
         {this.state.loginSuccessful ? (
-          <Redirect to={`${env.routePath}profile`} />
+          <Redirect to={this.redirectPath} />
         ) : null}
       </React.Fragment>
     );
