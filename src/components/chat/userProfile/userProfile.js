@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import comms from './comms/comms';
 import AuthenticationContext from '../../authentication/authenticationContext';
 import env from '../../../env';
+import Toolbar from '../toolbar/toolbar';
 import CategoriesPanel from './categoriesPanel/categoriesPanel';
 import ChatView from './chatView/chatView';
 import Signout from './signout/signout';
@@ -337,20 +338,20 @@ class UserProfile extends Component {
     return this.state.isSigningOut ? (
       <Signout />
     ) : (
-      <article id="profile">
-        <CategoriesPanel
-          allChannelRefs={this.allChannelRefs}
-          allChannels={this.state.allChannels}
-          username={this.props.username}
-          allOnlineUsers={this.state.onlineUsers}
-          onChannelSelect={this.onChannelSelect}
-          signout={this.userSignout}
-        />
+        <article id="profile">
+          <CategoriesPanel
+            allChannelRefs={this.allChannelRefs}
+            allChannels={this.state.allChannels}
+            username={this.props.username}
+            allOnlineUsers={this.state.onlineUsers}
+            onChannelSelect={this.onChannelSelect}
+            signout={this.userSignout}
+          />
 
-        <ChatView
-          channelInfo={this.state.selectedChannel}
-          sendNewMsg={this.sendMsgToServer}
-        />
+          <ChatView
+            channelInfo={this.state.selectedChannel}
+            sendNewMsg={this.sendMsgToServer}
+          />
       </article>
     );
   }
