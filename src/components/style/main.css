@@ -461,13 +461,14 @@ input::-webkit-input-placeholder {
 }
 
 .scrollbar::-webkit-scrollbar {
-  width: 0.875rem;
+  width: 0.75rem;
   background: none;
 }
 .scrollbar::-webkit-scrollbar-track {
   background: none;
 }
 .scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
   border: 1px solid #728ADC;
   background: inherit;
 }
@@ -475,6 +476,7 @@ input::-webkit-input-placeholder {
   background: none;
 }
 .scrollbar::-webkit-scrollbar-button {
+  display: none;
   background: #2E3136;
   border: 1px solid #728ADC;
 }
@@ -515,6 +517,12 @@ input::-webkit-input-placeholder {
   font-size: calc(0.875rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
 }
 
+.toolbar {
+  width: 100%;
+  height: 3.125rem;
+  background: #2E3136;
+}
+
 #homepage {
   flex: 1 1 100%;
   background: linear-gradient(45deg, #728ADC, #36393E);
@@ -548,7 +556,7 @@ input::-webkit-input-placeholder {
   width: 2.1875rem;
   height: 2.1875rem;
   padding: 0.125rem;
-  border-radius: 0.5rem;
+  border-radius: 0.8125rem;
   border: 2px outset black;
   margin: 0 0 5px 0;
   box-shadow: 1px 2px 2px black;

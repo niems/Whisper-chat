@@ -1,6 +1,6 @@
 .scrollbar {
     &::-webkit-scrollbar {
-        width: pxToRem(14px);
+        width: pxToRem(12px);
         background: none;
     }
 
@@ -9,6 +9,7 @@
     }
     
     &::-webkit-scrollbar-thumb {
+        border-radius: pxToRem(4px);
         border: 1px solid $primary;
         background: inherit;
     }
@@ -19,6 +20,7 @@
     }
     
     &::-webkit-scrollbar-button {
+        display: none;
         background: $darkest;
         border: 1px solid $primary;
     }
