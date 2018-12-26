@@ -338,20 +338,19 @@ class UserProfile extends Component {
     return this.state.isSigningOut ? (
       <Signout />
     ) : (
-        <article id="profile">
-          <CategoriesPanel
-            allChannelRefs={this.allChannelRefs}
-            allChannels={this.state.allChannels}
-            username={this.props.username}
-            allOnlineUsers={this.state.onlineUsers}
-            onChannelSelect={this.onChannelSelect}
-            signout={this.userSignout}
-          />
+      <article id="profile">
+        <Toolbar username={this.props.username} signout={this.userSignout} />
+        <CategoriesPanel
+          allChannelRefs={this.allChannelRefs}
+          allChannels={this.state.allChannels}
+          allOnlineUsers={this.state.onlineUsers}
+          onChannelSelect={this.onChannelSelect}
+        />
 
-          <ChatView
-            channelInfo={this.state.selectedChannel}
-            sendNewMsg={this.sendMsgToServer}
-          />
+        <ChatView
+          channelInfo={this.state.selectedChannel}
+          sendNewMsg={this.sendMsgToServer}
+        />
       </article>
     );
   }

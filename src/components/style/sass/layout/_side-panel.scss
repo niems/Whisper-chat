@@ -153,39 +153,5 @@
                 }
             }
         }
-
-        #current-user {
-            $max-username-font: pxToRem(18px);
-            $min-username-font: pxToRem(16px);
-
-            position: relative;
-            display: inline-block;
-            height: 20px;
-            margin-left: pxToRem(16px);
-
-            @include fluid-type($min-vw, $max-vw, $min-username-font, $max-username-font);
-            font-weight: bold;
-            font-style: italic;
-            text-shadow: 1px 1px 1px black;
-
-            &::before {
-                $max-hashtag-space: pxToRem(-16px);
-                $min-hashtag-space: pxToRem(-14px);
-                
-                content: '#';
-                position: absolute;
-                top: 0;
-                left: fluid-value($min-vw, $max-vw, $min-hashtag-space, $max-hashtag-space);
-                transform: translateY(-8%);
-                
-                font-size: 125%;
-                font-weight: bold;
-
-                text-shadow: 1px 1px 1px black;
-
-                transition: color 0.25s;
-
-            }
-        }
     }
 }
