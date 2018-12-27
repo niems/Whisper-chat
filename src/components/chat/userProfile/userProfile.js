@@ -340,17 +340,19 @@ class UserProfile extends Component {
     ) : (
       <article id="profile">
         <Toolbar username={this.props.username} signout={this.userSignout} />
-        <CategoriesPanel
-          allChannelRefs={this.allChannelRefs}
-          allChannels={this.state.allChannels}
-          allOnlineUsers={this.state.onlineUsers}
-          onChannelSelect={this.onChannelSelect}
-        />
+        <div id="profile-view">
+          <CategoriesPanel
+            allChannelRefs={this.allChannelRefs}
+            allChannels={this.state.allChannels}
+            allOnlineUsers={this.state.onlineUsers}
+            onChannelSelect={this.onChannelSelect}
+          />
 
-        <ChatView
-          channelInfo={this.state.selectedChannel}
-          sendNewMsg={this.sendMsgToServer}
-        />
+          <ChatView
+            channelInfo={this.state.selectedChannel}
+            sendNewMsg={this.sendMsgToServer}
+          />
+        </div>
       </article>
     );
   }
