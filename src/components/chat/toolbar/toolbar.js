@@ -14,7 +14,7 @@ class Toolbar extends PureComponent {
   render() {
     return (
       <div className="toolbar">
-        <button id='channels-view-list-btn'>
+        <button id='channels-view-list-btn' onClick={this.props.toggleChannelsDisplay}>
           <img src={this.channelsViewImgSrc} alt="toggle channel list" />
         </button>
         

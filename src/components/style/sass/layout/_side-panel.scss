@@ -1,157 +1,181 @@
 .side-panel {
-    display: none;
-}
+  box-sizing: border-box;
 
-@keyframes panel-slide-in {
-    from {
-        //transform: translateX(-100%);
-        opacity: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+
+  z-index: 1;
+  overflow: hidden;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  padding: pxToRem(10px) pxToRem(15px);
+
+  color: $light;
+  background: rgba(46, 49, 54, 0.90);
+
+  animation-name: panel-slide-in;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+
+  #all-categories {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+
+    //position: relative;
+    margin: pxToRem(20px) 0;
+    padding: 0 pxToRem(16px);
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    flex: 1 1 auto;
+
+    border-radius: pxToRem(10px);
+
+    border-right: none;
+    background: none;
+  }
+
+  .category-section-header {
+    $max-header-font: pxToRem(36px);
+    $min-header-font: pxToRem(26px);
+
+    box-sizing: border-box;
+    width: max-content;
+    margin-bottom: pxToRem(10px);
+    padding: 0 pxToRem(10px);
+
+    border-bottom: 1px solid $purple-accent;
+    text-align: center;
+
+    font-weight: bold;
+    color: $light;
+    @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
+  }
+
+  .category-channels-list {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: max-content;
+    padding: pxToRem(4px) pxToRem(12px);
+    margin-top: 0;
+  }
+
+  .category-title {
+    $max-header-font: pxToRem(26px);
+    $min-header-font: pxToRem(20px);
+
+    box-sizing: border-box;
+    display: inline-block;
+    width: 90%;
+
+    padding: 0;
+    margin: 0 0 0 pxToRem(5px);
+    font-weight: normal;
+    text-align: left;
+    color: $light;
+    @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
+  }
+
+  .channel {
+    $max-item-font: pxToRem(20px);
+    $min-item-font: pxToRem(16px);
+
+    position: relative;
+
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: pxToRem(5px) 0 pxToRem(12px) 0;
+    width: max-content;
+
+    list-style: none;
+    @include fluid-type($min-vw, $max-vw, $min-item-font, $max-item-font);
+
+    border-radius: pxToRem(5px);
+    padding: pxToRem(2px) pxToRem(8px);
+    margin-left: 2px;
+
+    color: black;
+    background: $purple-accent-transparent;
+    box-shadow: 2px 2px 2px black;
+
+    transition: background 0.25s;
+
+    &::before {
+      $max-hashtag-space: pxToRem(-18px);
+      $min-hashtag-space: pxToRem(-16px);
+
+      content: '#';
+      position: absolute;
+      top: 0;
+      left: fluid-value(
+        $min-vw,
+        $max-vw,
+        $min-hashtag-space,
+        $max-hashtag-space
+      );
+      transform: translateY(-15%);
+      font-size: 150%;
+      font-weight: bold;
+      color: $purple-accent;
+      text-shadow: 2px 2px 2px black;
+      transition: color 0.25s;
     }
-
-    to {
-        //transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@media only screen and (min-width: pxToRem(750px)) {
-    .side-panel {
-        box-sizing: border-box;
-        @include size(100%);
-        min-width: 180px;
-        max-width: 250px;
-        overflow: hidden;
-        
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: stretch;
-        
-        padding: pxToRem(10px) pxToRem(15px);
-        box-shadow: 2px 0 1px $darkest;
-        
+    &:hover {
+      background: $light;
+      &::before {
         color: $light;
-        background: $darkest-transparent;
-
-        animation-name: panel-slide-in;
-        animation-duration: 0.5s;
-        animation-timing-function: linear;
-
-        #all-categories {
-            box-sizing: border-box;
-            overflow-x: hidden;
-            overflow-y: auto;
-    
-            //position: relative;
-            margin: pxToRem(20px) 0;
-            padding: 0 pxToRem(16px);
-
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: flex-start;
-            align-items: stretch;
-            flex: 1 1 auto;
-
-            border-radius: pxToRem(10px);
-            box-shadow: inset 2px 3px 2px black;
-
-            border-right: none;
-            background: none;
-        }
-
-        .category-section-header {
-            
-            $max-header-font: pxToRem(20px);
-            $min-header-font: pxToRem(16px);
-            
-            box-sizing: border-box;
-            width: max-content;
-            margin-bottom: pxToRem(10px);
-            padding: 0 pxToRem(10px);
-
-            border-bottom: 1px solid $purple-accent;
-            text-align: center;
-
-            font-weight: bold;
-            color: $light;
-            @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
-        }
-
-        .category-channels-list {
-            box-sizing: border-box;
-            display: block;
-            width: 100%;
-            height: max-content;
-            padding: pxToRem(4px) pxToRem(12px);
-            margin-top: 0;
-        }
-
-        .category-title {
-            $max-header-font: pxToRem(18px);
-            $min-header-font: pxToRem(14px);
-
-            box-sizing: border-box;
-            display: inline-block;
-            width: 90%;
-            
-            padding: 0; 
-            margin: 0 0 0 pxToRem(5px);
-            font-weight: normal;
-            text-align: left;
-            color: $light;
-            @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
-        }
-
-        .channel {
-            $max-item-font: pxToRem(16px);
-            $min-item-font: pxToRem(14px);
-            
-            position: relative;
-
-            cursor: pointer;
-            box-sizing: border-box;
-            margin: pxToRem(5px) 0 pxToRem(12px) 0;
-            width: max-content;
-
-            list-style: none;
-            @include fluid-type($min-vw, $max-vw, $min-item-font, $max-item-font);
-
-            border-radius: pxToRem(5px);
-            padding: pxToRem(2px) pxToRem(8px);
-            margin-left: 2px;
-            
-            color: black;
-            background: $purple-accent-transparent;
-            box-shadow: 2px 2px 2px black;
-
-            transition: background 0.25s;
-
-            &::before {
-                $max-hashtag-space: pxToRem(-18px);
-                $min-hashtag-space: pxToRem(-16px);
-                
-                content: '#';
-                position: absolute;
-                top: 0;
-                left: fluid-value($min-vw, $max-vw, $min-hashtag-space, $max-hashtag-space);
-                transform: translateY(-15%);
-                
-                font-size: 150%;
-                font-weight: bold;
-
-                color: $purple-accent;
-                text-shadow: 2px 2px 2px black;
-
-                transition: color 0.25s;
-
-            }
-
-            &:hover {
-                background: $light;
-
-                &::before {
-                    color: $light;
-                }
-            }
-        }
+      }
     }
+  }
+}
+@keyframes panel-slide-in {
+  from {
+    // transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    // transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@media only screen and (min-width: pxToRem(750px)) {
+  .side-panel {
+    position: static;
+    @include size(100%);
+    min-width: 180px;
+    max-width: 250px;
+    align-items: stretch;
+    box-shadow: 2px 0 1px $darkest;
+    background: $darkest-transparent;
+
+    #all-categories {
+      width: max-content;
+      align-items: stretch;
+      box-shadow: inset 2px 3px 2px black;
+    }
+    .category-section-header {
+      $max-header-font: pxToRem(20px);
+      $min-header-font: pxToRem(16px);
+      width: max-content;
+      @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
+    }
+    .category-title {
+      $max-header-font: pxToRem(18px);
+      $min-header-font: pxToRem(14px);
+      @include fluid-type($min-vw, $max-vw, $min-header-font, $max-header-font);
+    }
+    .channel {
+      $max-item-font: pxToRem(16px);
+      $min-item-font: pxToRem(14px);
+      @include fluid-type($min-vw, $max-vw, $min-item-font, $max-item-font);
+    }
+  }
 }

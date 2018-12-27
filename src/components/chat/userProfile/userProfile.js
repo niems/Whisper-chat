@@ -114,8 +114,15 @@ class UserProfile extends Component {
     // on user signout, deletes the authentication data & displays <SigningOut />
     this.userSignout = this.userSignout.bind(this);
 
+    //* toggles displaying all the chat channels
+    this.toggleChannelsDisplay = this.toggleChannelsDisplay.bind(this);
+
     this.state = {
       isSigningOut: false, // determines if the sign out screen is displayed
+
+      //* determines if all channels are being displayed () - either as a sidepanel or
+      //* fullscreen depending on the screen width
+      areChannelsDisplayed: false,
 
       selectedChannel: {
         // info about selected channel (displayed in chatView)
@@ -334,19 +341,34 @@ class UserProfile extends Component {
     this.setState({ isSigningOut: true }); // displays the signout screen, then redirects to homepage
   }
 
+  toggleChannelsDisplay() {
+    console.log('toggleChannelsDisplay()');
+
+    this.setState(prevState => ({
+      areChannelsDisplayed: !prevState.areChannelsDisplayed
+    }));
+  }
+
   render() {
     return this.state.isSigningOut ? (
       <Signout />
     ) : (
       <article id="profile">
-        <Toolbar username={this.props.username} signout={this.userSignout} />
+        <Toolbar
+          username={this.props.username}
+          signout={this.userSignout}
+          toggleChannelsDisplay={this.toggleChannelsDisplay}
+        />
+
         <div id="profile-view">
-          <CategoriesPanel
-            allChannelRefs={this.allChannelRefs}
-            allChannels={this.state.allChannels}
-            allOnlineUsers={this.state.onlineUsers}
-            onChannelSelect={this.onChannelSelect}
-          />
+          {this.state.areChannelsDisplayed ? (
+            <CategoriesPanel
+              allChannelRefs={this.allChannelRefs}
+              allChannels={this.state.allChannels}
+              allOnlineUsers={this.state.onlineUsers}
+              onChannelSelect={this.onChannelSelect}
+            />
+          ) : null}
 
           <ChatView
             channelInfo={this.state.selectedChannel}

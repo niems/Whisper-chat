@@ -3,7 +3,7 @@ import UserList from './UserList/userList';
 
 const OnlineUsersCategory = ({ channelRef, onUserSelect, userList }) => {
   return (
-    <React.Fragment>
+    <div>
       <h2 className="category-section-header">Online Users</h2>
       <div className="category-section">
         <UserList
@@ -12,7 +12,7 @@ const OnlineUsersCategory = ({ channelRef, onUserSelect, userList }) => {
           userList={userList}
         />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

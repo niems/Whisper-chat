@@ -6,7 +6,7 @@ const ChannelsCategory = ({ allChannels, allChannelRefs, onChannelSelect }) => {
   const PMs = 'PMs';
 
   return (
-    <React.Fragment>
+    <div>
       <h2 className="category-section-header">Channels</h2>
       <div className="category-section">
         <CategoryList
@@ -25,7 +25,7 @@ const ChannelsCategory = ({ allChannels, allChannelRefs, onChannelSelect }) => {
           channelList={allChannels[PMs]}
         />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
