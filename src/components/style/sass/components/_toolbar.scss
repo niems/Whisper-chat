@@ -10,54 +10,21 @@
   justify-content: flex-start;
   align-items: center;
 
-  #logout {
-    align-self: flex-start;
-    all: unset;
-    cursor: pointer;
-
-    box-sizing: border-box;
-    min-width: max-content;
-    width: auto;
-    min-height: pxToRem(25px);
-
-    border-radius: 50%;
-    
-    border: 2px outset black;
-    padding: pxToRem(2px);
-    margin: 0 pxToRem(8px) 0 auto;
-
-    box-shadow: 1px 1px 1px black;
-    //background: none;
-    background: $light;
-    transition: background 0.35s;
-    
-    img {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-    
-    &:hover {
-        //background: $purple-accent;
-        background: red;
-    }
-  }
-
   #current-user {
-    $max-username-font: pxToRem(18px);
-    $min-username-font: pxToRem(16px);
+    $max-username-font: pxToRem(14px);
+    $min-username-font: pxToRem(14px);
 
     align-self: flex-end;
-    position: relative;
     display: inline-block;
     height: 20px;
-    margin: 0 pxToRem(16px) 0 pxToRem(24px);
+    margin: 0 pxToRem(12px);
 
     @include fluid-type($min-vw, $max-vw, $min-username-font, $max-username-font);
     font-weight: bold;
     font-style: italic;
     text-shadow: 1px 1px 1px black;
 
+    /*
     &::before {
         $max-hashtag-space: pxToRem(-16px);
         $min-hashtag-space: pxToRem(-14px);
@@ -76,6 +43,66 @@
         transition: color 0.25s;
 
     }
+    */
+  }
+
+  #channels-view-list-btn {
+    background: none;
+    width: pxToRem(35px);
+    height: auto;
+    
+    
+    border: none;
+    border-radius: 50%;
+    padding: pxToRem(2px);    
+    margin-left: pxToRem(8px);
+
+    transition: background 0.35s;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+  }
+
+     &:hover {
+       img {
+         filter: $purple-filter;
+       }
+     }
+     
+  }
+
+  #logout-btn {
+    min-width: max-content;
+    width: pxToRem(15px);
+    height: auto;
+
+    border-radius: 50%;
+    border-radius: pxToRem(8px);
+    
+    border: none;
+    padding: pxToRem(1px);
+    margin: 0 pxToRem(8px) 0 auto;
+
+    box-shadow: 1px 1px 1px black;
+    //background: none;
+    background: $light;
+    transition: background 0.35s;
+    
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    
+    &:hover {
+        //background: $purple-accent;
+        background: red;
+    }
+  }
 }
+
+@media only screen and (min-width: pxToRem(750px)) {
 
 }

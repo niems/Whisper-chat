@@ -6,14 +6,21 @@ class Toolbar extends PureComponent {
     super(props);
     this.logoutImgSrc =
       env.routePath + 'assets/svg/placeholder/logout-black.svg';
+
+    this.channelsViewImgSrc =
+      env.routePath + 'assets/svg/placeholder/list-view.svg';
   }
 
   render() {
     return (
       <div className="toolbar">
-        <span id='current-user'>{this.props.username}</span>
+        <button id='channels-view-list-btn'>
+          <img src={this.channelsViewImgSrc} alt="toggle channel list" />
+        </button>
         
-        <button id="logout" className="link-to" onClick={this.props.signout}>
+        <span id="current-user">{this.props.username}</span>
+
+        <button id="logout-btn" className="link-to" onClick={this.props.signout}>
           <img src={this.logoutImgSrc} alt="user logout" />
         </button>
       </div>

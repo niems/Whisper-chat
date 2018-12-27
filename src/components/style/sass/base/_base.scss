@@ -25,6 +25,7 @@ header {
 }
 
 button {
+    box-sizing: border-box;
     cursor: pointer;
     outline-color: $primary;
 }

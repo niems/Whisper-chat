@@ -83,6 +83,7 @@ header {
 }
 
 button {
+  box-sizing: border-box;
   cursor: pointer;
   outline-color: #728ADC;
 }
@@ -507,51 +508,74 @@ input::-webkit-input-placeholder {
   justify-content: flex-start;
   align-items: center;
 }
-.toolbar #logout {
-  align-self: flex-start;
-  all: unset;
-  cursor: pointer;
-  box-sizing: border-box;
-  min-width: max-content;
-  width: auto;
-  min-height: 1.5625rem;
+.toolbar #current-user {
+  align-self: flex-end;
+  display: inline-block;
+  height: 20px;
+  margin: 0 0.75rem;
+  font-size: calc(0.875rem + 0 * ((100vw - 18.75rem) / 43.75) );
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 1px 1px 1px black;
+  /*
+      &::before {
+          $max-hashtag-space: pxToRem(-16px);
+          $min-hashtag-space: pxToRem(-14px);
+          
+          content: '#';
+          position: absolute;
+          top: 0;
+          left: fluid-value($min-vw, $max-vw, $min-hashtag-space, $max-hashtag-space);
+          transform: translateY(-8%);
+          
+          font-size: 125%;
+          font-weight: bold;
+  
+          text-shadow: 1px 1px 1px black;
+  
+          transition: color 0.25s;
+  
+      }
+      */
+}
+.toolbar #channels-view-list-btn {
+  background: none;
+  width: 2.1875rem;
+  height: auto;
+  border: none;
   border-radius: 50%;
-  border: 2px outset black;
   padding: 0.125rem;
+  margin-left: 0.5rem;
+  transition: background 0.35s;
+}
+.toolbar #channels-view-list-btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.toolbar #channels-view-list-btn:hover img {
+  filter: invert(50%) sepia(5%) saturate(4965%) hue-rotate(199deg) brightness(107%) contrast(98%);
+}
+.toolbar #logout-btn {
+  min-width: max-content;
+  width: 0.9375rem;
+  height: auto;
+  border-radius: 50%;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.0625rem;
   margin: 0 0.5rem 0 auto;
   box-shadow: 1px 1px 1px black;
   background: #F1F1F1;
   transition: background 0.35s;
 }
-.toolbar #logout img {
+.toolbar #logout-btn img {
   display: block;
   width: 100%;
   height: auto;
 }
-.toolbar #logout:hover {
+.toolbar #logout-btn:hover {
   background: red;
-}
-.toolbar #current-user {
-  align-self: flex-end;
-  position: relative;
-  display: inline-block;
-  height: 20px;
-  margin: 0 1rem 0 1.5rem;
-  font-size: calc(1rem + 0.125 * ((100vw - 18.75rem) / 43.75) );
-  font-weight: bold;
-  font-style: italic;
-  text-shadow: 1px 1px 1px black;
-}
-.toolbar #current-user::before {
-  content: "#";
-  position: absolute;
-  top: 0;
-  left: calc(-0.875rem + -0.125 * ((100vw - 18.75rem) / 43.75) );
-  transform: translateY(-8%);
-  font-size: 125%;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px black;
-  transition: color 0.25s;
 }
 
 #homepage {
